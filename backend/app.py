@@ -457,10 +457,12 @@ def legacy_uploaded_file(filename):
     return send_from_directory(legacy_upload_dir, filename)
 
 
+# Initialize the schema for both Flask development and Gunicorn imports.
+init_db()
+
 # ---------------------------------------------------------------
 # STEP 4: Run the app
 # ---------------------------------------------------------------
 if __name__ == "__main__":
-    init_db()  # make sure the database table exists before we start
     # debug=True auto-restarts the server whenever you save a code change
     app.run(debug=False, host="0.0.0.0", port=5000)
