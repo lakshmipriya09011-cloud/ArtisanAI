@@ -1,0 +1,31 @@
+# Python environments and bytecode
+.venv/
+venv/
+backend/venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Local databases and SQLite sidecar files
+*.db-wal
+*.db-shm
+*.db
+backend/*.db
+*.sqlite
+*.sqlite3
+
+# Temporary and editor files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.zip
