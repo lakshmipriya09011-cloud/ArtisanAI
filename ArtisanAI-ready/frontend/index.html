@@ -77,16 +77,6 @@
           🛍️ <span data-en="Explore Marketplace" data-hi="बाज़ार देखें">Explore Marketplace</span>
         </button>
       </div>
-      <div class="voice-assistant" aria-live="polite">
-        <button class="btn btn-voice" id="voiceAssistantBtn" type="button" aria-label="Start voice search" title="Start voice search">
-          🎙️ <span data-en="Voice search" data-hi="आवाज़ से खोजें">Voice search</span>
-        </button>
-        <div class="voice-command-row">
-          <input class="voice-command-input" id="voiceCommandInput" type="text" placeholder="Your spoken statement will appear here" aria-label="Spoken statement">
-          <button class="voice-submit" id="voiceSubmitBtn" type="button" aria-label="Submit spoken statement" title="Submit spoken statement" disabled>➜</button>
-        </div>
-        <p class="voice-status" id="voiceStatus" data-en="Click the microphone, then speak" data-hi="माइक्रोफ़ोन दबाएं और बोलें">Click the microphone, then speak</p>
-      </div>
       <div class="hero-stats">
         <div class="stat"><strong>12,400+</strong><span data-en="Artisans onboarded" data-hi="जुड़े कारीगर">Artisans onboarded</span></div>
         <div class="stat"><strong>38</strong><span data-en="Crafts represented" data-hi="शिल्प विधाएँ">Crafts represented</span></div>
@@ -320,14 +310,7 @@
               <option data-en="Painting" data-hi="चित्रकला">Painting</option>
               <option data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
               <option data-en="Woodwork" data-hi="लकड़ी का काम">Woodwork</option>
-              <option data-en="Wood Crafts" data-hi="लकड़ी के शिल्प">Wood Crafts</option>
-              <option data-en="Bamboo, Cane & Natural Fiber" data-hi="बांस, बेंत और प्राकृतिक रेशे">Bamboo, Cane & Natural Fiber</option>
-              <option data-en="Dolls & Traditional Toys" data-hi="गुड़िया और पारंपरिक खिलौने">Dolls & Traditional Toys</option>
-              <option data-en="Shell, Coconut & Palm Crafts" data-hi="सीप, नारियल और ताड़ के शिल्प">Shell, Coconut & Palm Crafts</option>
-              <option data-en="Embroidery & Needlework" data-hi="कढ़ाई और सुई का काम">Embroidery & Needlework</option>
-              <option value="__custom__" data-en="Other / Type your own category" data-hi="अन्य / अपनी श्रेणी लिखें">Other / Type your own category</option>
             </select>
-            <input type="text" class="text-input hidden" id="prodCustomCategory" placeholder="Type your craft category">
 
             <label class="form-label" data-en="Materials used" data-hi="उपयोग की गई सामग्री">Materials used</label>
             <input type="text" class="text-input" id="prodMaterials" placeholder="Clay, natural dye...">
@@ -504,14 +487,7 @@
             <option data-en="Textiles & Weaving" data-hi="वस्त्र और बुनाई">Textiles & Weaving</option>
             <option data-en="Painting" data-hi="चित्रकला">Painting</option>
             <option data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
-            <option data-en="Wood Crafts" data-hi="लकड़ी के शिल्प">Wood Crafts</option>
-            <option data-en="Bamboo, Cane & Natural Fiber" data-hi="बांस, बेंत और प्राकृतिक रेशे">Bamboo, Cane & Natural Fiber</option>
-            <option data-en="Dolls & Traditional Toys" data-hi="गुड़िया और पारंपरिक खिलौने">Dolls & Traditional Toys</option>
-            <option data-en="Shell, Coconut & Palm Crafts" data-hi="सीप, नारियल और ताड़ के शिल्प">Shell, Coconut & Palm Crafts</option>
-            <option data-en="Embroidery & Needlework" data-hi="कढ़ाई और सुई का काम">Embroidery & Needlework</option>
-              <option value="__custom__" data-en="Other / Type your own category" data-hi="अन्य / अपनी श्रेणी लिखें">Other / Type your own category</option>
           </select>
-          <input type="text" class="text-input hidden" id="priceCustomCategory" placeholder="Type your craft category">
           <button class="btn btn-primary btn-block btn-lg" id="calcPriceBtn" data-en="Suggest My Price" data-hi="मेरी कीमत सुझाएं">Suggest My Price</button>
         </div>
 
@@ -591,14 +567,7 @@
         <option value="Textiles & Weaving" data-en="Textiles & Weaving" data-hi="वस्त्र और बुनाई">Textiles & Weaving</option>
         <option value="Painting" data-en="Painting" data-hi="चित्रकला">Painting</option>
         <option value="Jewelry" data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
-        <option value="Wood Crafts" data-en="Wood Crafts" data-hi="लकड़ी के शिल्प">Wood Crafts</option>
-        <option value="Bamboo, Cane & Natural Fiber" data-en="Bamboo, Cane & Natural Fiber" data-hi="बांस, बेंत और प्राकृतिक रेशे">Bamboo, Cane & Natural Fiber</option>
-        <option value="Dolls & Traditional Toys" data-en="Dolls & Traditional Toys" data-hi="गुड़िया और पारंपरिक खिलौने">Dolls & Traditional Toys</option>
-        <option value="Shell, Coconut & Palm Crafts" data-en="Shell, Coconut & Palm Crafts" data-hi="सीप, नारियल और ताड़ के शिल्प">Shell, Coconut & Palm Crafts</option>
-        <option value="Embroidery & Needlework" data-en="Embroidery & Needlework" data-hi="कढ़ाई और सुई का काम">Embroidery & Needlework</option>
-        <option value="__custom__" data-en="Other / Type your own category" data-hi="अन्य / अपनी श्रेणी लिखें">Other / Type your own category</option>
       </select>
-      <input type="text" class="text-input hidden" id="marketCustomCategory" placeholder="Type a category to filter">
       <select class="text-input" id="marketSort">
         <option value="popular" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</option>
         <option value="low" data-en="Price: Low to High" data-hi="कीमत: कम से ज़्यादा">Price: Low to High</option>

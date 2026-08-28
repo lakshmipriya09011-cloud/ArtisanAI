@@ -33,7 +33,6 @@ hackathon.
 # ---------------------------------------------------------------
 from flask import Flask,request, jsonify, send_from_directory
 from flask_cors import CORS    # Flask = our web server toolkit
-from werkzeug.utils import secure_filename
 import sqlite3                              # sqlite3 = built into Python, no install needed
 import os
 import secrets
@@ -45,9 +44,6 @@ from twilio.rest import Client
 # STEP 2: Create the Flask app
 # ---------------------------------------------------------------
 FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
-UPLOAD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "uploads", "products")
-DEFAULT_IMAGE_URL = "/static/uploads/products/default-product.svg"
-ALLOWED_IMAGE_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
 app = Flask(__name__, static_folder=FRONTEND_DIR, static_url_path="")
 CORS(app)
 
@@ -97,52 +93,8 @@ def init_db():
             created_at TEXT
         )
     """)
-    columns = {row[1] for row in conn.execute("PRAGMA table_info(products)").fetchall()}
-    if "artisan" not in columns:
-        conn.execute("ALTER TABLE products ADD COLUMN artisan TEXT")
-    if "region" not in columns:
-        conn.execute("ALTER TABLE products ADD COLUMN region TEXT")
-    conn.execute(
-        "UPDATE products SET image_url = REPLACE(image_url, '/uploads/', '/static/uploads/products/') "
-        "WHERE image_url LIKE '/uploads/%' AND image_url NOT LIKE '/uploads/uploads/%'"
-    )
-    conn.execute(
-        "UPDATE products SET image_url = '/static/uploads/products/' || image_url "
-        "WHERE image_url LIKE 'uploads/products/%'"
-    )
     conn.commit()
     conn.close()
-
-
-def save_product_image(image):
-    if not image or not image.filename:
-        raise ValueError("Please choose a product image before publishing")
-    extension = image.filename.rsplit(".", 1)[-1].lower() if "." in image.filename else ""
-    if extension not in ALLOWED_IMAGE_EXTENSIONS or not image.mimetype.startswith("image/"):
-        raise ValueError("Upload a JPG, JPEG, PNG, or WEBP image")
-    filename = secure_filename(image.filename)
-    filename = f"{secrets.token_hex(8)}-{filename}"
-    os.makedirs(UPLOAD_DIR, exist_ok=True)
-    image.save(os.path.join(UPLOAD_DIR, filename))
-    return f"/static/uploads/products/{filename}"
-
-
-def resolve_image_url(image_url):
-    """Return a browser URL only when the stored local image exists."""
-    if not image_url:
-        return DEFAULT_IMAGE_URL
-    if image_url.startswith("/static/uploads/products/"):
-        filename = image_url.rsplit("/", 1)[-1]
-        return image_url if os.path.isfile(os.path.join(UPLOAD_DIR, filename)) else DEFAULT_IMAGE_URL
-    if image_url.startswith("/uploads/"):
-        filename = image_url.rsplit("/", 1)[-1]
-        local_path = os.path.join(UPLOAD_DIR, filename)
-        return f"/static/uploads/products/{filename}" if os.path.isfile(local_path) else DEFAULT_IMAGE_URL
-    if image_url.startswith("uploads/products/"):
-        filename = image_url.rsplit("/", 1)[-1]
-        local_path = os.path.join(UPLOAD_DIR, filename)
-        return f"/static/uploads/products/{filename}" if os.path.isfile(local_path) else DEFAULT_IMAGE_URL
-    return image_url
 
 
 @app.route("/api/auth/send-otp", methods=["POST"])
@@ -207,7 +159,7 @@ def create_product():
     }
     Only "name" is required. Everything else is optional.
     """
-    data = request.form if request.form else (request.get_json(silent=True) or {})
+    data = request.get_json(silent=True) or {}
 
     name = data.get("name")
     if not name:
@@ -217,21 +169,16 @@ def create_product():
     description = data.get("description", "")
     category = data.get("category", "")
     price = data.get("price", 0)
-    artisan = data.get("artisan", "Artisan")
-    region = data.get("region", "India")
-    try:
-        image_url = save_product_image(request.files.get("image"))
-    except ValueError as error:
-        return jsonify({"error": str(error)}), 400
+    image_url = data.get("image_url", "")
     created_at = datetime.utcnow().isoformat()
 
     conn = get_db_connection()
     cursor = conn.execute(
         """
-        INSERT INTO products (name, description, category, price, image_url, artisan, region, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO products (name, description, category, price, image_url, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
         """,
-        (name, description, category, price, image_url, artisan, region, created_at),
+        (name, description, category, price, image_url, created_at),
     )
     conn.commit()
     new_id = cursor.lastrowid  # the id SQLite just assigned to this new row
@@ -246,8 +193,6 @@ def create_product():
             "category": category,
             "price": price,
             "image_url": image_url,
-            "artisan": artisan,
-            "region": region,
             "created_at": created_at,
         }
     }), 201  # 201 = "Created"
@@ -263,8 +208,6 @@ def get_products():
     conn.close()
 
     products = [dict(row) for row in rows]  # convert each DB row into a normal dictionary
-    for product in products:
-        product["image_url"] = resolve_image_url(product.get("image_url"))
     return jsonify({"count": len(products), "products": products}), 200
 
 
@@ -282,9 +225,7 @@ def get_product(product_id):
     if row is None:
         return jsonify({"error": f"No product found with id {product_id}"}), 404
 
-    product = dict(row)
-    product["image_url"] = resolve_image_url(product.get("image_url"))
-    return jsonify({"product": product}), 200
+    return jsonify({"product": dict(row)}), 200
 
 
 # =================================================================
@@ -444,25 +385,10 @@ def home():
     return send_from_directory(FRONTEND_DIR, "index.html")
 
 
-@app.route("/static/uploads/products/<path:filename>", methods=["GET"])
-def uploaded_file(filename):
-    return send_from_directory(UPLOAD_DIR, filename)
-
-
-@app.route("/uploads/<path:filename>", methods=["GET"])
-def legacy_uploaded_file(filename):
-    legacy_upload_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
-    if filename == "default-product.svg" and not os.path.exists(os.path.join(legacy_upload_dir, filename)):
-        return send_from_directory(UPLOAD_DIR, filename)
-    return send_from_directory(legacy_upload_dir, filename)
-
-
-# Initialize the schema for both Flask development and Gunicorn imports.
-init_db()
-
 # ---------------------------------------------------------------
 # STEP 4: Run the app
 # ---------------------------------------------------------------
 if __name__ == "__main__":
+    init_db()  # make sure the database table exists before we start
     # debug=True auto-restarts the server whenever you save a code change
     app.run(debug=False, host="0.0.0.0", port=5000)

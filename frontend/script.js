@@ -11,28 +11,28 @@
      1. SAMPLE PRODUCT DATA
      --------------------------------------------------------- */
   let PRODUCTS = [
-    { id: 1, name: { en: "Blue Pottery Vase", hi: "ब्लू पॉटरी फूलदान" }, category: "Pottery", price: 1450, icon: "🏺", image_url: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=80",
+    { id: 1, name: { en: "Blue Pottery Vase", hi: "ब्लू पॉटरी फूलदान" }, category: "Pottery", price: 1450, icon: "🏺",
       artisan: "Hello Lakshmi Priyaa", region: "Jaipur, Rajasthan",
       desc: { en: "A hand-thrown blue pottery vase glazed with traditional cobalt patterns, fired using centuries-old Jaipur techniques.", hi: "पारंपरिक कोबाल्ट पैटर्न से सजा हाथ से बना ब्लू पॉटरी फूलदान, जो सदियों पुरानी जयपुर तकनीक से बनाया गया है।" } },
-    { id: 2, name: { en: "Madhubani Painting", hi: "मधुबनी पेंटिंग" }, category: "Paintings", price: 2200, icon: "🎨", image_url: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=800&q=80",
+    { id: 2, name: { en: "Madhubani Painting", hi: "मधुबनी पेंटिंग" }, category: "Painting", price: 2200, icon: "🎨",
       artisan: "Ravi Paswan", region: "Madhubani, Bihar",
       desc: { en: "A vibrant Madhubani folk painting depicting nature and mythology, hand-painted with natural pigments on handmade paper.", hi: "प्रकृति और पौराणिक कथाओं को दर्शाती एक जीवंत मधुबनी लोक चित्रकला, हस्तनिर्मित कागज़ पर प्राकृतिक रंगों से हाथ से बनाई गई।" } },
-    { id: 3, name: { en: "Terracotta Diya Set", hi: "टेराकोटा दीया सेट" }, category: "Pottery", price: 680, icon: "🪔", image_url: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80",
+    { id: 3, name: { en: "Terracotta Diya Set", hi: "टेराकोटा दीया सेट" }, category: "Pottery", price: 680, icon: "🪔",
       artisan: "Hello Lakshmi Priyaa", region: "Khurja, Uttar Pradesh",
       desc: { en: "A set of 6 hand-moulded terracotta diyas, perfect for festive lighting, finished with a natural clay glaze.", hi: "त्योहारी रोशनी के लिए बिल्कुल उपयुक्त, 6 हाथ से बने टेराकोटा दीयों का सेट, प्राकृतिक मिट्टी की चमक के साथ तैयार।" } },
-    { id: 4, name: { en: "Banarasi Silk Stole", hi: "बनारसी सिल्क स्टोल" }, category: "Handloom", price: 3400, icon: "🧣", image_url: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80",
+    { id: 4, name: { en: "Banarasi Silk Stole", hi: "बनारसी सिल्क स्टोल" }, category: "Textiles & Weaving", price: 3400, icon: "🧣",
       artisan: "Imran Ansari", region: "Varanasi, Uttar Pradesh",
       desc: { en: "A handwoven Banarasi silk stole with fine zari brocade work, woven on a traditional pit loom.", hi: "बारीक ज़री बुनाई के साथ हाथ से बुना गया बनारसी सिल्क स्टोल, पारंपरिक पिट लूम पर बुना गया।" } },
-    { id: 5, name: { en: "Silver Filigree Earrings", hi: "सिल्वर फिलिग्री बालियां" }, category: "Jewellery", price: 1250, icon: "💍", image_url: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+    { id: 5, name: { en: "Silver Filigree Earrings", hi: "सिल्वर फिलिग्री बालियां" }, category: "Jewelry", price: 1250, icon: "💍",
       artisan: "Sunita Behera", region: "Cuttack, Odisha",
       desc: { en: "Intricate silver filigree earrings handcrafted using the delicate Cuttack tarakasi technique.", hi: "कटक की नाज़ुक तारकशी तकनीक से हाथ से बनाई गई बारीक सिल्वर फिलिग्री बालियां।" } },
-    { id: 6, name: { en: "Warli Art Wall Panel", hi: "वारली आर्ट वॉल पैनल" }, category: "Paintings", price: 1800, icon: "🖼️", image_url: "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80",
+    { id: 6, name: { en: "Warli Art Wall Panel", hi: "वारली आर्ट वॉल पैनल" }, category: "Painting", price: 1800, icon: "🖼️",
       artisan: "Jivya Meshram", region: "Palghar, Maharashtra",
       desc: { en: "A Warli tribal art wall panel painted with white pigment on a natural earthen backdrop, depicting village life.", hi: "गांव के जीवन को दर्शाता, प्राकृतिक मिट्टी की पृष्ठभूमि पर सफ़ेद रंग से बना वारली जनजातीय कला वॉल पैनल।" } },
-    { id: 7, name: { en: "Handloom Cotton Saree", hi: "हैंडलूम कॉटन साड़ी" }, category: "Handloom", price: 2100, icon: "👘", image_url: "https://images.unsplash.com/photo-1610189012906-4c3c0f2b1f3d?auto=format&fit=crop&w=800&q=80",
+    { id: 7, name: { en: "Handloom Cotton Saree", hi: "हैंडलूम कॉटन साड़ी" }, category: "Textiles & Weaving", price: 2100, icon: "👘",
       artisan: "Lakshmi Nair", region: "Kannur, Kerala",
       desc: { en: "A breathable handloom cotton saree with a woven temple border, ideal for everyday elegance.", hi: "बुने हुए मंदिर बॉर्डर के साथ हल्की और आरामदायक हैंडलूम कॉटन साड़ी, रोज़मर्रा की खूबसूरती के लिए उपयुक्त।" } },
-    { id: 8, name: { en: "Carved Wooden Elephant", hi: "नक्काशीदार लकड़ी का हाथी" }, category: "Wood Craft", price: 950, icon: "🐘", image_url: "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=800&q=80",
+    { id: 8, name: { en: "Carved Wooden Elephant", hi: "नक्काशीदार लकड़ी का हाथी" }, category: "Woodwork", price: 950, icon: "🐘",
       artisan: "Manoj Kumhar", region: "Saharanpur, Uttar Pradesh",
       desc: { en: "A hand-carved rosewood elephant figurine, sanded and polished by hand over three days of careful work.", hi: "हाथ से नक्काशीदार शीशम की लकड़ी का हाथी, तीन दिनों की मेहनत से हाथ से रेता और पॉलिश किया गया।" } }
   ];
@@ -47,28 +47,6 @@
     : window.location.port === "5500"
       ? `${window.location.protocol}//${window.location.hostname}:5000`
       : window.location.origin;
-  const DEFAULT_PRODUCT_IMAGE = "/static/uploads/products/default-product.svg";
-
-  function getCategory(selectId, customInputId) {
-    const select = document.getElementById(selectId);
-    return select.value === "__custom__"
-      ? document.getElementById(customInputId).value.trim()
-      : select.value;
-  }
-
-  function updateCustomCategory(selectId, customInputId) {
-    const select = document.getElementById(selectId);
-    const input = document.getElementById(customInputId);
-    const isCustom = select.value === "__custom__";
-    input.classList.toggle("hidden", !isCustom);
-    input.required = isCustom;
-    if (isCustom) input.focus();
-  }
-
-  [["prodCategory", "prodCustomCategory"], ["priceCategory", "priceCustomCategory"], ["marketCategory", "marketCustomCategory"]]
-    .forEach(([selectId, customInputId]) => {
-      document.getElementById(selectId).addEventListener("change", () => updateCustomCategory(selectId, customInputId));
-    });
 
   /* ---------------------------------------------------------
      2. NAVIGATION (SPA page switching)
@@ -93,7 +71,7 @@
       btn.classList.toggle("active", btn.dataset.target === id);
     });
     if (!opts.skipHash) {
-      history.pushState(null, "", "#/" + id);
+      history.pushState(null, "", "#" + id);
     }
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
     mainNav.classList.remove("open");
@@ -109,105 +87,9 @@
   });
 
   window.addEventListener("hashchange", () => {
-    const id = location.hash.replace(/^#\/?/, "") || "landing";
+    const id = location.hash.replace("#", "") || "landing";
     showPage(id, { skipHash: true });
   });
-
-  const voiceAssistantBtn = document.getElementById("voiceAssistantBtn");
-  const voiceStatus = document.getElementById("voiceStatus");
-  const voiceCommandInput = document.getElementById("voiceCommandInput");
-  const voiceSubmitBtn = document.getElementById("voiceSubmitBtn");
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  function executeVoiceCommand() {
-    const command = voiceCommandInput.value.trim().toLowerCase();
-    if (!command) return;
-    const wantsCart = /\b(add|put|save)\b.*\b(cart|basket)\b/.test(command) || command.includes("कार्ट में");
-    const wantsPurchase = /\b(buy|purchase|order|checkout)\b/.test(command) || command.includes("खरीद");
-    if ((wantsCart || wantsPurchase) && state.currentProductId) {
-      const actionButton = document.getElementById(wantsPurchase ? "buyNowBtn" : "addToCartBtn");
-      if (actionButton) {
-        actionButton.click();
-        voiceStatus.textContent = wantsPurchase
-          ? (state.lang === "hi" ? "खरीदारी शुरू हो गई।" : "Purchase started.")
-          : (state.lang === "hi" ? "उत्पाद कार्ट में जोड़ दिया गया।" : "Product added to cart.");
-        return;
-      }
-    }
-    const isSearch = /\b(search|find|show me|look for|देखें|खोजें)\b/.test(command);
-    const destinations = [
-      { page: "marketplace", words: ["marketplace", "go to market", "open market", "बाज़ार", "बाजार"] },
-      { page: "dashboard", words: ["dashboard", "my dashboard", "go to dashboard", "डैशबोर्ड"] },
-      { page: "pricing-assistant", words: ["pricing", "smart pricing", "open pricing", "कीमत", "मूल्य"] },
-      { page: "add-product", words: ["add product", "new product", "list a product", "उत्पाद जोड़ें"] },
-      { page: "my-catalog", words: ["my products", "my catalog", "open catalog", "मेरे उत्पाद"] },
-      { page: "image-studio", words: ["image studio", "enhance image", "इमेज स्टूडियो"] },
-      { page: "catalog-generator", words: ["catalog generator", "generate listing", "कैटलॉग जनरेटर"] },
-      { page: "landing", words: ["go home", "go back", "होम"] }
-    ];
-    const destination = isSearch ? null : destinations.find((item) => item.words.some((word) => command.includes(word)));
-    if (destination) {
-      showPage(destination.page);
-      voiceStatus.textContent = state.lang === "hi" ? "आपका आदेश पूरा हो गया।" : "Your request is complete.";
-      return;
-    }
-    showPage("marketplace");
-    document.getElementById("marketSearch").value = voiceCommandInput.value.trim();
-    renderMarketGrid();
-    voiceStatus.textContent = state.lang === "hi" ? "आपकी खोज पूरी हो गई।" : "Your search is complete.";
-  }
-
-  if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = state.lang === "hi" ? "hi-IN" : "en-IN";
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = () => {
-      voiceAssistantBtn.classList.add("is-listening");
-      voiceCommandInput.value = "";
-      voiceSubmitBtn.disabled = true;
-      voiceStatus.textContent = state.lang === "hi" ? "अब बोलें..." : "Speak now...";
-    };
-    recognition.onerror = (event) => {
-      voiceAssistantBtn.classList.remove("is-listening");
-      const errors = {
-        "not-allowed": "Microphone permission was denied. Allow microphone access and try again.",
-        "audio-capture": "No microphone was found. Check your microphone and try again.",
-        "no-speech": "No speech detected. Click the microphone and speak clearly.",
-        "network": "Voice recognition needs an internet connection in this browser."
-      };
-      voiceStatus.textContent = errors[event.error] || "Voice recognition failed. Please try again.";
-    };
-    recognition.onnomatch = () => {
-      voiceAssistantBtn.classList.remove("is-listening");
-      voiceStatus.textContent = "No words were recognized. Please speak again.";
-    };
-    recognition.onend = () => voiceAssistantBtn.classList.remove("is-listening");
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.trim();
-      voiceCommandInput.value = transcript;
-      voiceSubmitBtn.disabled = false;
-      voiceStatus.textContent = state.lang === "hi" ? "खोज रहा हूँ..." : "Searching...";
-      executeVoiceCommand();
-    };
-    voiceAssistantBtn.addEventListener("click", () => {
-      if (voiceAssistantBtn.classList.contains("is-listening")) return;
-      recognition.lang = state.lang === "hi" ? "hi-IN" : "en-IN";
-      try {
-        recognition.start();
-      } catch (error) {
-        voiceAssistantBtn.classList.remove("is-listening");
-        voiceStatus.textContent = "Microphone is already active. Please wait and try again.";
-      }
-    });
-    voiceSubmitBtn.addEventListener("click", executeVoiceCommand);
-  } else {
-    voiceAssistantBtn.disabled = true;
-    voiceSubmitBtn.disabled = true;
-    voiceStatus.textContent = "Voice commands are not supported in this browser.";
-  }
 
   /* ---------------------------------------------------------
      3. LANGUAGE TOGGLE (English / Hindi)
@@ -313,48 +195,39 @@
      --------------------------------------------------------- */
   const uploadBox = document.getElementById("uploadBox");
   const productPhotoInput = document.getElementById("productPhoto");
-  let productPhotoDataUrl = "";
   uploadBox.addEventListener("click", () => productPhotoInput.click());
   productPhotoInput.addEventListener("change", () => {
     const file = productPhotoInput.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      productPhotoDataUrl = reader.result;
-      document.getElementById("uploadPreviewWrap").innerHTML =
-        '<img src="' + productPhotoDataUrl + '" alt="Product preview">';
-    };
-    reader.readAsDataURL(file);
+    const url = URL.createObjectURL(file);
+    document.getElementById("uploadPreviewWrap").innerHTML =
+      '<img src="' + url + '" alt="Product preview">';
   });
   document.getElementById("addProductForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("prodName").value.trim();
-  const category = getCategory("prodCategory", "prodCustomCategory");
+  const category = document.getElementById("prodCategory").value;
   const price = document.getElementById("prodPrice").value;
   const description = document.getElementById("prodDesc").value.trim();
-  const artisan = document.getElementById("prodArtisan").value.trim() || "Artisan";
-  const region = document.getElementById("prodRegion").value.trim() || "India";
-  const imageFile = productPhotoInput.files[0];
 
-  if (!name || !category || !price || Number(price) <= 0 || !imageFile) {
-    alert("Please choose a product image and add a product name, category, and valid price.");
+  if (!name || !category || !price || Number(price) <= 0) {
+    alert("Please enter a name, category, and valid price.");
     return;
   }
 
   try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("price", Number(price));
-    formData.append("description", description);
-    formData.append("artisan", artisan);
-    formData.append("region", region);
-    if (imageFile) formData.append("image", imageFile);
-
     const response = await fetch(`${API_URL}/api/products`, {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        category: category,
+        price: Number(price),
+        description: description
+      })
     });
 
 
@@ -373,20 +246,17 @@
       name: { en: savedProduct.name, hi: savedProduct.name },
       category: savedProduct.category,
       price: Number(savedProduct.price),
-      image_url: savedProduct.image_url || DEFAULT_PRODUCT_IMAGE,
       icon: "🛍️",
-      artisan: savedProduct.artisan || artisan,
-      region: savedProduct.region || region,
+      artisan: "Hello Lakshmi Priyaa",
+      region: "India",
       desc: { en: savedProduct.description || "", hi: savedProduct.description || "" }
     });
     renderMarketGrid();
     renderMyCatalogGrid();
     renderDashboardRecent();
     document.getElementById("addProductForm").reset();
-    productPhotoInput.value = "";
-    productPhotoDataUrl = "";
     document.getElementById("uploadPreviewWrap").innerHTML =
-      '<span class="upload-icon">📷</span><p>Upload Product Image</p><small>JPG, PNG, or WEBP (required)</small>';
+      '<span class="upload-icon">📷</span><p>Tap to add a photo</p>';
 
     showPage("my-catalog");
 
@@ -529,7 +399,6 @@
       },
       category: p.category,
       price: Number(p.price),
-      image_url: p.image_url || DEFAULT_PRODUCT_IMAGE,
       icon: p.icon || "🛍️",
       artisan: p.artisan || "Artisan",
       region: p.region || "India",
@@ -549,14 +418,14 @@ function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
     return (
       '<div class="product-card" data-product-id="' + p.id + '">' +
-        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span><img src="' + (p.image_url || DEFAULT_PRODUCT_IMAGE) + '" alt="' + name + '"></div>' +
+        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span>' + p.icon + "</div>" +
         '<div class="product-body">' +
           "<h3>" + name + "</h3>" +
           '<div class="product-artisan">' + p.artisan + " · " + p.region + "</div>" +
           '<div class="product-price-row">' +
             '<span class="product-price">₹' + p.price.toLocaleString("en-IN") + "</span>" +
             '<button type="button" class="mini-btn" data-view-product="' + p.id + '">' +
-              (state.lang === "hi" ? "विवरण देखें" : "View Details") +
+              (state.lang === "hi" ? "देखें" : "View") +
             "</button>" +
           "</div>" +
         "</div>" +
@@ -577,22 +446,12 @@ function productCardHTML(p) {
   function renderMarketGrid() {
     const grid = document.getElementById("marketGrid");
     const query = (document.getElementById("marketSearch").value || "").toLowerCase();
-    const categorySelect = document.getElementById("marketCategory");
-    const category = getCategory("marketCategory", "marketCustomCategory");
+    const category = document.getElementById("marketCategory").value;
     const sort = document.getElementById("marketSort").value;
     const products = PRODUCTS.filter((p) => {
       const name = (p.name.en + " " + p.name.hi).toLowerCase();
-      const artisan = (p.artisan || "").toLowerCase();
-      const region = (p.region || "").toLowerCase();
-      const matchesQuery = !query || name.includes(query) || artisan.includes(query) || region.includes(query) || p.category.toLowerCase().includes(query);
-      const categoryAliases = {
-        jewellery: ["jewellery", "jewelry"],
-        paintings: ["paintings", "painting"],
-        handloom: ["handloom", "textiles & weaving"],
-        "wood craft": ["wood craft", "woodwork", "woodcraft"]
-      };
-      const selectedCategories = categoryAliases[category.toLowerCase()] || [category.toLowerCase()];
-      const matchesCategory = categorySelect.value === "all" || (category && selectedCategories.includes(p.category.toLowerCase()));
+      const matchesQuery = !query || name.includes(query) || p.category.toLowerCase().includes(query);
+      const matchesCategory = category === "all" || p.category === category;
       return matchesQuery && matchesCategory;
     });
 
@@ -615,11 +474,8 @@ function productCardHTML(p) {
     )).join("");
   }
 
-  ["marketSearch", "marketCategory", "marketSort", "marketCustomCategory"].forEach((id) => {
+  ["marketSearch", "marketCategory", "marketSort"].forEach((id) => {
     document.getElementById(id).addEventListener("input", renderMarketGrid);
-  });
-  ["marketCategory", "marketSort"].forEach((id) => {
-    document.getElementById(id).addEventListener("change", renderMarketGrid);
   });
   document.getElementById("myCatalogSearch").addEventListener("input", renderMyCatalogGrid);
 
@@ -641,8 +497,8 @@ function productCardHTML(p) {
       "</button>" +
       '<div class="detail-grid">' +
         "<div>" +
-          '<div class="detail-gallery-main"><img src="' + (p.image_url || DEFAULT_PRODUCT_IMAGE) + '" alt="' + name + '"></div>' +
-          '<div class="detail-thumbs"><span><img src="' + (p.image_url || DEFAULT_PRODUCT_IMAGE) + '" alt="' + name + '"></span><span>🧵</span><span>📦</span></div>' +
+          '<div class="detail-gallery-main">' + p.icon + "</div>" +
+          '<div class="detail-thumbs"><span>' + p.icon + "</span><span>🧵</span><span>📦</span></div>" +
         "</div>" +
         "<div class=\"detail-info\">" +
           '<span class="cat-chip-solo">' + p.category + "</span>" +
@@ -662,17 +518,12 @@ function productCardHTML(p) {
 
 
     document.getElementById("addToCartBtn").addEventListener("click", bumpCart);
-    document.getElementById("buyNowBtn").addEventListener("click", buyProduct);
+    document.getElementById("buyNowBtn").addEventListener("click", bumpCart);
   }
 
   function bumpCart() {
     state.cartCount += 1;
     document.getElementById("cartCount").textContent = state.cartCount;
-  }
-
-  function buyProduct() {
-    bumpCart();
-    alert(state.lang === "hi" ? "खरीदारी शुरू हो गई। आपका उत्पाद कार्ट में है।" : "Purchase started. Your product is in the cart.");
   }
 
   document.body.addEventListener("click", (e) => {
@@ -694,7 +545,7 @@ function productCardHTML(p) {
   async function init() {
     applyLanguage(state.lang);
 
-    const startId = location.hash.replace(/^#\/?/, "") || "landing";
+    const startId = location.hash.replace("#", "") || "landing";
     showPage(startId, { skipHash: true });
 
     const backendProducts = await loadProductsFromBackend();

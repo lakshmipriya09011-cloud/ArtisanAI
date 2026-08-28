@@ -48,27 +48,6 @@
       ? `${window.location.protocol}//${window.location.hostname}:5000`
       : window.location.origin;
 
-  function getCategory(selectId, customInputId) {
-    const select = document.getElementById(selectId);
-    return select.value === "__custom__"
-      ? document.getElementById(customInputId).value.trim()
-      : select.value;
-  }
-
-  function updateCustomCategory(selectId, customInputId) {
-    const select = document.getElementById(selectId);
-    const input = document.getElementById(customInputId);
-    const isCustom = select.value === "__custom__";
-    input.classList.toggle("hidden", !isCustom);
-    input.required = isCustom;
-    if (isCustom) input.focus();
-  }
-
-  [["prodCategory", "prodCustomCategory"], ["priceCategory", "priceCustomCategory"], ["marketCategory", "marketCustomCategory"]]
-    .forEach(([selectId, customInputId]) => {
-      document.getElementById(selectId).addEventListener("change", () => updateCustomCategory(selectId, customInputId));
-    });
-
   /* ---------------------------------------------------------
      2. NAVIGATION (SPA page switching)
      --------------------------------------------------------- */
@@ -111,102 +90,6 @@
     const id = location.hash.replace("#", "") || "landing";
     showPage(id, { skipHash: true });
   });
-
-  const voiceAssistantBtn = document.getElementById("voiceAssistantBtn");
-  const voiceStatus = document.getElementById("voiceStatus");
-  const voiceCommandInput = document.getElementById("voiceCommandInput");
-  const voiceSubmitBtn = document.getElementById("voiceSubmitBtn");
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  function executeVoiceCommand() {
-    const command = voiceCommandInput.value.trim().toLowerCase();
-    if (!command) return;
-    const wantsCart = /\b(add|put|save)\b.*\b(cart|basket)\b/.test(command) || command.includes("कार्ट में");
-    const wantsPurchase = /\b(buy|purchase|order|checkout)\b/.test(command) || command.includes("खरीद");
-    if ((wantsCart || wantsPurchase) && state.currentProductId) {
-      const actionButton = document.getElementById(wantsPurchase ? "buyNowBtn" : "addToCartBtn");
-      if (actionButton) {
-        actionButton.click();
-        voiceStatus.textContent = wantsPurchase
-          ? (state.lang === "hi" ? "खरीदारी शुरू हो गई।" : "Purchase started.")
-          : (state.lang === "hi" ? "उत्पाद कार्ट में जोड़ दिया गया।" : "Product added to cart.");
-        return;
-      }
-    }
-    const isSearch = /\b(search|find|show me|look for|देखें|खोजें)\b/.test(command);
-    const destinations = [
-      { page: "marketplace", words: ["marketplace", "go to market", "open market", "बाज़ार", "बाजार"] },
-      { page: "dashboard", words: ["dashboard", "my dashboard", "go to dashboard", "डैशबोर्ड"] },
-      { page: "pricing-assistant", words: ["pricing", "smart pricing", "open pricing", "कीमत", "मूल्य"] },
-      { page: "add-product", words: ["add product", "new product", "list a product", "उत्पाद जोड़ें"] },
-      { page: "my-catalog", words: ["my products", "my catalog", "open catalog", "मेरे उत्पाद"] },
-      { page: "image-studio", words: ["image studio", "enhance image", "इमेज स्टूडियो"] },
-      { page: "catalog-generator", words: ["catalog generator", "generate listing", "कैटलॉग जनरेटर"] },
-      { page: "landing", words: ["go home", "go back", "होम"] }
-    ];
-    const destination = isSearch ? null : destinations.find((item) => item.words.some((word) => command.includes(word)));
-    if (destination) {
-      showPage(destination.page);
-      voiceStatus.textContent = state.lang === "hi" ? "आपका आदेश पूरा हो गया।" : "Your request is complete.";
-      return;
-    }
-    showPage("marketplace");
-    document.getElementById("marketSearch").value = voiceCommandInput.value.trim();
-    renderMarketGrid();
-    voiceStatus.textContent = state.lang === "hi" ? "आपकी खोज पूरी हो गई।" : "Your search is complete.";
-  }
-
-  if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = state.lang === "hi" ? "hi-IN" : "en-IN";
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = () => {
-      voiceAssistantBtn.classList.add("is-listening");
-      voiceCommandInput.value = "";
-      voiceSubmitBtn.disabled = true;
-      voiceStatus.textContent = state.lang === "hi" ? "अब बोलें..." : "Speak now...";
-    };
-    recognition.onerror = (event) => {
-      voiceAssistantBtn.classList.remove("is-listening");
-      const errors = {
-        "not-allowed": "Microphone permission was denied. Allow microphone access and try again.",
-        "audio-capture": "No microphone was found. Check your microphone and try again.",
-        "no-speech": "No speech detected. Click the microphone and speak clearly.",
-        "network": "Voice recognition needs an internet connection in this browser."
-      };
-      voiceStatus.textContent = errors[event.error] || "Voice recognition failed. Please try again.";
-    };
-    recognition.onnomatch = () => {
-      voiceAssistantBtn.classList.remove("is-listening");
-      voiceStatus.textContent = "No words were recognized. Please speak again.";
-    };
-    recognition.onend = () => voiceAssistantBtn.classList.remove("is-listening");
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.trim();
-      voiceCommandInput.value = transcript;
-      voiceSubmitBtn.disabled = false;
-      voiceStatus.textContent = state.lang === "hi" ? "खोज रहा हूँ..." : "Searching...";
-      executeVoiceCommand();
-    };
-    voiceAssistantBtn.addEventListener("click", () => {
-      if (voiceAssistantBtn.classList.contains("is-listening")) return;
-      recognition.lang = state.lang === "hi" ? "hi-IN" : "en-IN";
-      try {
-        recognition.start();
-      } catch (error) {
-        voiceAssistantBtn.classList.remove("is-listening");
-        voiceStatus.textContent = "Microphone is already active. Please wait and try again.";
-      }
-    });
-    voiceSubmitBtn.addEventListener("click", executeVoiceCommand);
-  } else {
-    voiceAssistantBtn.disabled = true;
-    voiceSubmitBtn.disabled = true;
-    voiceStatus.textContent = "Voice commands are not supported in this browser.";
-  }
 
   /* ---------------------------------------------------------
      3. LANGUAGE TOGGLE (English / Hindi)
@@ -312,29 +195,24 @@
      --------------------------------------------------------- */
   const uploadBox = document.getElementById("uploadBox");
   const productPhotoInput = document.getElementById("productPhoto");
-  let productPhotoDataUrl = "";
   uploadBox.addEventListener("click", () => productPhotoInput.click());
   productPhotoInput.addEventListener("change", () => {
     const file = productPhotoInput.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      productPhotoDataUrl = reader.result;
-      document.getElementById("uploadPreviewWrap").innerHTML =
-        '<img src="' + productPhotoDataUrl + '" alt="Product preview">';
-    };
-    reader.readAsDataURL(file);
+    const url = URL.createObjectURL(file);
+    document.getElementById("uploadPreviewWrap").innerHTML =
+      '<img src="' + url + '" alt="Product preview">';
   });
   document.getElementById("addProductForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const name = document.getElementById("prodName").value.trim();
-  const category = getCategory("prodCategory", "prodCustomCategory");
+  const category = document.getElementById("prodCategory").value;
   const price = document.getElementById("prodPrice").value;
   const description = document.getElementById("prodDesc").value.trim();
 
-  if (!name || !category || !price || Number(price) <= 0 || !productPhotoDataUrl) {
-    alert("Please add a product photo, name, category, and valid price.");
+  if (!name || !category || !price || Number(price) <= 0) {
+    alert("Please enter a name, category, and valid price.");
     return;
   }
 
@@ -348,8 +226,7 @@
         name: name,
         category: category,
         price: Number(price),
-        description: description,
-        image_url: productPhotoDataUrl
+        description: description
       })
     });
 
@@ -369,7 +246,6 @@
       name: { en: savedProduct.name, hi: savedProduct.name },
       category: savedProduct.category,
       price: Number(savedProduct.price),
-      image_url: savedProduct.image_url || productPhotoDataUrl,
       icon: "🛍️",
       artisan: "Hello Lakshmi Priyaa",
       region: "India",
@@ -379,7 +255,6 @@
     renderMyCatalogGrid();
     renderDashboardRecent();
     document.getElementById("addProductForm").reset();
-    productPhotoDataUrl = "";
     document.getElementById("uploadPreviewWrap").innerHTML =
       '<span class="upload-icon">📷</span><p>Tap to add a photo</p>';
 
@@ -524,7 +399,6 @@
       },
       category: p.category,
       price: Number(p.price),
-      image_url: p.image_url || "",
       icon: p.icon || "🛍️",
       artisan: p.artisan || "Artisan",
       region: p.region || "India",
@@ -544,7 +418,7 @@ function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
     return (
       '<div class="product-card" data-product-id="' + p.id + '">' +
-        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span>' + (p.image_url ? '<img src="' + p.image_url + '" alt="' + name + '">' : p.icon) + "</div>" +
+        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span>' + p.icon + "</div>" +
         '<div class="product-body">' +
           "<h3>" + name + "</h3>" +
           '<div class="product-artisan">' + p.artisan + " · " + p.region + "</div>" +
@@ -572,13 +446,12 @@ function productCardHTML(p) {
   function renderMarketGrid() {
     const grid = document.getElementById("marketGrid");
     const query = (document.getElementById("marketSearch").value || "").toLowerCase();
-    const categorySelect = document.getElementById("marketCategory");
-    const category = getCategory("marketCategory", "marketCustomCategory");
+    const category = document.getElementById("marketCategory").value;
     const sort = document.getElementById("marketSort").value;
     const products = PRODUCTS.filter((p) => {
       const name = (p.name.en + " " + p.name.hi).toLowerCase();
       const matchesQuery = !query || name.includes(query) || p.category.toLowerCase().includes(query);
-      const matchesCategory = categorySelect.value === "all" || (category && p.category.toLowerCase() === category.toLowerCase());
+      const matchesCategory = category === "all" || p.category === category;
       return matchesQuery && matchesCategory;
     });
 
@@ -601,7 +474,7 @@ function productCardHTML(p) {
     )).join("");
   }
 
-  ["marketSearch", "marketCategory", "marketSort", "marketCustomCategory"].forEach((id) => {
+  ["marketSearch", "marketCategory", "marketSort"].forEach((id) => {
     document.getElementById(id).addEventListener("input", renderMarketGrid);
   });
   document.getElementById("myCatalogSearch").addEventListener("input", renderMyCatalogGrid);
@@ -624,8 +497,8 @@ function productCardHTML(p) {
       "</button>" +
       '<div class="detail-grid">' +
         "<div>" +
-          '<div class="detail-gallery-main">' + (p.image_url ? '<img src="' + p.image_url + '" alt="' + name + '">' : p.icon) + "</div>" +
-          '<div class="detail-thumbs"><span>' + (p.image_url ? '<img src="' + p.image_url + '" alt="' + name + '">' : p.icon) + "</span><span>🧵</span><span>📦</span></div>" +
+          '<div class="detail-gallery-main">' + p.icon + "</div>" +
+          '<div class="detail-thumbs"><span>' + p.icon + "</span><span>🧵</span><span>📦</span></div>" +
         "</div>" +
         "<div class=\"detail-info\">" +
           '<span class="cat-chip-solo">' + p.category + "</span>" +
@@ -645,17 +518,12 @@ function productCardHTML(p) {
 
 
     document.getElementById("addToCartBtn").addEventListener("click", bumpCart);
-    document.getElementById("buyNowBtn").addEventListener("click", buyProduct);
+    document.getElementById("buyNowBtn").addEventListener("click", bumpCart);
   }
 
   function bumpCart() {
     state.cartCount += 1;
     document.getElementById("cartCount").textContent = state.cartCount;
-  }
-
-  function buyProduct() {
-    bumpCart();
-    alert(state.lang === "hi" ? "खरीदारी शुरू हो गई। आपका उत्पाद कार्ट में है।" : "Purchase started. Your product is in the cart.");
   }
 
   document.body.addEventListener("click", (e) => {
