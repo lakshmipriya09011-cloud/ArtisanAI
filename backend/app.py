@@ -31,8 +31,9 @@ hackathon.
 # ---------------------------------------------------------------
 # STEP 1: Import the tools we need
 # ---------------------------------------------------------------
-from flask import Flask,request, jsonify, send_from_directory
+from flask import Flask,request, jsonify, send_from_directory, send_file
 from flask_cors import CORS    # Flask = our web server toolkit
+from werkzeug.utils import secure_filename
 import sqlite3                              # sqlite3 = built into Python, no install needed
 import os
 import secrets
@@ -49,9 +50,32 @@ CORS(app)
 
 OTP_TTL_SECONDS = 300
 OTP_STORE = {}
+ARTISAN_PROFILE = {
+    "name": "Hello Lakshmi Priyaa",
+    "shop_name": "Lakshmi Priyaa Handcrafts",
+    "craft_category": "Pottery",
+    "state": "Tamil Nadu",
+    "district": "Chennai",
+    "story": "I make useful, joyful pieces by hand and share traditional craft with new homes.",
+    "contact": "lakshmi@example.com",
+    "verification_status": "Verified",
+    "rating": 4.8,
+    "followers": 126
+}
+DEMO_ORDERS = [
+    {"id": "ORD-1001", "product": "Blue Pottery Vase", "buyer": "R. Sharma", "amount": 1450, "status": "Shipped"},
+    {"id": "ORD-1002", "product": "Madhubani Painting", "buyer": "A. Iyer", "amount": 2200, "status": "Processing"},
+    {"id": "ORD-1003", "product": "Terracotta Diya Set", "buyer": "S. Khan", "amount": 680, "status": "Delivered"}
+]
+DEMO_REVIEWS = [
+    {"author": "Meera K.", "rating": 5, "text": "Beautiful finish and carefully packed."},
+    {"author": "Arjun P.", "rating": 4, "text": "The craft feels authentic and special."}
+]
 
 # The database file will be created in the same folder as this app.py
 DB_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "artisan.db")
+UPLOAD_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "uploads", "products")
+ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 
 
 def normalize_phone(phone):
@@ -159,7 +183,7 @@ def create_product():
     }
     Only "name" is required. Everything else is optional.
     """
-    data = request.get_json(silent=True) or {}
+    data = request.form.to_dict() if request.form else (request.get_json(silent=True) or {})
 
     name = data.get("name")
     if not name:
@@ -169,7 +193,20 @@ def create_product():
     description = data.get("description", "")
     category = data.get("category", "")
     price = data.get("price", 0)
+    try:
+        price = float(price)
+    except (TypeError, ValueError):
+        return jsonify({"error": "Field 'price' must be a number"}), 400
     image_url = data.get("image_url", "")
+    image = request.files.get("image")
+    if image and image.filename:
+        extension = os.path.splitext(image.filename)[1].lower()
+        if extension not in ALLOWED_IMAGE_EXTENSIONS:
+            return jsonify({"error": "Use a JPG, PNG, GIF, or WEBP image"}), 400
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
+        filename = f"{secrets.token_hex(10)}{extension}"
+        image.save(os.path.join(UPLOAD_DIR, filename))
+        image_url = f"/uploads/products/{filename}"
     created_at = datetime.utcnow().isoformat()
 
     conn = get_db_connection()
@@ -211,6 +248,11 @@ def get_products():
     return jsonify({"count": len(products), "products": products}), 200
 
 
+@app.route("/uploads/products/<path:filename>", methods=["GET"])
+def uploaded_product_image(filename):
+    return send_from_directory(UPLOAD_DIR, filename)
+
+
 # =================================================================
 # ROUTE 3: GET /api/products/<id>  -> Get a single product
 # =================================================================
@@ -226,6 +268,94 @@ def get_product(product_id):
         return jsonify({"error": f"No product found with id {product_id}"}), 404
 
     return jsonify({"product": dict(row)}), 200
+
+
+@app.route("/api/artisan/profile", methods=["GET", "POST"])
+def artisan_profile():
+    if request.method == "POST":
+        data = request.get_json(silent=True) or {}
+        ARTISAN_PROFILE.update({key: data[key] for key in ARTISAN_PROFILE if key in data})
+    return jsonify({"profile": ARTISAN_PROFILE}), 200
+
+
+@app.route("/api/products/<int:product_id>", methods=["PUT", "DELETE"])
+def update_or_delete_product(product_id):
+    conn = get_db_connection()
+    existing = conn.execute("SELECT * FROM products WHERE id = ?", (product_id,)).fetchone()
+    if existing is None:
+        conn.close()
+        return jsonify({"error": "Product not found"}), 404
+    if request.method == "DELETE":
+        conn.execute("DELETE FROM products WHERE id = ?", (product_id,))
+    else:
+        data = request.get_json(silent=True) or {}
+        conn.execute(
+            "UPDATE products SET name = ?, description = ?, category = ?, price = ? WHERE id = ?",
+            (data.get("name", existing["name"]), data.get("description", existing["description"]),
+             data.get("category", existing["category"]), data.get("price", existing["price"]), product_id)
+        )
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Product deleted" if request.method == "DELETE" else "Product updated"}), 200
+
+
+@app.route("/api/orders", methods=["GET", "PATCH"])
+def orders():
+    if request.method == "PATCH":
+        data = request.get_json(silent=True) or {}
+        for order in DEMO_ORDERS:
+            if order["id"] == data.get("id") and data.get("status") in {"New", "Processing", "Shipped", "Delivered", "Cancelled", "Returned"}:
+                order["status"] = data["status"]
+    return jsonify({"orders": DEMO_ORDERS}), 200
+
+
+@app.route("/api/orders", methods=["POST"])
+def create_order():
+    data = request.get_json(silent=True) or {}
+    items = data.get("items") or []
+    if not data.get("name") or not data.get("phone") or not data.get("address") or not items:
+        return jsonify({"error": "Name, phone, address, and at least one item are required"}), 400
+
+    total = sum(float(item.get("price", 0)) * int(item.get("quantity", 1)) for item in items)
+    order = {
+        "id": f"ORD-{1000 + len(DEMO_ORDERS) + 1}",
+        "product": items[0].get("name", "Artisan product") if len(items) == 1 else f"{len(items)} artisan products",
+        "buyer": data["name"],
+        "amount": round(total, 2),
+        "status": "New"
+    }
+    DEMO_ORDERS.insert(0, order)
+    return jsonify({"message": "Order placed successfully", "order": order}), 201
+
+
+@app.route("/api/reviews", methods=["GET", "POST"])
+def reviews():
+    if request.method == "POST":
+        data = request.get_json(silent=True) or {}
+        DEMO_REVIEWS.append({"author": data.get("author", "Guest"), "rating": int(data.get("rating", 5)), "text": data.get("text", "")})
+    return jsonify({"reviews": DEMO_REVIEWS}), 200
+
+
+@app.route("/api/earnings", methods=["GET"])
+def earnings():
+    completed = sum(order["amount"] for order in DEMO_ORDERS if order["status"] == "Delivered")
+    pending = sum(order["amount"] for order in DEMO_ORDERS if order["status"] not in {"Delivered", "Cancelled", "Returned"})
+    return jsonify({"total": completed + pending, "pending": pending, "completed": completed, "sales": DEMO_ORDERS}), 200
+
+
+@app.route("/api/ai/describe", methods=["POST"])
+def ai_describe():
+    data = request.get_json(silent=True) or {}
+    name = data.get("name", "handmade product")
+    material = data.get("material", "traditional materials")
+    return jsonify({"description": f"A thoughtfully handmade {name.lower()} crafted with {material.lower()}. Made in small batches with care, character and a story worth sharing."}), 200
+
+
+@app.route("/api/ai/categorize", methods=["POST"])
+def ai_categorize():
+    text = str((request.get_json(silent=True) or {}).get("text", "")).lower()
+    category = "Textiles & Weaving" if any(word in text for word in ["silk", "cotton", "weave", "saree"]) else "Jewelry" if any(word in text for word in ["earring", "necklace", "silver"]) else "Pottery" if any(word in text for word in ["clay", "pottery", "ceramic", "diya"]) else "Handicrafts"
+    return jsonify({"category": category}), 200
 
 
 # =================================================================
@@ -383,6 +513,14 @@ def translate_text():
 @app.route("/", methods=["GET"])
 def home():
     return send_from_directory(FRONTEND_DIR, "index.html")
+
+
+@app.route("/download/artisanai-complete.zip", methods=["GET"])
+def download_project():
+    archive_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "ArtisanAI-complete.zip"))
+    if not os.path.isfile(archive_path):
+        return jsonify({"error": "Project archive is not available"}), 404
+    return send_file(archive_path, as_attachment=True, download_name="ArtisanAI-complete.zip")
 
 
 # ---------------------------------------------------------------

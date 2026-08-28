@@ -16,6 +16,7 @@
 <!-- ============ SITE HEADER ============ -->
 <header class="site-header" id="siteHeader">
   <div class="header-inner">
+    <button class="left-menu-toggle" id="leftMenuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="leftMenu">☰</button>
     <a href="#landing" class="brand" data-target="landing">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40" width="34" height="34">
@@ -38,14 +39,23 @@
     </nav>
 
     <div class="header-tools">
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span class="lang-opt" data-lang-label-en>EN</span>
-        <span class="lang-sep">/</span>
-        <span class="lang-opt" data-lang-label-hi>हिं</span>
-      </button>
-      <button class="cart-btn" data-target="marketplace" aria-label="Cart">
+      <label class="language-picker" for="languageSelect">
+        <span aria-hidden="true">🌐</span>
+        <select id="languageSelect" aria-label="Choose language">
+          <option value="en">English</option>
+          <option value="hi">हिंदी</option>
+          <option value="bn">বাংলা</option>
+          <option value="ta">தமிழ்</option>
+          <option value="te">తెలుగు</option>
+          <option value="mr">मराठी</option>
+          <option value="kn">ಕನ್ನಡ</option>
+          <option value="gu">ગુજરાતી</option>
+        </select>
+      </label>
+      <button class="cart-btn" data-target="cart" aria-label="Cart">
         🧺 <span class="cart-count" id="cartCount">0</span>
       </button>
+      <button class="orders-btn" data-target="my-orders" aria-label="My orders" title="My orders">📦</button>
       <button class="hamburger" id="hamburgerBtn" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -53,94 +63,93 @@
   </div>
 </header>
 
+<aside class="left-menu" id="leftMenu" aria-label="Site menu" hidden>
+  <div class="left-menu-head"><strong data-en="ArtisanAI Menu" data-hi="ArtisanAI मेनू">ArtisanAI Menu</strong><button type="button" id="leftMenuClose" aria-label="Close menu">×</button></div>
+  <nav class="left-menu-links">
+    <button data-target="landing">⌂ <span data-en="Home" data-hi="होम">Home</span></button>
+    <button data-target="marketplace">🛍️ <span data-en="Marketplace" data-hi="बाज़ार">Marketplace</span></button>
+    <button data-target="about">ⓘ <span data-en="About ArtisanAI" data-hi="ArtisanAI के बारे में">About ArtisanAI</span></button>
+    <button data-target="dashboard">🧑‍🎨 <span data-en="Artisan Dashboard" data-hi="कारीगर डैशबोर्ड">Artisan Dashboard</span></button>
+    <button data-target="login">↪ <span data-en="Artisan Login" data-hi="कारीगर लॉगिन">Artisan Login</span></button>
+  </nav>
+  <div class="left-menu-categories">
+    <strong data-en="Shop by category" data-hi="श्रेणी के अनुसार खरीदें">Shop by category</strong>
+    <button data-side-category="all" data-en="All products" data-hi="सभी उत्पाद">All products</button>
+    <button data-side-category="Pottery" data-en="🏺 Pottery" data-hi="🏺 मिट्टी के बर्तन">🏺 Pottery</button>
+    <button data-side-category="Textiles & Weaving" data-en="🧣 Textiles & Weaving" data-hi="🧣 वस्त्र और बुनाई">🧣 Textiles & Weaving</button>
+    <button data-side-category="Painting" data-en="🎨 Painting" data-hi="🎨 चित्रकला">🎨 Painting</button>
+    <button data-side-category="Jewelry" data-en="💍 Jewelry" data-hi="💍 आभूषण">💍 Jewelry</button>
+    <button data-side-category="Woodwork" data-en="🪵 Woodwork" data-hi="🪵 लकड़ी का काम">🪵 Woodwork</button>
+    <button data-side-category="Metalwork" data-en="🔔 Metalwork" data-hi="🔔 धातु शिल्प">🔔 Metalwork</button>
+  </div>
+</aside>
+<div class="left-menu-backdrop" id="leftMenuBackdrop" hidden></div>
+
 <main id="app">
 
 <!-- ============ 1. LANDING PAGE ============ -->
 <section class="page" id="page-landing" data-page="landing">
-
-  <div class="hero">
-    <div class="hero-thread" aria-hidden="true"></div>
-    <div class="hero-inner">
-      <p class="eyebrow" data-en="Smart India Hackathon · Artisan Empowerment" data-hi="स्मार्ट इंडिया हैकाथॉन · कारीगर सशक्तिकरण">Smart India Hackathon · Artisan Empowerment</p>
-      <h1 class="hero-title">
-        <span data-en="Your hands make it." data-hi="आपके हाथ इसे बनाते हैं।">Your hands make it.</span><br>
-        <span class="accent" data-en="AI helps the world find it." data-hi="AI इसे दुनिया तक पहुँचाता है।">AI helps the world find it.</span>
-      </h1>
-      <p class="hero-sub" data-en="ArtisanAI helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps." data-hi="ArtisanAI वंचित कारीगरों को उनके हस्तशिल्प की फ़ोटो लेने, विवरण लिखने, सही दाम तय करने और ऑनलाइन बेचने में मदद करता है — अपनी भाषा में, बस कुछ टैप में।">
-        ArtisanAI helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps.
-      </p>
-      <div class="hero-actions">
-        <button class="btn btn-primary btn-lg" data-target="login">
-          🧑‍🎨 <span data-en="I am an Artisan" data-hi="मैं एक कारीगर हूँ">I am an Artisan</span>
-        </button>
-        <button class="btn btn-outline btn-lg" data-target="marketplace">
-          🛍️ <span data-en="Explore Marketplace" data-hi="बाज़ार देखें">Explore Marketplace</span>
-        </button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><strong>12,400+</strong><span data-en="Artisans onboarded" data-hi="जुड़े कारीगर">Artisans onboarded</span></div>
-        <div class="stat"><strong>38</strong><span data-en="Crafts represented" data-hi="शिल्प विधाएँ">Crafts represented</span></div>
-        <div class="stat"><strong>₹2.1 Cr+</strong><span data-en="Paid directly to artisans" data-hi="कारीगरों को सीधे भुगतान">Paid directly to artisans</span></div>
+  <div class="storefront-search">
+    <span>🔎</span>
+    <input id="homeSearch" type="search" placeholder="Search pottery, textiles, gifts..." aria-label="Search products">
+    <button type="button" class="voice-search-btn" id="homeVoiceSearchBtn" aria-label="Search by voice" title="Search by voice">🎙️</button>
+    <button type="button" id="homeSearchBtn" data-target="marketplace">Search</button>
+    <p class="voice-search-status" id="homeVoiceSearchStatus" role="status" aria-live="polite"></p>
+  </div>
+  <div class="storefront-hero">
+    <div class="storefront-hero-copy">
+      <p class="eyebrow" data-en="Shop directly from India's makers" data-hi="भारत के कारीगरों से सीधे खरीदें">Shop directly from India's makers</p>
+      <h1 data-en="A more personal kind of shopping." data-hi="खरीदारी का एक अधिक व्यक्तिगत अनुभव।">A more personal kind of shopping.</h1>
+      <p data-en="Find handmade pieces with a story, made fairly and delivered from the artisan's workshop to your home." data-hi="कहानी वाले हस्तनिर्मित उत्पाद खोजें, उचित मूल्य पर, कारीगर की कार्यशाला से आपके घर तक।">Find handmade pieces with a story, made fairly and delivered from the artisan's workshop to your home.</p>
+      <button class="btn btn-primary" data-target="marketplace" data-en="Shop handmade" data-hi="हस्तनिर्मित खरीदें">Shop handmade</button>
+    </div>
+    <div class="storefront-hero-art" aria-label="Artisan product collection">
+      <video class="hero-work-video" autoplay muted loop playsinline preload="metadata" poster="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1000&q=80" aria-label="Artisan working with clay">
+        <source src="https://cdn.coverr.co/videos/coverr-a-woman-making-pottery-1576/1080p.mp4" type="video/mp4">
+      </video>
+      <div class="hero-slide is-active" style="background-image:url('assets/artisan-making-pottery.jpg')" role="img" aria-label="Handmade pottery collection"></div>
+      <div class="hero-slide" style="background-image:url('assets/artisan-pottery.jpg')" role="img" aria-label="Handmade pottery collection"></div>
+      <div class="hero-slide" style="background-image:url('assets/saree-making-new.jpg')" role="img" aria-label="Artisan sewing handwoven saree fabric"></div>
+      <button type="button" class="hero-slide-control hero-slide-prev" id="heroSlidePrev" aria-label="Previous image">‹</button>
+      <button type="button" class="hero-slide-control hero-slide-next" id="heroSlideNext" aria-label="Next image">›</button>
+      <div class="hero-slide-dots" aria-label="Choose hero image">
+        <button type="button" class="is-active" data-slide="0" aria-label="Show image 1"></button>
+        <button type="button" data-slide="1" aria-label="Show image 2"></button>
+        <button type="button" data-slide="2" aria-label="Show image 3"></button>
       </div>
     </div>
   </div>
-
-  <div class="stitch-divider" aria-hidden="true"></div>
-
-  <section class="section">
-    <h2 class="section-title" data-en="From workshop to world, in three steps" data-hi="कार्यशाला से दुनिया तक, तीन चरणों में">From workshop to world, in three steps</h2>
-    <div class="steps-grid">
-      <div class="step-card" data-target="add-product" role="button" tabindex="0">
-        <div class="step-num">01</div>
-        <div class="step-icon">📸</div>
-        <h3 data-en="Add your product" data-hi="अपना उत्पाद जोड़ें">Add your product</h3>
-        <p data-en="Snap a photo and tell us a little about what you made — no typing skills needed, just tap and speak." data-hi="एक फ़ोटो खींचें और बताएं कि आपने क्या बनाया है — टाइपिंग की ज़रूरत नहीं, बस टैप करें और बोलें।">Snap a photo and tell us a little about what you made — no typing skills needed, just tap and speak.</p>
-      </div>
-      <div class="step-card" data-target="image-studio" role="button" tabindex="0">
-        <div class="step-num">02</div>
-        <div class="step-icon">✨</div>
-        <h3 data-en="AI makes it shine" data-hi="AI इसे निखारता है">AI makes it shine</h3>
-        <p data-en="Our AI Image Studio, Catalog Generator and Pricing Assistant turn your product into a professional listing." data-hi="हमारा AI इमेज स्टूडियो, कैटलॉग जनरेटर और प्राइसिंग असिस्टेंट आपके उत्पाद को एक पेशेवर लिस्टिंग में बदल देता है।">Our AI Image Studio, Catalog Generator and Pricing Assistant turn your product into a professional listing.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <div class="step-icon">🤝</div>
-        <h3 data-en="Sell to real buyers" data-hi="असली ग्राहकों को बेचें">Sell to real buyers</h3>
-        <p data-en="Your craft appears in the buyer marketplace, reaching customers across the country at a fair price." data-hi="आपका शिल्प खरीदार बाज़ार में दिखता है, देशभर के ग्राहकों तक उचित दाम पर पहुँचता है।">Your craft appears in the buyer marketplace, reaching customers across the country at a fair price.</p>
-      </div>
+  <section class="mission-section">
+    <div class="mission-copy">
+      <p class="eyebrow" data-en="Why we created ArtisanAI" data-hi="हमने ArtisanAI क्यों बनाया">Why we created ArtisanAI</p>
+      <h2 data-en="Our aim is to give every artisan a direct path from their hands to the world." data-hi="हमारा उद्देश्य हर कारीगर को उसके हाथों से दुनिया तक सीधा रास्ता देना है।">Our aim is to give every artisan a direct path from their hands to the world.</h2>
+      <p data-en="Millions of skilled artisans make beautiful products but struggle with photography, digital catalogues, language barriers, fair pricing and access to customers. ArtisanAI uses simple AI tools to remove those barriers, so artisans can present their work proudly, sell directly and earn fairly." data-hi="लाखों कुशल कारीगर सुंदर उत्पाद बनाते हैं, लेकिन फ़ोटोग्राफ़ी, डिजिटल कैटलॉग, भाषा की बाधा, उचित मूल्य और ग्राहकों तक पहुंच की समस्याओं का सामना करते हैं। ArtisanAI आसान AI टूल्स से इन बाधाओं को दूर करता है, ताकि कारीगर अपना काम गर्व से दिखा सकें, सीधे बेच सकें और उचित कमाई कर सकें।">Millions of skilled artisans make beautiful products but struggle with photography, digital catalogues, language barriers, fair pricing and access to customers. ArtisanAI uses simple AI tools to remove those barriers, so artisans can present their work proudly, sell directly and earn fairly.</p>
+    </div>
+    <div class="mission-points">
+      <div><span>🤝</span><strong data-en="Direct connection" data-hi="सीधा संपर्क">Direct connection</strong><small data-en="Customers discover the person behind every product." data-hi="ग्राहक हर उत्पाद के पीछे के व्यक्ति को जान पाते हैं।">Customers discover the person behind every product.</small></div>
+      <div><span>⚖️</span><strong data-en="Fair earning" data-hi="उचित कमाई">Fair earning</strong><small data-en="Transparent pricing helps artisans keep more of the value." data-hi="पारदर्शी मूल्य निर्धारण से कारीगर अधिक कमाई रखते हैं।">Transparent pricing helps artisans keep more of the value.</small></div>
+      <div><span>🗣️</span><strong data-en="AI in their language" data-hi="अपनी भाषा में AI">AI in their language</strong><small data-en="Voice and bilingual tools make digital selling easier." data-hi="आवाज़ और द्विभाषी टूल डिजिटल बिक्री को आसान बनाते हैं।">Voice and bilingual tools make digital selling easier.</small></div>
     </div>
   </section>
-
-  <section class="section section-alt">
-    <h2 class="section-title" data-en="Built for the hands that build everything else" data-hi="हर चीज़ बनाने वाले हाथों के लिए बनाया गया">Built for the hands that build everything else</h2>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3 data-en="AI Image Studio" data-hi="AI इमेज स्टूडियो">AI Image Studio</h3>
-        <p data-en="Clean backgrounds, better lighting and lifestyle scenes — from a single phone photo." data-hi="साफ़ बैकग्राउंड, बेहतर रोशनी और लाइफस्टाइल दृश्य — सिर्फ़ एक फ़ोन फ़ोटो से।">Clean backgrounds, better lighting and lifestyle scenes — from a single phone photo.</p>
-        <button class="link-btn" data-target="image-studio" data-en="Try it →" data-hi="आज़माएँ →">Try it →</button>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📝</div>
-        <h3 data-en="AI Catalog Generator" data-hi="AI कैटलॉग जनरेटर">AI Catalog Generator</h3>
-        <p data-en="Get a ready title, description and tags in English and Hindi — automatically." data-hi="अंग्रेज़ी और हिंदी में तैयार शीर्षक, विवरण और टैग — अपने आप।">Get a ready title, description and tags in English and Hindi — automatically.</p>
-        <button class="link-btn" data-target="catalog-generator" data-en="Try it →" data-hi="आज़माएँ →">Try it →</button>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💰</div>
-        <h3 data-en="Smart Pricing Assistant" data-hi="स्मार्ट प्राइसिंग असिस्टेंट">Smart Pricing Assistant</h3>
-        <p data-en="A fair price suggestion based on your materials, time and local market rates." data-hi="आपकी सामग्री, समय और स्थानीय बाज़ार भाव के आधार पर उचित दाम का सुझाव।">A fair price suggestion based on your materials, time and local market rates.</p>
-        <button class="link-btn" data-target="pricing-assistant" data-en="Try it →" data-hi="आज़माएँ →">Try it →</button>
-      </div>
+  <section class="storefront-section">
+    <div class="storefront-heading"><h2 data-en="Explore popular crafts" data-hi="लोकप्रिय शिल्प देखें">Explore popular crafts</h2><button class="link-btn" data-target="marketplace" data-en="See all" data-hi="सभी देखें">See all</button></div>
+    <div class="category-tiles">
+      <button data-product-id="1"><span><img src="assets/artisan-pottery.jpg" alt="Blue pottery collection"></span><strong data-en="Pottery" data-hi="मिट्टी के बर्तन">Pottery</strong><small data-en="From ₹499" data-hi="₹499 से">From ₹499</small></button>
+      <button data-product-id="4"><span>🧣</span><strong data-en="Handwoven textiles" data-hi="हाथ से बुने वस्त्र">Handwoven textiles</strong><small data-en="From ₹899" data-hi="₹899 से">From ₹899</small></button>
+      <button data-product-id="2"><span><img src="assets/artisan-art.jpg" alt="Folk painting collection"></span><strong data-en="Folk paintings" data-hi="लोक चित्रकला">Folk paintings</strong><small data-en="From ₹799" data-hi="₹799 से">From ₹799</small></button>
+      <button data-product-id="5"><span>💍</span><strong data-en="Artisan jewelry" data-hi="कारीगर आभूषण">Artisan jewelry</strong><small data-en="From ₹599" data-hi="₹599 से">From ₹599</small></button>
     </div>
   </section>
-
-  <section class="section cta-band">
-    <h2 data-en="Ready to put your craft on the map?" data-hi="अपने शिल्प को पहचान दिलाने के लिए तैयार हैं?">Ready to put your craft on the map?</h2>
-    <button class="btn btn-primary btn-lg" data-target="login">
-      <span data-en="Get Started as Artisan" data-hi="कारीगर के रूप में शुरू करें">Get Started as Artisan</span>
-    </button>
+  <section class="storefront-section storefront-deals">
+    <div class="storefront-heading"><h2 data-en="Handpicked for your home" data-hi="आपके घर के लिए चुने हुए उत्पाद">Handpicked for your home</h2><button class="link-btn" data-target="marketplace" data-en="Shop the collection" data-hi="कलेक्शन खरीदें">Shop the collection</button></div>
+    <div class="home-product-grid">
+      <button class="home-product" data-product-id="3"><span><img src="assets/artisan-making-pottery.jpg" alt="Festive terracotta pottery"></span><strong data-en="Festive terracotta" data-hi="त्योहार की टेराकोटा">Festive terracotta</strong><small data-en="Warm light, handmade" data-hi="हाथ से बनी गर्म रोशनी">Warm light, handmade</small><b>₹680</b></button>
+      <button class="home-product" data-product-id="4"><span>🧺</span><strong data-en="Woven everyday textiles" data-hi="रोज़मर्रा के बुने वस्त्र">Woven everyday textiles</strong><small data-en="Made for useful beauty" data-hi="सुंदर और उपयोगी">Made for useful beauty</small><b>₹3,400</b></button>
+      <button class="home-product" data-product-id="6"><span>🖼️</span><strong data-en="Stories in colour" data-hi="रंगों में कहानियां">Stories in colour</strong><small data-en="Folk art for your walls" data-hi="दीवारों के लिए लोक कला">Folk art for your walls</small><b>₹1,800</b></button>
+      <button class="home-product" data-product-id="7"><span>👘</span><strong data-en="The handloom edit" data-hi="हैंडलूम कलेक्शन">The handloom edit</strong><small data-en="Woven slowly, worn often" data-hi="धीरे बुना, रोज़ पहना">Woven slowly, worn often</small><b>₹2,100</b></button>
+    </div>
   </section>
+  <section class="artisan-promise"><div><p class="eyebrow" data-en="The ArtisanAI promise" data-hi="ArtisanAI का वादा">The ArtisanAI promise</p><h2 data-en="Every purchase keeps craft in capable hands." data-hi="हर खरीदारी शिल्प को सक्षम हाथों में रखती है।">Every purchase keeps craft in capable hands.</h2></div><button class="btn btn-outline" data-target="login" data-en="Sell your craft" data-hi="अपना शिल्प बेचें">Sell your craft</button></section>
 </section>
 
 <!-- ============ 2. ARTISAN LOGIN ============ -->
@@ -291,11 +300,12 @@
 
       <form class="card-form" id="addProductForm">
         <div class="form-grid">
-          <div class="upload-box" id="uploadBox">
-            <input type="file" id="productPhoto" accept="image/*" hidden>
+          <div class="upload-box" id="uploadBox" role="button" tabindex="0" aria-controls="productPhoto" aria-label="Add your product photo">
+            <input type="file" id="productPhoto" accept="image/*" capture="environment" hidden>
             <div id="uploadPreviewWrap">
               <span class="upload-icon">📷</span>
-              <p data-en="Tap to add a photo" data-hi="फ़ोटो जोड़ने के लिए टैप करें">Tap to add a photo</p>
+              <p data-en="Add your product photo" data-hi="अपने उत्पाद की फ़ोटो जोड़ें">Add your product photo</p>
+              <small data-en="Choose from your device or camera" data-hi="अपने डिवाइस या कैमरे से चुनें">Choose from your device or camera</small>
             </div>
           </div>
 
@@ -310,6 +320,7 @@
               <option data-en="Painting" data-hi="चित्रकला">Painting</option>
               <option data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
               <option data-en="Woodwork" data-hi="लकड़ी का काम">Woodwork</option>
+              <option data-en="Metalwork" data-hi="धातु शिल्प">Metalwork</option>
             </select>
 
             <label class="form-label" data-en="Materials used" data-hi="उपयोग की गई सामग्री">Materials used</label>
@@ -317,6 +328,8 @@
 
             <label class="form-label" data-en="Short description (optional)" data-hi="संक्षिप्त विवरण (वैकल्पिक)">Short description (optional)</label>
             <textarea class="text-input" id="prodDesc" rows="3" placeholder="Tell us about it in your own words..."></textarea>
+            <button type="button" class="btn btn-soft voice-product-btn" id="describeByVoiceBtn">🎙️ <span data-en="Describe by voice" data-hi="आवाज़ से विवरण दें">Describe by voice</span></button>
+            <p class="hint-text" id="voiceProductStatus" role="status"></p>
 
             <div class="two-col">
               <div>
@@ -430,11 +443,17 @@
           <input type="text" class="text-input" id="genMaterials" value="Clay, cobalt glaze">
           <label class="form-label" data-en="Region / village" data-hi="क्षेत्र / गाँव">Region / village</label>
           <input type="text" class="text-input" id="genRegion" value="Jaipur, Rajasthan">
-          <label class="form-label" data-en="Output language" data-hi="आउटपुट भाषा">Output language</label>
-          <select class="text-input" id="genLang">
-            <option value="both" data-en="English + Hindi" data-hi="अंग्रेज़ी + हिंदी">English + Hindi</option>
-            <option value="en" data-en="English only" data-hi="केवल अंग्रेज़ी">English only</option>
-            <option value="hi" data-en="Hindi only" data-hi="केवल हिंदी">Hindi only</option>
+          <p class="ai-auto-note" data-en="AI will automatically create the product history from your craft type, materials and region." data-hi="AI आपके शिल्प प्रकार, सामग्री और क्षेत्र से उत्पाद का इतिहास अपने आप बनाएगा।">AI will automatically create the product history from your craft type, materials and region.</p>
+          <label class="form-label" data-en="Output languages" data-hi="आउटपुट भाषाएं">Output languages</label>
+          <select class="text-input language-multi-select" id="genLang" multiple size="4" aria-label="Select one or more output languages">
+            <option value="en" selected>English</option>
+            <option value="hi" selected>हिंदी</option>
+            <option value="bn">বাংলা</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+            <option value="mr">मराठी</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="gu">ગુજરાતી</option>
           </select>
           <button class="btn btn-primary btn-block btn-lg" id="generateCatalogBtn" data-en="✨ Generate Listing" data-hi="✨ लिस्टिंग बनाएं">✨ Generate Listing</button>
         </div>
@@ -556,6 +575,7 @@
   <section class="marketplace-hero">
     <h1 data-en="Discover handmade, sourced directly from artisans" data-hi="कारीगरों से सीधे हस्तनिर्मित शिल्प खोजें">Discover handmade, sourced directly from artisans</h1>
     <p data-en="Every purchase pays an artisan fairly — no middlemen." data-hi="हर खरीद कारीगर को उचित मूल्य देती है — कोई बिचौलिया नहीं।">Every purchase pays an artisan fairly — no middlemen.</p>
+    <p class="category-result-label" id="categoryResultLabel" aria-live="polite"></p>
   </section>
 
   <div class="section">
@@ -567,6 +587,8 @@
         <option value="Textiles & Weaving" data-en="Textiles & Weaving" data-hi="वस्त्र और बुनाई">Textiles & Weaving</option>
         <option value="Painting" data-en="Painting" data-hi="चित्रकला">Painting</option>
         <option value="Jewelry" data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
+        <option value="Woodwork" data-en="Woodwork" data-hi="लकड़ी का काम">Woodwork</option>
+        <option value="Metalwork" data-en="Metalwork" data-hi="धातु शिल्प">Metalwork</option>
       </select>
       <select class="text-input" id="marketSort">
         <option value="popular" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</option>
@@ -585,7 +607,51 @@
   </div>
 </section>
 
-<!-- ============ 11. ABOUT THE SOLUTION ============ -->
+<!-- ============ 11. CART AND CHECKOUT ============ -->
+<section class="page" id="page-cart" data-page="cart">
+  <div class="section cart-page">
+    <div class="content-header">
+      <div>
+        <p class="eyebrow" data-en="Your basket" data-hi="आपकी टोकरी">Your basket</p>
+        <h1 data-en="Cart & checkout" data-hi="कार्ट और चेकआउट">Cart & checkout</h1>
+        <p data-en="Buy directly from the artisan who made it." data-hi="इसे बनाने वाले कारीगर से सीधे खरीदें।">Buy directly from the artisan who made it.</p>
+      </div>
+      <button class="btn btn-outline" data-target="marketplace" data-en="Continue shopping" data-hi="खरीदारी जारी रखें">Continue shopping</button>
+    </div>
+    <div class="cart-layout">
+      <div class="panel" id="cartItems"></div>
+      <form class="panel checkout-form" id="checkoutForm">
+        <h2 data-en="Delivery details" data-hi="डिलीवरी विवरण">Delivery details</h2>
+        <label class="form-label" for="buyerName" data-en="Name" data-hi="नाम">Name</label>
+        <input class="text-input" id="buyerName" required>
+        <label class="form-label" for="buyerPhone" data-en="Phone" data-hi="फ़ोन">Phone</label>
+        <input class="text-input" id="buyerPhone" type="tel" required>
+        <label class="form-label" for="buyerAddress" data-en="Delivery address" data-hi="डिलीवरी पता">Delivery address</label>
+        <textarea class="text-input" id="buyerAddress" rows="3" required></textarea>
+        <div class="cart-total"><span data-en="Total" data-hi="कुल">Total</span><strong id="cartTotal">₹0</strong></div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit" data-en="Place order" data-hi="ऑर्डर दें">Place order</button>
+        <p class="hint-text" id="checkoutStatus" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12. MY ORDERS ============ -->
+<section class="page" id="page-my-orders" data-page="my-orders">
+  <div class="section orders-page">
+    <div class="content-header">
+      <div>
+        <p class="eyebrow" data-en="Your purchases" data-hi="आपकी खरीदारी">Your purchases</p>
+        <h1 data-en="My Orders" data-hi="मेरे ऑर्डर">My Orders</h1>
+        <p data-en="Track the handmade products you have ordered." data-hi="अपने ऑर्डर किए हुए हस्तनिर्मित उत्पादों को देखें।">Track the handmade products you have ordered.</p>
+      </div>
+      <button class="btn btn-outline" data-target="marketplace" data-en="Continue shopping" data-hi="खरीदारी जारी रखें">Continue shopping</button>
+    </div>
+    <div class="panel order-history" id="orderHistory"></div>
+  </div>
+</section>
+
+<!-- ============ 12. ABOUT THE SOLUTION ============ -->
 <section class="page" id="page-about" data-page="about">
   <div class="about-hero">
     <h1 data-en="About ArtisanAI" data-hi="ArtisanAI के बारे में">About ArtisanAI</h1>
