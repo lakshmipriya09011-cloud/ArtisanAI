@@ -75,25 +75,25 @@
         All
       </button>
       <div class="menu-dropdown" aria-label="Browse categories menu">
-        <button type="button" data-target="marketplace">Best Sellers</button>
-        <button type="button" data-target="marketplace">New Arrivals</button>
-        <button type="button" data-target="marketplace">Pottery</button>
-        <button type="button" data-target="marketplace">Textiles</button>
-        <button type="button" data-target="marketplace">Paintings</button>
-        <button type="button" data-target="marketplace">Jewelry</button>
-        <button type="button" data-target="marketplace">Woodwork</button>
+        <button type="button" data-target="marketplace" data-category="best-sellers">Best Sellers</button>
+        <button type="button" data-target="marketplace" data-category="new-arrivals">New Arrivals</button>
+        <button type="button" data-target="marketplace" data-category="Pottery">Pottery</button>
+        <button type="button" data-target="marketplace" data-category="Textiles & Weaving">Textiles</button>
+        <button type="button" data-target="marketplace" data-category="Painting">Paintings</button>
+        <button type="button" data-target="marketplace" data-category="Jewelry">Jewelry</button>
+        <button type="button" data-target="marketplace" data-category="Woodwork">Woodwork</button>
       </div>
     </div>
     <nav class="header-categories" aria-label="Store categories">
-      <button type="button" data-target="marketplace">Best Sellers</button>
-      <button type="button" data-target="marketplace">New Arrivals</button>
-      <button type="button" data-target="marketplace">Today's Deals</button>
-      <button type="button" data-target="marketplace">Pottery</button>
-      <button type="button" data-target="marketplace">Textiles</button>
-      <button type="button" data-target="marketplace">Paintings</button>
-      <button type="button" data-target="marketplace">Jewelry</button>
-      <button type="button" data-target="marketplace">Woodwork</button>
-      <button type="button" data-target="marketplace">Home Decor</button>
+      <button type="button" data-target="marketplace" data-category="best-sellers">Best Sellers</button>
+      <button type="button" data-target="marketplace" data-category="new-arrivals">New Arrivals</button>
+      <button type="button" data-target="marketplace" data-category="todays-deals">Today's Deals</button>
+      <button type="button" data-target="marketplace" data-category="Pottery">Pottery</button>
+      <button type="button" data-target="marketplace" data-category="Textiles & Weaving">Textiles</button>
+      <button type="button" data-target="marketplace" data-category="Painting">Paintings</button>
+      <button type="button" data-target="marketplace" data-category="Jewelry">Jewelry</button>
+      <button type="button" data-target="marketplace" data-category="Woodwork">Woodwork</button>
+      <button type="button" data-target="marketplace" data-category="Pottery">Home Decor</button>
       <button type="button" data-target="about">About</button>
       <button type="button" data-target="dashboard">Dashboard</button>
     </nav>
@@ -636,8 +636,9 @@
 <!-- ============ 9. BUYER MARKETPLACE ============ -->
 <section class="page" id="page-marketplace" data-page="marketplace">
   <section class="marketplace-hero">
-    <h1 data-en="Discover handmade, sourced directly from artisans" data-hi="कारीगरों से सीधे हस्तनिर्मित शिल्प खोजें">Discover handmade, sourced directly from artisans</h1>
-    <p data-en="Every purchase pays an artisan fairly — no middlemen." data-hi="हर खरीद कारीगर को उचित मूल्य देती है — कोई बिचौलिया नहीं।">Every purchase pays an artisan fairly — no middlemen.</p>
+    <p class="category-result-label" id="marketCategoryLabel">Marketplace</p>
+    <h1 id="marketTitle" data-en="Discover handmade, sourced directly from artisans" data-hi="कारीगरों से सीधे हस्तनिर्मित शिल्प खोजें">Discover handmade, sourced directly from artisans</h1>
+    <p id="marketDescription" data-en="Every purchase pays an artisan fairly — no middlemen." data-hi="हर खरीद कारीगर को उचित मूल्य देती है — कोई बिचौलिया नहीं।">Every purchase pays an artisan fairly — no middlemen.</p>
   </section>
 
   <div class="section">
@@ -648,10 +649,14 @@
       </div>
       <select class="text-input" id="marketCategory">
         <option value="all" data-en="All Categories" data-hi="सभी श्रेणियाँ">All Categories</option>
+        <option value="best-sellers" data-en="Best Sellers" data-hi="सबसे लोकप्रिय">Best Sellers</option>
+        <option value="new-arrivals" data-en="New Arrivals" data-hi="नए आ रहे">New Arrivals</option>
+        <option value="todays-deals" data-en="Today's Deals" data-hi="आज की डील्स">Today's Deals</option>
         <option value="Pottery" data-en="Pottery" data-hi="मिट्टी के बर्तन">Pottery</option>
         <option value="Textiles & Weaving" data-en="Textiles & Weaving" data-hi="वस्त्र और बुनाई">Textiles & Weaving</option>
         <option value="Painting" data-en="Painting" data-hi="चित्रकला">Painting</option>
         <option value="Jewelry" data-en="Jewelry" data-hi="आभूषण">Jewelry</option>
+        <option value="Woodwork" data-en="Woodwork" data-hi="लकड़ी का काम">Woodwork</option>
       </select>
       <select class="text-input" id="marketSort">
         <option value="popular" data-en="Most Popular" data-hi="सबसे लोकप्रिय">Most Popular</option>
@@ -731,6 +736,23 @@
 </section>
 
 </main>
+
+<div class="cart-panel" id="cartPanel" aria-live="polite">
+  <div class="cart-panel-header">
+    <h2>My Cart</h2>
+    <button type="button" class="cart-close" id="cartCloseBtn" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="empty-state">Your cart is empty.</p>
+  </div>
+  <div class="cart-summary">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <strong id="cartTotal">₹0</strong>
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Buy</button>
+  </div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer">

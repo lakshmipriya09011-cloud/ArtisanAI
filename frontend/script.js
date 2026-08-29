@@ -41,6 +41,7 @@
     lang: localStorage.getItem("artisanai_lang") || "en",
     cartCount: 0,
     currentProductId: null,
+    cart: [],
     authenticated: false,
     dashboardProducts: []
   };
@@ -82,8 +83,194 @@
     document.getElementById("hamburgerBtn").setAttribute("aria-expanded", "false");
   }
 
+  function renderCart() {
+    const itemsWrap = document.getElementById("cartItems");
+    const totalEl = document.getElementById("cartTotal");
+    if (!itemsWrap || !totalEl) return;
+
+    const total = state.cart.reduce((sum, item) => sum + (Number(item.price) * Number(item.quantity || 1)), 0);
+    state.cartCount = state.cart.reduce((sum, item) => sum + Number(item.quantity || 1), 0);
+    document.getElementById("cartCount").textContent = state.cartCount;
+
+    if (!state.cart.length) {
+      itemsWrap.innerHTML = '<p class="empty-state">Your cart is empty.</p>';
+      totalEl.textContent = "₹0";
+      return;
+    }
+
+    itemsWrap.innerHTML = state.cart.map((item) => (
+      '<div class="cart-item">' +
+        '<div><strong>' + (item.name || "Artisan product") + '</strong><span>' + (item.quantity || 1) + ' item(s)</span></div>' +
+        '<strong>₹' + (Number(item.price) * Number(item.quantity || 1)).toLocaleString("en-IN") + '</strong>' +
+      '</div>'
+    )).join("");
+    totalEl.textContent = "₹" + total.toLocaleString("en-IN");
+  }
+
+  function openCart() {
+    const cartPanel = document.getElementById("cartPanel");
+    if (cartPanel) cartPanel.classList.add("open");
+  }
+
+  function closeCart() {
+    const cartPanel = document.getElementById("cartPanel");
+    if (cartPanel) cartPanel.classList.remove("open");
+  }
+
+  async function placeOrder(items, label) {
+    const buyerName = window.prompt("Enter your name", "Guest Customer") || "Guest Customer";
+    const buyerPhone = window.prompt("Enter your phone number", "+91") || "+919876543210";
+    const buyerAddress = window.prompt("Enter delivery address", "India") || "India";
+
+    try {
+      const response = await fetch(`${API_URL}/api/orders`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: buyerName,
+          phone: buyerPhone,
+          address: buyerAddress,
+          items: items.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: Number(item.price),
+            quantity: Number(item.quantity || 1)
+          }))
+        })
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to place order");
+      }
+
+      alert(label + " placed successfully! Order ID: " + data.order.id);
+      state.cart = [];
+      renderCart();
+      closeCart();
+      showPage("marketplace");
+    } catch (error) {
+      console.error(error);
+      alert("Unable to place the order right now. Please try again.");
+    }
+  }
+
+  function addToCart(productId) {
+    const product = PRODUCTS.find((item) => item.id === productId);
+    if (!product) return;
+
+    const existing = state.cart.find((item) => item.id === productId);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      state.cart.push({ id: product.id, name: product.name.en, price: product.price, quantity: 1 });
+    }
+    renderCart();
+    openCart();
+  }
+
+  function normalizeMarketplaceCategory(category) {
+    const value = (category || "").trim();
+    if (!value) return "all";
+
+    const direct = [
+      "best-sellers",
+      "new-arrivals",
+      "todays-deals",
+      "Pottery",
+      "Textiles & Weaving",
+      "Painting",
+      "Jewelry",
+      "Woodwork",
+      "all"
+    ];
+
+    if (direct.includes(value)) return value;
+
+    const lower = value.toLowerCase();
+
+    if (lower === "paintings" || lower === "painting") return "Painting";
+    if (lower === "textiles" || lower === "textile") return "Textiles & Weaving";
+    if (lower === "jewellery" || lower === "jewelery") return "Jewelry";
+    if (lower === "woodcraft" || lower === "woodcrafts") return "Woodwork";
+    if (lower === "ceramics" || lower === "home decor" || lower === "home-decor") return "Pottery";
+
+    return value;
+  }
+
+  function applyMarketplaceCategory(category) {
+    const select = document.getElementById("marketCategory");
+    const normalized = normalizeMarketplaceCategory(category);
+    if (select) {
+      select.value = normalized;
+    }
+    updateMarketplaceHeading(normalized);
+    if (document.getElementById("marketGrid")) {
+      renderMarketGrid();
+    }
+  }
+
+  const MARKETPLACE_HEADINGS = {
+    all: ["Marketplace", "Discover handmade, sourced directly from artisans."],
+    "best-sellers": ["Best Sellers", "Loved by shoppers and made with care by independent artisans."],
+    "new-arrivals": ["New Arrivals", "Fresh work from artisan studios across India."],
+    "todays-deals": ["Today's Deals", "Thoughtful handmade pieces at special prices today."],
+    Pottery: ["Pottery", "Hand-shaped clay, terracotta and glazed pieces for your home."],
+    "Textiles & Weaving": ["Textiles & Weaving", "Handwoven fabrics, stoles and everyday pieces with a story."],
+    Painting: ["Paintings", "Folk art and original paintings made by hand, one brushstroke at a time."],
+    Jewelry: ["Jewelry", "Distinctive handcrafted jewelry made for everyday and special moments."],
+    Woodwork: ["Woodwork", "Carved and polished wooden pieces made by skilled craftspeople."]
+  };
+
+  function updateMarketplaceHeading(category) {
+    const heading = MARKETPLACE_HEADINGS[category] || MARKETPLACE_HEADINGS.all;
+    const label = document.getElementById("marketCategoryLabel");
+    const title = document.getElementById("marketTitle");
+    const description = document.getElementById("marketDescription");
+    if (label) label.textContent = heading[0];
+    if (title) title.textContent = heading[0];
+    if (description) description.textContent = heading[1];
+  }
+
   // Any element with data-target navigates
   document.body.addEventListener("click", (e) => {
+    const cartTrigger = e.target.closest(".cart-btn");
+    if (cartTrigger) {
+      e.preventDefault();
+      openCart();
+      return;
+    }
+
+    const closeTrigger = e.target.closest("#cartCloseBtn");
+    if (closeTrigger) {
+      e.preventDefault();
+      closeCart();
+      return;
+    }
+
+    const checkoutTrigger = e.target.closest("#checkoutBtn");
+    if (checkoutTrigger) {
+      e.preventDefault();
+      if (!state.cart.length) {
+        alert("Your cart is empty.");
+        return;
+      }
+      placeOrder(state.cart, "Checkout");
+      return;
+    }
+
+    const categoryTrigger = e.target.closest("[data-category]");
+    if (categoryTrigger) {
+      e.preventDefault();
+      const category = categoryTrigger.dataset.category;
+      const normalized = normalizeMarketplaceCategory(category);
+      applyMarketplaceCategory(normalized);
+      showPage("marketplace");
+      history.replaceState(null, "", "#marketplace/" + encodeURIComponent(normalized));
+      setTimeout(() => renderMarketGrid(), 50);
+      return;
+    }
+
     const trigger = e.target.closest("[data-target]");
     if (!trigger) return;
     e.preventDefault();
@@ -91,7 +278,11 @@
   });
 
   window.addEventListener("hashchange", () => {
-    const id = location.hash.replace("#", "") || "landing";
+    const hashParts = location.hash.replace("#", "").split("/");
+    const id = hashParts[0] || "landing";
+    if (id === "marketplace" && hashParts[1]) {
+      applyMarketplaceCategory(decodeURIComponent(hashParts[1]));
+    }
     showPage(id, { skipHash: true });
   });
 
@@ -846,12 +1037,24 @@ function productCardHTML(p) {
     const query = (document.getElementById("marketSearch").value || "").toLowerCase();
     const category = document.getElementById("marketCategory").value;
     const sort = document.getElementById("marketSort").value;
-    const products = PRODUCTS.filter((p) => {
+    updateMarketplaceHeading(category);
+
+    let products = PRODUCTS.filter((p) => {
       const name = (p.name.en + " " + p.name.hi).toLowerCase();
       const matchesQuery = !query || name.includes(query) || p.category.toLowerCase().includes(query);
       const matchesCategory = category === "all" || p.category === category;
       return matchesQuery && matchesCategory;
     });
+
+    if (category === "best-sellers") {
+      products = [...PRODUCTS].sort((a, b) => b.price - a.price).slice(0, 4);
+    }
+    if (category === "new-arrivals") {
+      products = [...PRODUCTS].sort((a, b) => b.id - a.id).slice(0, 4);
+    }
+    if (category === "todays-deals") {
+      products = [...PRODUCTS].filter((p) => p.price < 2000).slice(0, 5);
+    }
 
     if (sort === "low") products.sort((a, b) => a.price - b.price);
     if (sort === "high") products.sort((a, b) => b.price - a.price);
@@ -1006,8 +1209,12 @@ function productCardHTML(p) {
         "</div>" +
       "</div>";
 
-    document.getElementById("addToCartBtn").addEventListener("click", bumpCart);
-    document.getElementById("buyNowBtn").addEventListener("click", bumpCart);
+    document.getElementById("addToCartBtn").addEventListener("click", () => addToCart(id));
+    document.getElementById("buyNowBtn").addEventListener("click", () => {
+      const product = PRODUCTS.find((item) => item.id === id);
+      if (!product) return;
+      placeOrder([{ id: product.id, name: product.name.en, price: product.price, quantity: 1 }], "Buy now");
+    });
     document.getElementById("whatsappBtn").addEventListener("click", async () => {
       try {
         const response = await fetch(`${API_URL}/api/products/${id}/whatsapp`);
@@ -1047,7 +1254,11 @@ function productCardHTML(p) {
     state.authenticated = authResponse.ok && (await authResponse.json()).authenticated;
     applyLanguage(state.lang);
 
-    const startId = location.hash.replace("#", "") || "landing";
+    const hashParts = location.hash.replace("#", "").split("/");
+    const startId = hashParts[0] || "landing";
+    if (startId === "marketplace" && hashParts[1]) {
+      applyMarketplaceCategory(decodeURIComponent(hashParts[1]));
+    }
     showPage(startId, { skipHash: true });
 
     if (state.authenticated) await loadDashboard();
