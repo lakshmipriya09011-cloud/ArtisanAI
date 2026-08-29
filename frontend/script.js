@@ -12,13 +12,13 @@
      --------------------------------------------------------- */
   let PRODUCTS = [
     { id: 1, name: { en: "Blue Pottery Vase", hi: "ब्लू पॉटरी फूलदान" }, category: "Pottery", price: 1450, icon: "🏺",
-      artisan: "Hello Lakshmi Priyaa", region: "Jaipur, Rajasthan",
+      artisan: "Kamla Devi", region: "Jaipur, Rajasthan",
       desc: { en: "A hand-thrown blue pottery vase glazed with traditional cobalt patterns, fired using centuries-old Jaipur techniques.", hi: "पारंपरिक कोबाल्ट पैटर्न से सजा हाथ से बना ब्लू पॉटरी फूलदान, जो सदियों पुरानी जयपुर तकनीक से बनाया गया है।" } },
     { id: 2, name: { en: "Madhubani Painting", hi: "मधुबनी पेंटिंग" }, category: "Painting", price: 2200, icon: "🎨",
       artisan: "Ravi Paswan", region: "Madhubani, Bihar",
       desc: { en: "A vibrant Madhubani folk painting depicting nature and mythology, hand-painted with natural pigments on handmade paper.", hi: "प्रकृति और पौराणिक कथाओं को दर्शाती एक जीवंत मधुबनी लोक चित्रकला, हस्तनिर्मित कागज़ पर प्राकृतिक रंगों से हाथ से बनाई गई।" } },
     { id: 3, name: { en: "Terracotta Diya Set", hi: "टेराकोटा दीया सेट" }, category: "Pottery", price: 680, icon: "🪔",
-      artisan: "Hello Lakshmi Priyaa", region: "Khurja, Uttar Pradesh",
+      artisan: "Kamla Devi", region: "Khurja, Uttar Pradesh",
       desc: { en: "A set of 6 hand-moulded terracotta diyas, perfect for festive lighting, finished with a natural clay glaze.", hi: "त्योहारी रोशनी के लिए बिल्कुल उपयुक्त, 6 हाथ से बने टेराकोटा दीयों का सेट, प्राकृतिक मिट्टी की चमक के साथ तैयार।" } },
     { id: 4, name: { en: "Banarasi Silk Stole", hi: "बनारसी सिल्क स्टोल" }, category: "Textiles & Weaving", price: 3400, icon: "🧣",
       artisan: "Imran Ansari", region: "Varanasi, Uttar Pradesh",
@@ -32,239 +32,33 @@
     { id: 7, name: { en: "Handloom Cotton Saree", hi: "हैंडलूम कॉटन साड़ी" }, category: "Textiles & Weaving", price: 2100, icon: "👘",
       artisan: "Lakshmi Nair", region: "Kannur, Kerala",
       desc: { en: "A breathable handloom cotton saree with a woven temple border, ideal for everyday elegance.", hi: "बुने हुए मंदिर बॉर्डर के साथ हल्की और आरामदायक हैंडलूम कॉटन साड़ी, रोज़मर्रा की खूबसूरती के लिए उपयुक्त।" } },
-    { id: 1008, name: { en: "Carved Wooden Elephant", hi: "नक्काशीदार लकड़ी का हाथी" }, category: "Woodwork", price: 950, icon: "🐘",
+    { id: 8, name: { en: "Carved Wooden Elephant", hi: "नक्काशीदार लकड़ी का हाथी" }, category: "Woodwork", price: 950, icon: "🐘",
       artisan: "Manoj Kumhar", region: "Saharanpur, Uttar Pradesh",
-      desc: { en: "A hand-carved rosewood elephant figurine, sanded and polished by hand over three days of careful work.", hi: "हाथ से नक्काशीदार शीशम की लकड़ी का हाथी, तीन दिनों की मेहनत से हाथ से रेता और पॉलिश किया गया।" } },
-    { id: 1009, name: { en: "Blue Lotus Brass Diya", hi: "नीला कमल पीतल दीया" }, category: "Metalwork", price: 780, icon: "🪔",
-      artisan: "Kavita Sahu", region: "Moradabad, Uttar Pradesh",
-      desc: { en: "A hand-finished brass diya inspired by the blue lotus, shaped and polished in a family metalworking studio.", hi: "नीले कमल से प्रेरित हाथ से तैयार पीतल का दीया, पारिवारिक धातु शिल्प स्टूडियो में बनाया और चमकाया गया।" } },
-    { id: 1010, name: { en: "Kutch Embroidered Cushion", hi: "कच्छ कढ़ाई कुशन" }, category: "Textiles & Weaving", price: 1150, icon: "🧵",
-      artisan: "Amina Khatri", region: "Kutch, Gujarat",
-      desc: { en: "A vibrant cushion cover featuring patient mirror work and geometric embroidery stitched by hand in Kutch.", hi: "कच्छ में हाथ से की गई बारीक शीशे के काम और ज्यामितीय कढ़ाई वाला रंगीन कुशन कवर।" } },
-    { id: 1011, name: { en: "Blue River Ceramic Mug", hi: "नीली नदी सिरेमिक मग" }, category: "Pottery", price: 620, icon: "☕",
-      artisan: "Meena Kumari", region: "Khurja, Uttar Pradesh",
-      desc: { en: "A wheel-thrown ceramic mug with a flowing blue glaze, made for slow mornings and everyday rituals.", hi: "बहती नीली चमक वाला चाक पर बनाया गया सिरेमिक मग, आराम से सुबह बिताने के लिए।" } },
-    { id: 1012, name: { en: "Madhubani Sun Wall Art", hi: "मधुबनी सूर्य वॉल आर्ट" }, category: "Painting", price: 1650, icon: "🌞",
-      artisan: "Sita Jha", region: "Madhubani, Bihar",
-      desc: { en: "A joyful hand-painted sun artwork filled with folk symbols, natural colour and the energy of Madhubani storytelling.", hi: "लोक प्रतीकों, प्राकृतिक रंगों और मधुबनी कहानी कहने की ऊर्जा से भरी आनंदमयी हाथ से बनी सूर्य चित्रकला।" } },
-    { id: 1013, name: { en: "Warli Village Story", hi: "वारली गांव की कहानी" }, category: "Painting", price: 1250, icon: "🖌️",
-      artisan: "Ramesh Bhagat", region: "Palghar, Maharashtra",
-      desc: { en: "A hand-painted Warli scene showing village music, farming and community life in the traditional white-on-earth style.", hi: "पारंपरिक सफेद-मिट्टी शैली में गांव का संगीत, खेती और सामुदायिक जीवन दिखाने वाली हाथ से बनी वारली चित्रकला।" } },
-    { id: 1014, name: { en: "Lotus Folk Canvas", hi: "कमल लोक कैनवास" }, category: "Painting", price: 1450, icon: "🌸",
-      artisan: "Pooja Devi", region: "Jaipur, Rajasthan",
-      desc: { en: "A vivid lotus canvas painted with natural pigments and decorative folk patterns for a calm, colourful home.", hi: "शांत और रंगीन घर के लिए प्राकृतिक रंगों और सजावटी लोक पैटर्न से बनी जीवंत कमल कैनवास चित्रकला।" } },
-    { id: 1015, name: { en: "Monsoon Folk Landscape", hi: "मानसून लोक दृश्य" }, category: "Painting", price: 1950, icon: "🌧️",
-      artisan: "Anil Kumar", region: "Bihar",
-      desc: { en: "A layered folk landscape capturing rain, fields and village homes with expressive hand-painted detail.", hi: "बारिश, खेतों और गांव के घरों को अभिव्यंजक हाथ से बने विवरण में दिखाने वाली लोक परिदृश्य चित्रकला।" } },
-    { id: 1016, name: { en: "Peacock Mandala Art", hi: "मोर मंडला कला" }, category: "Painting", price: 1750, icon: "🦚",
-      artisan: "Nandini Rao", region: "Bengaluru, Karnataka",
-      desc: { en: "A detailed peacock mandala combining folk geometry, jewel-like colour and patient brushwork on handmade paper.", hi: "हस्तनिर्मित कागज़ पर लोक ज्यामिति, रत्न जैसे रंग और बारीक ब्रशवर्क से बनी मोर मंडला कला।" } },
-    { id: 1017, name: { en: "Heritage Temple Panel", hi: "विरासत मंदिर पैनल" }, category: "Painting", price: 2300, icon: "🛕",
-      artisan: "Lakshmi Narayan", region: "Puri, Odisha",
-      desc: { en: "A heritage-inspired painted panel with temple motifs, warm mineral colours and a handcrafted finish.", hi: "मंदिर आकृतियों, गर्म खनिज रंगों और हस्तनिर्मित फिनिश वाला विरासत से प्रेरित चित्रित पैनल।" } },
-    { id: 1018, name: { en: "Terracotta Spice Jar", hi: "टेराकोटा मसाला जार" }, category: "Pottery", price: 890, icon: "🏺",
-      artisan: "Shyam Lal", region: "Khurja, Uttar Pradesh",
-      desc: { en: "A hand-thrown terracotta spice jar with a natural finish, designed for practical and beautiful kitchens.", hi: "प्राकृतिक फिनिश वाला हाथ से चाक पर बनाया गया टेराकोटा मसाला जार, सुंदर और उपयोगी रसोई के लिए।" } },
-    { id: 1019, name: { en: "Ajrakh Block Print Scarf", hi: "अजरख ब्लॉक प्रिंट स्कार्फ" }, category: "Textiles & Weaving", price: 980, icon: "🧣",
-      artisan: "Yusuf Khatri", region: "Ajrakhpur, Gujarat",
-      desc: { en: "A soft cotton scarf printed with traditional Ajrakh blocks and plant-based colours by a master artisan.", hi: "मास्टर कारीगर द्वारा पारंपरिक अजरख ब्लॉक और वनस्पति रंगों से छपा मुलायम सूती स्कार्फ।" } },
-    { id: 1020, name: { en: "Dhokra Horse Figurine", hi: "ढोकरा घोड़े की मूर्ति" }, category: "Metalwork", price: 1350, icon: "🐎",
-      artisan: "Mangal Murmu", region: "Bastar, Chhattisgarh",
-      desc: { en: "A sculptural Dhokra horse cast using the ancient lost-wax technique, with every surface finished by hand.", hi: "प्राचीन मोम-ढलाई तकनीक से बनी ढोकरा घोड़े की मूर्ति, जिसकी हर सतह हाथ से तैयार की गई है।" } },
-    { id: 1021, name: { en: "Rosewood Serving Tray", hi: "शीशम लकड़ी सर्विंग ट्रे" }, category: "Woodwork", price: 1450, icon: "🪵",
-      artisan: "Harish Kumar", region: "Saharanpur, Uttar Pradesh",
-      desc: { en: "A sturdy rosewood serving tray with hand-carved edges and a food-safe natural polish.", hi: "हाथ से नक्काशीदार किनारों और प्राकृतिक पॉलिश वाली मजबूत शीशम की सर्विंग ट्रे।" } },
-    { id: 1022, name: { en: "Kundan Sun Pendant", hi: "कुंदन सूर्य पेंडेंट" }, category: "Jewelry", price: 1600, icon: "📿",
-      artisan: "Rekha Meena", region: "Jaipur, Rajasthan",
-      desc: { en: "A bright Kundan sun pendant set by hand with traditional detail, made to add a small spark to everyday wear.", hi: "पारंपरिक बारीकी से हाथ से जड़ा हुआ चमकीला कुंदन सूर्य पेंडेंट, रोज़मर्रा के पहनावे में चमक जोड़ने के लिए।" } },
-    { id: 1023, name: { en: "Hand-painted Leaf Bowl", hi: "हाथ से चित्रित पत्ती कटोरी" }, category: "Painting", price: 720, icon: "🍃",
-      artisan: "Asha Devi", region: "Bhopal, Madhya Pradesh",
-      desc: { en: "A small decorative bowl hand-painted with leaf motifs and natural colours, bringing a quiet folk accent to a room.", hi: "प्राकृतिक रंगों और पत्ती आकृतियों से हाथ से चित्रित छोटी सजावटी कटोरी, कमरे में लोक कला का सुंदर स्पर्श।" } },
-    { id: 1024, name: { en: "Handwoven Jute Planter", hi: "हाथ से बुना जूट प्लांटर" }, category: "Textiles & Weaving", price: 540, icon: "🪴",
-      artisan: "Maya Das", region: "Kolkata, West Bengal",
-      desc: { en: "A sturdy handwoven jute planter made with natural fibre, bringing texture and warmth to indoor plants.", hi: "प्राकृतिक रेशे से बना मजबूत हाथ से बुना जूट प्लांटर, पौधों में सुंदर बनावट और गर्माहट जोड़ने के लिए।" } },
-    { id: 1025, name: { en: "Hand-carved Mango Box", hi: "हाथ से नक्काशीदार आम की लकड़ी का डिब्बा" }, category: "Woodwork", price: 880, icon: "📦",
-      artisan: "Ravi Singh", region: "Saharanpur, Uttar Pradesh",
-      desc: { en: "A compact mango-wood keepsake box with floral carving, smoothed and finished by hand for everyday treasures.", hi: "फूलों की नक्काशी वाला आम की लकड़ी का छोटा डिब्बा, रोज़मर्रा की खास चीज़ों के लिए हाथ से तैयार किया गया।" } },
-    { id: 1026, name: { en: "Meenakari Lotus Earrings", hi: "मीनाकारी कमल बालियां" }, category: "Jewelry", price: 1280, icon: "💠",
-      artisan: "Neha Sharma", region: "Jaipur, Rajasthan",
-      desc: { en: "Delicate lotus earrings finished with colourful Meenakari enamel work and a light, comfortable handcrafted form.", hi: "रंगीन मीनाकारी इनेमल काम से सजी नाज़ुक कमल बालियां, हल्की और आरामदायक हस्तनिर्मित डिजाइन के साथ।" } },
-    { id: 1027, name: { en: "Bell Metal Candle Holder", hi: "बेल मेटल कैंडल होल्डर" }, category: "Metalwork", price: 1050, icon: "🕯️",
-      artisan: "Bikash Karmakar", region: "Bastar, Chhattisgarh",
-      desc: { en: "A warm bell-metal candle holder cast and polished by hand, designed to make evening spaces feel welcoming.", hi: "हाथ से ढाला और चमकाया गया गर्म बेल मेटल कैंडल होल्डर, शाम के कमरे को सुकून देने के लिए।" } },
-    { id: 1028, name: { en: "Blue Glaze Breakfast Plate", hi: "नीली चमक वाली नाश्ते की प्लेट" }, category: "Pottery", price: 640, icon: "🍽️",
-      artisan: "Farida Begum", region: "Khurja, Uttar Pradesh",
-      desc: { en: "A cheerful ceramic breakfast plate with a hand-painted blue glaze, made for relaxed everyday meals.", hi: "आराम से रोज़मर्रा के भोजन के लिए हाथ से चित्रित नीली चमक वाली आनंदमयी सिरेमिक नाश्ते की प्लेट।" } },
-    { id: 1029, name: { en: "Pattachitra Krishna Panel", hi: "पट्टचित्र कृष्ण पैनल" }, category: "Painting", price: 2100, icon: "🎭",
-      artisan: "Gouri Maharana", region: "Raghurajpur, Odisha",
-      desc: { en: "A detailed Pattachitra panel depicting Krishna, painted with traditional natural colours and fine ornamental lines.", hi: "पारंपरिक प्राकृतिक रंगों और बारीक सजावटी रेखाओं से बनी कृष्ण को दर्शाती विस्तृत पट्टचित्र कला।" } },
-    { id: 1030, name: { en: "Handmade Coconut Shell Bowl", hi: "हस्तनिर्मित नारियल खोल कटोरी" }, category: "Handicrafts", price: 460, icon: "🥥",
-      artisan: "Suresh Nair", region: "Kochi, Kerala",
-      desc: { en: "A polished coconut-shell bowl finished with natural oil, giving sustainable materials a beautiful everyday purpose.", hi: "प्राकृतिक तेल से तैयार चमकदार नारियल खोल की कटोरी, टिकाऊ सामग्री को सुंदर रोज़मर्रा का उपयोग देती है।" } }
+      desc: { en: "A hand-carved rosewood elephant figurine, sanded and polished by hand over three days of careful work.", hi: "हाथ से नक्काशीदार शीशम की लकड़ी का हाथी, तीन दिनों की मेहनत से हाथ से रेता और पॉलिश किया गया।" } }
   ];
 
   const state = {
     lang: localStorage.getItem("artisanai_lang") || "en",
-    cart: JSON.parse(localStorage.getItem("artisanai_cart") || "[]"),
-    orders: JSON.parse(localStorage.getItem("artisanai_orders") || "[]"),
-    currentProductId: null
+    cartCount: 0,
+    currentProductId: null,
+    authenticated: false,
+    dashboardProducts: []
   };
-  const categoryReferenceImages = {
-    Pottery: [
-      "assets/artisan-pottery.jpg",
-      "assets/artisan-making-pottery.jpg",
-      "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1521133573892-e44906baee46?auto=format&fit=crop&w=900&q=80"
-    ],
-    Painting: ["assets/artisan-art.jpg", "assets/craft-a.jpg", "assets/craft-b.jpg", "assets/craft-c.jpg", "assets/craft-d.jpg"],
-    "Textiles & Weaving": [
-      "assets/artisan-textiles.jpg",
-      "assets/saree-making-new.jpg",
-      "assets/textile-making-new.jpg",
-      "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80",
-      "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80"
-    ],
-    Jewelry: "assets/artisan-handwork.jpg",
-    Woodwork: "assets/artisan-woodcraft.jpg",
-    Metalwork: "assets/artisan-handwork.jpg",
-    Handicrafts: "assets/artisan-handwork.jpg"
-  };
-  const imageReferenceProfiles = [
-    { terms: ["bull", "cart"], categories: ["Pottery"], image: "/uploads/products/4505c5345efc3712-Screenshot_20260827-182907.jpg" },
-    { terms: ["vase", "flower"], categories: ["Pottery"], image: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["diya", "lamp", "candle", "light"], categories: ["Pottery", "Metalwork"], image: "https://images.unsplash.com/photo-1576020799627-aeac74d58064?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["cup", "mug", "tea", "coffee"], categories: ["Pottery"], image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["plate", "bowl", "jar", "spice"], categories: ["Pottery"], image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["madhubani"], categories: ["Painting"], image: "assets/artisan-art.jpg" },
-    { terms: ["warli"], categories: ["Painting"], image: "assets/craft-a.jpg" },
-    { terms: ["peacock", "mandala"], categories: ["Painting"], image: "assets/craft-d.jpg" },
-    { terms: ["pattachitra", "canvas", "painting", "art"], categories: ["Painting"], image: "assets/craft-b.jpg" },
-    { terms: ["saree", "sari", "handloom"], categories: ["Textiles & Weaving"], image: "assets/saree-making-new.jpg" },
-    { terms: ["stole", "scarf", "ajrakh"], categories: ["Textiles & Weaving"], image: "assets/textile-making-new.jpg" },
-    { terms: ["cushion", "embroidery", "embroidered"], categories: ["Textiles & Weaving"], image: "assets/artisan-textiles.jpg" },
-    { terms: ["jute", "planter", "woven"], categories: ["Textiles & Weaving"], image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["gown", "dress", "silk"], categories: ["Textiles & Weaving"], image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["chain", "chains", "necklace"], categories: ["Jewelry"], image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["earring", "earrings"], categories: ["Jewelry"], image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["pendant", "kundan"], categories: ["Jewelry"], image: "https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["brass", "lotus", "diya"], categories: ["Metalwork"], image: "https://images.unsplash.com/photo-1602523961358-f9f03dd557db?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["dhokra", "horse", "figurine"], categories: ["Metalwork"], image: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=80" },
-    { terms: ["bell metal", "bell", "candle holder"], categories: ["Metalwork"], image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=80" }
-  ];
-
-  function getProductImage(product) {
-    const productName = String(product.name?.en || product.name || "").trim().toLowerCase();
-    const productDescription = String(product.desc?.en || product.description || "").toLowerCase();
-    const searchableText = productName + " " + productDescription;
-    const uploadedImage = String(product.image_url || "").replace(/^\/static\//, "/");
-    const isPlaceholder = !uploadedImage || uploadedImage.endsWith("default-product.svg");
-    if (!isPlaceholder) return uploadedImage;
-
-    let bestReference;
-    let bestScore = 0;
-    imageReferenceProfiles.forEach((reference) => {
-      const termScore = reference.terms.reduce((score, term) => score + (searchableText.includes(term) ? 3 : 0), 0);
-      const categoryScore = reference.categories.includes(product.category) ? 1 : 0;
-      if (termScore + categoryScore > bestScore) {
-        bestScore = termScore + categoryScore;
-        bestReference = reference;
-      }
-    });
-    const categoryImages = categoryReferenceImages[product.category];
-    const categoryImage = Array.isArray(categoryImages)
-      ? categoryImages[Math.abs(Number(product.id) || 0) % categoryImages.length]
-      : categoryImages;
-    return bestReference?.image || categoryImage || "assets/artisan-handwork.jpg";
-  }
-
-  const API_URL = window.location.protocol === "file:"
+  const API_URL = window.location.port === "8000"
     ? "http://127.0.0.1:5000"
-    : window.location.port === "5500"
-      ? `${window.location.protocol}//${window.location.hostname}:5000`
-      : window.location.origin;
-
-  const heroSlides = document.querySelectorAll(".hero-slide");
-  const heroDots = document.querySelectorAll(".hero-slide-dots button");
-  let activeHeroSlide = 0;
-  let heroSlideTimer;
-  function showHeroSlide(index) {
-    activeHeroSlide = (index + heroSlides.length) % heroSlides.length;
-    heroSlides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === activeHeroSlide));
-    heroDots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === activeHeroSlide));
-  }
-  function restartHeroSlideTimer() {
-    clearInterval(heroSlideTimer);
-    heroSlideTimer = setInterval(() => showHeroSlide(activeHeroSlide + 1), 5000);
-  }
-  document.getElementById("heroSlidePrev").addEventListener("click", () => { showHeroSlide(activeHeroSlide - 1); restartHeroSlideTimer(); });
-  document.getElementById("heroSlideNext").addEventListener("click", () => { showHeroSlide(activeHeroSlide + 1); restartHeroSlideTimer(); });
-  heroDots.forEach((dot) => dot.addEventListener("click", () => { showHeroSlide(Number(dot.dataset.slide)); restartHeroSlideTimer(); }));
-  restartHeroSlideTimer();
+    : window.location.origin;
 
   /* ---------------------------------------------------------
      2. NAVIGATION (SPA page switching)
      --------------------------------------------------------- */
   const pages = document.querySelectorAll(".page");
   const mainNav = document.getElementById("mainNav");
-  const leftMenu = document.getElementById("leftMenu");
-  const leftMenuBackdrop = document.getElementById("leftMenuBackdrop");
-  const leftMenuToggle = document.getElementById("leftMenuToggle");
-  const categorySlugs = {
-    all: "all",
-    Pottery: "pottery",
-    "Textiles & Weaving": "textiles-weaving",
-    Painting: "painting",
-    Jewelry: "jewelry",
-    Woodwork: "woodwork",
-    Metalwork: "metalwork"
-  };
-  const categoriesBySlug = Object.fromEntries(Object.entries(categorySlugs).map(([category, slug]) => [slug, category]));
-
-  function openCategory(category) {
-    document.getElementById("marketSearch").value = "";
-    document.getElementById("marketCategory").value = category;
-    showPage("category-" + categorySlugs[category]);
-    renderMarketGrid();
-  }
-
-  function closeLeftMenu() {
-    leftMenu.setAttribute("hidden", "");
-    leftMenuBackdrop.setAttribute("hidden", "");
-    leftMenuToggle.setAttribute("aria-expanded", "false");
-  }
-
-  leftMenuToggle.addEventListener("click", () => {
-    const isOpen = leftMenu.hasAttribute("hidden");
-    leftMenu.toggleAttribute("hidden", !isOpen);
-    leftMenuBackdrop.toggleAttribute("hidden", !isOpen);
-    leftMenuToggle.setAttribute("aria-expanded", String(isOpen));
-  });
-  document.getElementById("leftMenuClose").addEventListener("click", closeLeftMenu);
-  leftMenuBackdrop.addEventListener("click", closeLeftMenu);
-  leftMenu.addEventListener("click", (event) => {
-    const category = event.target.closest("[data-side-category]");
-    if (!category) return;
-    openCategory(category.dataset.sideCategory);
-    closeLeftMenu();
-  });
 
   function showPage(id, opts) {
     opts = opts || {};
-    const requestedId = id;
-    const categoryMatch = /^category-(.+)$/.exec(id);
-    if (categoryMatch && categoriesBySlug[categoryMatch[1]]) {
-      document.getElementById("marketCategory").value = categoriesBySlug[categoryMatch[1]];
-      document.getElementById("marketSearch").value = "";
-      id = "marketplace";
-    }
-    const productMatch = /^product-details-(\d+)$/.exec(id);
-    if (productMatch) {
-      state.currentProductId = Number(productMatch[1]);
-      id = "product-details";
+    const privatePages = ["dashboard", "add-product", "image-studio", "catalog-generator", "pricing-assistant", "my-catalog"];
+    if (privatePages.includes(id) && !state.authenticated) {
+      id = "login";
     }
     let found = false;
     pages.forEach((p) => {
@@ -281,55 +75,20 @@
       btn.classList.toggle("active", btn.dataset.target === id);
     });
     if (!opts.skipHash) {
-      history.pushState(null, "", "#" + requestedId);
+      history.pushState(null, "", "#" + id);
     }
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-    if (id === "cart") renderCart();
-    if (id === "my-orders") renderOrders();
-    if (id === "product-details" && state.currentProductId) renderProductDetail(state.currentProductId);
-    if (id === "marketplace") updateCategoryResultLabel();
-    closeLeftMenu();
     mainNav.classList.remove("open");
     document.getElementById("hamburgerBtn").setAttribute("aria-expanded", "false");
   }
 
   // Any element with data-target navigates
   document.body.addEventListener("click", (e) => {
-    const categoryLink = e.target.closest("[data-category-link]");
-    if (categoryLink) {
-      e.preventDefault();
-      openCategory(categoryLink.dataset.categoryLink);
-      return;
-    }
     const trigger = e.target.closest("[data-target]");
     if (!trigger) return;
     e.preventDefault();
     showPage(trigger.dataset.target);
   });
-
-  const categoryMenuToggle = document.getElementById("categoryMenuToggle");
-  const categoryMenu = document.getElementById("categoryMenu");
-  if (categoryMenuToggle && categoryMenu) {
-    categoryMenuToggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const isOpen = categoryMenu.hasAttribute("hidden");
-      categoryMenu.toggleAttribute("hidden", !isOpen);
-      categoryMenuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-    categoryMenu.addEventListener("click", (event) => {
-      const categoryButton = event.target.closest("[data-category]");
-      if (!categoryButton) return;
-      categoryMenu.setAttribute("hidden", "");
-      categoryMenuToggle.setAttribute("aria-expanded", "false");
-      openCategory(categoryButton.dataset.category);
-    });
-    document.addEventListener("click", (event) => {
-      if (!event.target.closest(".category-menu-wrap")) {
-        categoryMenu.setAttribute("hidden", "");
-        categoryMenuToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
 
   window.addEventListener("hashchange", () => {
     const id = location.hash.replace("#", "") || "landing";
@@ -337,25 +96,428 @@
   });
 
   /* ---------------------------------------------------------
-     3. LANGUAGE TOGGLE (English / Hindi)
+     3. MULTI-LANGUAGE SUPPORT (AI translation fallback)
      --------------------------------------------------------- */
-  function applyLanguage(lang) {
+  const SUPPORTED_LANGUAGES = ["en", "hi", "ta", "te", "ml", "bn", "gu", "mr", "kn", "ur"];
+  let languageRequestId = 0;
+  const translationCache = new Map();
+  const COMMON_TRANSLATIONS = {
+    hi: {
+      Home: "होम",
+      Marketplace: "बाज़ार",
+      About: "जानकारी",
+      "Artisan Dashboard": "कारीगर डैशबोर्ड",
+      "Artisan Login": "कारीगर लॉगिन",
+      "I am an Artisan": "मैं एक कारीगर हूँ",
+      "Explore Marketplace": "बाज़ार देखें",
+      Dashboard: "डैशबोर्ड",
+      "Add Product": "उत्पाद जोड़ें",
+      "My Products": "मेरे उत्पाद",
+      "AI Image Studio": "AI इमेज स्टूडियो",
+      "AI Catalog Generator": "AI कैटलॉग जनरेटर",
+      "Smart Pricing": "स्मार्ट प्राइसिंग",
+      Logout: "लॉगआउट",
+      "Add New Product": "नया उत्पाद जोड़ें",
+      "View Marketplace": "बाज़ार देखें",
+      "Products listed": "सूचीबद्ध उत्पाद",
+      "Views this month": "इस माह के व्यू",
+      "Orders received": "प्राप्त ऑर्डर",
+      "Total earnings": "कुल कमाई",
+      "Recent products": "हाल के उत्पाद",
+      "Recent orders": "हाल के ऑर्डर",
+      Product: "उत्पाद",
+      Buyer: "ग्राहक",
+      Amount: "राशि",
+      Status: "स्थिति",
+      Shipped: "भेजा गया",
+      Packing: "पैकिंग में",
+      Delivered: "डिलीवर हो गया",
+      "Add a new product": "नया उत्पाद जोड़ें",
+      "Fill what you can — our AI tools help with the rest.": "जो जानते हैं भरें — बाकी काम में हमारे AI टूल मदद करेंगे।",
+      Photo: "फ़ोटो",
+      Details: "विवरण",
+      "AI Help": "AI मदद",
+      Publish: "प्रकाशित करें",
+      "Tap to add a photo": "फ़ोटो जोड़ने के लिए टैप करें",
+      "Product name": "उत्पाद का नाम",
+      Category: "श्रेणी",
+      "Materials used": "उपयोग की गई सामग्री",
+      "Short description (optional)": "संक्षिप्त विवरण (वैकल्पिक)"
+    },
+    ta: {
+      Home: "முகப்பு",
+      Marketplace: "சந்தை",
+      About: "பற்றி",
+      "Artisan Dashboard": "கைவினைஞர் டாஷ்போர்டு",
+      "Artisan Login": "கைவினைஞர் உள்நுழைவு",
+      "I am an Artisan": "நான் ஒரு கைவினைஞர்",
+      "Explore Marketplace": "சந்தையைப் பாருங்கள்",
+      Dashboard: "டாஷ்போர்டு",
+      "Add Product": "பொருள் சேர்க்கவும்",
+      "My Products": "என் பொருட்கள்",
+      "AI Image Studio": "AI படம் ஸ்டுடியோ",
+      "AI Catalog Generator": "AI கேடலாக் ஜெனரேட்டர்",
+      "Smart Pricing": "ஸ்மார்ட் விலை",
+      Logout: "வெளியேறு",
+      "Add New Product": "புதிய பொருள் சேர்க்கவும்",
+      "View Marketplace": "சந்தையைப் பாருங்கள்",
+      "Products listed": "பட்டியலிடப்பட்ட பொருட்கள்",
+      "Views this month": "இந்த மாதம் பார்வைகள்",
+      "Orders received": "பெறப்பட்ட ஆர்டர்கள்",
+      "Total earnings": "மொத்த வருமானம்",
+      "Recent products": "சமீபத்திய பொருட்கள்",
+      "Recent orders": "சமீபத்திய ஆர்டர்கள்",
+      Product: "பொருள்",
+      Buyer: "வாங்குபவர்",
+      Amount: "தொகை",
+      Status: "நிலை",
+      Shipped: "அனுப்பப்பட்டது",
+      Packing: "பேக்கிங்",
+      Delivered: "வழங்கப்பட்டது"
+    },
+    te: {
+      Home: "హోమ్",
+      Marketplace: "మార్కెట్",
+      About: "గురించి",
+      "Artisan Dashboard": "కళాకార డాష్బోర్డ్",
+      "Artisan Login": "కళాకార లాగిన్",
+      "I am an Artisan": "నేను కళాకారుడిని",
+      "Explore Marketplace": "మార్కెట్ చూడండి",
+      Dashboard: "డాష్బోర్డ్",
+      "Add Product": "ఉత్పత్తి జోడించండి",
+      "My Products": "నా ఉత్పత్తులు",
+      "AI Image Studio": "AI ఇమేజ్ స్టూడియో",
+      "AI Catalog Generator": "AI క్యాటలాగ్ జనరేటర్",
+      "Smart Pricing": "స్మార్ట్ ధర",
+      Logout: "లాగ్అవుట్",
+      "Add New Product": "కొత్త ఉత్పత్తి జోడించండి",
+      "View Marketplace": "మార్కెట్ చూడండి",
+      "Products listed": "జాబితా చేయబడిన ఉత్పత్తులు",
+      "Views this month": "ఈ నెల చూసినవారు",
+      "Orders received": "స్వీకరించిన ఆర్డర్లు",
+      "Total earnings": "మొత్తం ఆదాయం",
+      "Recent products": "ఇటీవలి ఉత్పత్తులు",
+      "Recent orders": "ఇటీవలి ఆర్డర్లు",
+      Product: "ఉత్పత్తి",
+      Buyer: "కొనుగోరి",
+      Amount: "మొత్తం",
+      Status: "స్థితి",
+      Shipped: "అனுப்பబడింది",
+      Packing: "ప్యాకింగ్",
+      Delivered: "పొందుపర్చారు"
+    },
+    ml: {
+      Home: "ഹോം",
+      Marketplace: "മാർക്കറ്റ്പ്ലേസ്",
+      About: "വിവരം",
+      "Artisan Dashboard": "കുറുവിളക്കാർ ഡാഷ്ബോർഡ്",
+      "Artisan Login": "കുറുവിളക്കാർ ലോഗിൻ",
+      "I am an Artisan": "ഞാൻ ഒരു കച്ചവടക്കാരൻ",
+      "Explore Marketplace": "മാർക്കറ്റ്പ്ലേസ് കാണുക",
+      Dashboard: "ഡാഷ്ബോർഡ്",
+      "Add Product": "ഉൽപ്പന്നം ചേർക്കുക",
+      "My Products": "എന്റെ ഉൽപ്പന്നങ്ങൾ",
+      "AI Image Studio": "AI ഇമേജ് സ്റ്റുഡിയോ",
+      "AI Catalog Generator": "AI കാറ്റലോഗ് ജനറേറ്റർ",
+      "Smart Pricing": "സ്മാർട് വില",
+      Logout: "പുറത്തുകടക്കുക",
+      "Add New Product": "പുതിയ ഉൽപ്പന്നം ചേർക്കുക",
+      "View Marketplace": "മാർക്കറ്റ്പ്ലേസ് കാണുക",
+      "Products listed": "പട്ടികയിൽ ഉള്ള ഉൽപ്പന്നങ്ങൾ",
+      "Views this month": "ഈ മാസത്തെ കാഴÕES",
+      "Orders received": "സമ്പാദിച്ച ഓർഡറുകൾ",
+      "Total earnings": "മൊത്തം വരുമാനം",
+      "Recent products": "സമീപകാല ഉൽപ്പന്നങ്ങൾ",
+      "Recent orders": "സമീപകാല ഓർഡറുകൾ",
+      Product: "ഉൽപ്പന്നം",
+      Buyer: "വാങ്ങുന്നയാൾ",
+      Amount: "തുക",
+      Status: "സ്ഥിതി",
+      Shipped: "അയച്ചു",
+      Packing: "പോക്കിംഗ്",
+      Delivered: "എത്തിച്ചു"
+    },
+    bn: {
+      Home: "হোম",
+      Marketplace: "মার্কেটপ্লেস",
+      About: "সম্পর্কে",
+      "Artisan Dashboard": "কারিগর ড্যাশবোর্ড",
+      "Artisan Login": "কারিগর লগইন",
+      "I am an Artisan": "আমি একজন কারিগর",
+      "Explore Marketplace": "মার্কেটপ্লেস দেখুন",
+      Dashboard: "ড্যাশবোর্ড",
+      "Add Product": "পণ্য যোগ করুন",
+      "My Products": "আমার পণ্য",
+      "AI Image Studio": "AI ইমেজ স্টুডিও",
+      "AI Catalog Generator": "AI ক্যাটালগ জেনারেটর",
+      "Smart Pricing": "স্মার্ট মূল্য",
+      Logout: "লগআউট",
+      "Add New Product": "নতুন পণ্য যোগ করুন",
+      "View Marketplace": "মার্কেটপ্লেস দেখুন",
+      "Products listed": "তালিকাভুক্ত পণ্য",
+      "Views this month": "এই মাসে ভিউ",
+      "Orders received": "গৃহীত অর্ডার",
+      "Total earnings": "মোট আয়",
+      "Recent products": "সাম্প্রতিক পণ্য",
+      "Recent orders": "সাম্প্রতিক অর্ডার",
+      Product: "পণ্য",
+      Buyer: "ক্রেতা",
+      Amount: "পরিমাণ",
+      Status: "অবস্থা",
+      Shipped: "প্রেরিত",
+      Packing: "প্যাকিং",
+      Delivered: "বিতরণ করা হয়েছে"
+    },
+    gu: {
+      Home: "હોમ",
+      Marketplace: "માર્કેટપ્લેસ",
+      About: "વિશે",
+      "Artisan Dashboard": "કારીગર ડેશબોર્ડ",
+      "Artisan Login": "કારીગર લોગિન",
+      "I am an Artisan": "હું એક કારીગર છું",
+      "Explore Marketplace": "માર્કેટપ્લેસ જુઓ",
+      Dashboard: "ડેશબોર્ડ",
+      "Add Product": "ઉત્પાદન ઉમેરો",
+      "My Products": "મારા ઉત્પાદન",
+      "AI Image Studio": "AI ઇમેજ સ્ટુડિયો",
+      "AI Catalog Generator": "AI કેટલોગ જનરેટર",
+      "Smart Pricing": "સ્માર્ટ ભાવ",
+      Logout: "લોગઆઉટ",
+      "Add New Product": "નવું ઉત્પાદન ઉમેરો",
+      "View Marketplace": "માર્કેટપ્લેસ જુઓ",
+      "Products listed": "સૂચીમાં આપેલ ઉત્પાદનો",
+      "Views this month": "આ મહિને દેખાવ",
+      "Orders received": "પ્રાપ્ત ઓર્ડર",
+      "Total earnings": "કુલ આવક",
+      "Recent products": "તાજેતરના ઉત્પાદનો",
+      "Recent orders": "તાજેતરના ઓર્ડર",
+      Product: "ઉત્પાદન",
+      Buyer: "ખરીદનાર",
+      Amount: "રકમ",
+      Status: "સ્થિતિ",
+      Shipped: "મોકલ્યું",
+      Packing: "પેકિંગ",
+      Delivered: "પહંચ્યું"
+    },
+    mr: {
+      Home: "मुख्यपृष्ठ",
+      Marketplace: "मार्केटप्लेस",
+      About: "माहिती",
+      "Artisan Dashboard": "कारागीर डॅशबोर्ड",
+      "Artisan Login": "कारागीर लॉगिन",
+      "I am an Artisan": "मी एक कारागीर आहे",
+      "Explore Marketplace": "मार्केटप्लेस पहा",
+      Dashboard: "डॅशबोर्ड",
+      "Add Product": "उत्पादन जोडा",
+      "My Products": "माझे उत्पादन",
+      "AI Image Studio": "AI इमेज स्टुडिओ",
+      "AI Catalog Generator": "AI कॅटलॉग जनरेटर",
+      "Smart Pricing": "स्मार्ट किंमत",
+      Logout: "लॉगआउट",
+      "Add New Product": "नवीन उत्पादन जोडा",
+      "View Marketplace": "मार्केटप्लेस पहा",
+      "Products listed": "यादीत उत्पादन",
+      "Views this month": "या महिन्यात दृश्ये",
+      "Orders received": "प्राप्त ऑर्डर",
+      "Total earnings": "एकूण कमाई",
+      "Recent products": "अलीकडील उत्पादन",
+      "Recent orders": "अलीकडील ऑर्डर",
+      Product: "उत्पादन",
+      Buyer: "खरेदीदार",
+      Amount: "रक्कम",
+      Status: "स्थिती",
+      Shipped: "पाठवले",
+      Packing: "पॅकिंग",
+      Delivered: "पुरवले"
+    },
+    kn: {
+      Home: "ಹೋಮ್",
+      Marketplace: "ಮಾರ್ಕೆಟ್‌ಪ್ಲೇಸ್",
+      About: "ಮಾಹಿತಿ",
+      "Artisan Dashboard": "ಕಾರಿಗರ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+      "Artisan Login": "ಕಾರಿಗರ ಲಾಗಿನ್",
+      "I am an Artisan": "ನಾನು ಒಂದು ಕಲೆಗಾರ",
+      "Explore Marketplace": "ಮಾರ್ಕೆಟ್‌ಪ್ಲೇಸ್ ವೀಕ್ಷಿಸಿ",
+      Dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+      "Add Product": "ಉತ್ಪನ್ನ ಸೇರಿಸಿ",
+      "My Products": "ನನ್ನ ಉತ್ಪನ್ನಗಳು",
+      "AI Image Studio": "AI ಇಮೇಜ್ ಸ್ಟುಡಿಯೋ",
+      "AI Catalog Generator": "AI ಕ್ಯಾಟಲಾಗ್ ಜನರೇಟರ್",
+      "Smart Pricing": "ಸ್ಮಾರ್ಟ್ ದರ",
+      Logout: "ಲಾಗ್‌ಔಟ್",
+      "Add New Product": "ಹೊಸ ಉತ್ಪನ್ನ ಸೇರಿಸಿ",
+      "View Marketplace": "ಮಾರ್ಕೆಟ್‌ಪ್ಲೇಸ್ ವೀಕ್ಷಿಸಿ",
+      "Products listed": "ಪಟ್ಟಿಮಾಡಲಾದ ಉತ್ಪನ್ನಗಳು",
+      "Views this month": "ಈ ತಿಂಗಳು ವೀಕ್ಷಣೆಗಳು",
+      "Orders received": "ಪಡೆಯಲಾದ ಆರ್ಡರ್ಗಳು",
+      "Total earnings": "ಒಟ್ಟು ಆದಾಯ",
+      "Recent products": "ಇತ್ತೀಚಿನ ಉತ್ಪನ್ನಗಳು",
+      "Recent orders": "ಇತ್ತೀಚಿನ ಆರ್ಡರ್ಗಳು",
+      Product: "ಉತ್ಪನ್ನ",
+      Buyer: "ಖರೀದಿಸುವವನು",
+      Amount: "ಮೊತ್ತ",
+      Status: "ಸ್ಥಿತಿ",
+      Shipped: "ಕಳುಹಿಸಲಾಗಿದೆ",
+      Packing: "ಪ್ಯಾಕಿಂಗ್",
+      Delivered: "ವಿತರಿಸಲಾಗಿದೆ"
+    },
+    ur: {
+      Home: "ہوم",
+      Marketplace: "مارکیٹ پلیس",
+      About: "معلومات",
+      "Artisan Dashboard": "صنعتکار ڈیش بورڈ",
+      "Artisan Login": "صنعتکار لاگ ان",
+      "I am an Artisan": "میں ایک صنعتکار ہوں",
+      "Explore Marketplace": "مارکیٹ پلیس دیکھیں",
+      Dashboard: "ڈیش بورڈ",
+      "Add Product": "پروڈکٹ شامل کریں",
+      "My Products": "میرے مصنوعات",
+      "AI Image Studio": "AI امیج اسٹوڈیو",
+      "AI Catalog Generator": "AI کیٹلاگ جنریٹر",
+      "Smart Pricing": "اسمارٹ قیمت",
+      Logout: "لاگ آوٹ",
+      "Add New Product": "نئی پروڈکٹ شامل کریں",
+      "View Marketplace": "مارکیٹ پلیس دیکھیں",
+      "Products listed": "فہرست شدہ مصنوعات",
+      "Views this month": "اس مہینے کے ویوز",
+      "Orders received": "موصولہ آرڈر",
+      "Total earnings": "کل آمدنی",
+      "Recent products": "حالیہ مصنوعات",
+      "Recent orders": "حالیہ آرڈرز",
+      Product: "مصنوعات",
+      Buyer: "خریدار",
+      Amount: "رقم",
+      Status: "حالت",
+      Shipped: "بھیجا گیا",
+      Packing: "پیکنگ",
+      Delivered: "تسلیم ہوا"
+    }
+  };
+
+  async function translateText(text, lang) {
+    if (!text || lang === "en") return text;
+    const key = `${lang}:${text}`;
+    if (translationCache.has(key)) return translationCache.get(key);
+    if (COMMON_TRANSLATIONS[lang] && COMMON_TRANSLATIONS[lang][text]) {
+      const translated = COMMON_TRANSLATIONS[lang][text];
+      translationCache.set(key, translated);
+      return translated;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/api/translate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, target_language: lang })
+      });
+      const data = await response.json();
+      const translated = data.translated_text || text;
+      translationCache.set(key, translated);
+      return translated;
+    } catch (error) {
+      console.warn("Translation fallback used:", error);
+      return text;
+    }
+  }
+
+  async function translateBatch(texts, lang) {
+    if (!texts.length || lang === "en") return {};
+    try {
+      const response = await fetch(`${API_URL}/api/translate/batch`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ texts, target_language: lang })
+      });
+      const data = await response.json();
+      return data.translations || {};
+    } catch (error) {
+      console.warn("Batch translation fallback used:", error);
+      return {};
+    }
+  }
+
+  async function applyLanguage(lang) {
+    if (!SUPPORTED_LANGUAGES.includes(lang)) lang = "en";
+    const requestId = ++languageRequestId;
     state.lang = lang;
     localStorage.setItem("artisanai_lang", lang);
     document.documentElement.setAttribute("lang", lang);
     document.documentElement.setAttribute("data-lang", lang);
-    document.getElementById("languageSelect").value = lang;
 
-    document.querySelectorAll("[data-en]").forEach((el) => {
-      // skip elements only used as containers for translation data (none currently)
-      const text = el.dataset[lang] || el.dataset.en;
-      if (text !== undefined) el.textContent = text;
+    renderMarketGrid();
+    renderMyCatalogGrid();
+    renderDashboardRecent();
+    if (state.currentProductId) renderProductDetail(state.currentProductId);
+
+    const nodes = document.querySelectorAll("[data-en]");
+    const translationsByText = {};
+    const missingTexts = [];
+    const sourceTexts = Array.from(nodes).map((el) => {
+      const sourceText = el.dataset.en || "";
+      if (el.dataset[lang]) translationsByText[sourceText] = el.dataset[lang];
+      else if (lang === "en") translationsByText[sourceText] = sourceText;
+      else if (!missingTexts.includes(sourceText)) missingTexts.push(sourceText);
+      return sourceText;
+    });
+    Object.assign(translationsByText, await translateBatch(missingTexts, lang));
+    if (requestId !== languageRequestId) return;
+    nodes.forEach((el, index) => {
+      const translated = translationsByText[sourceTexts[index]] || sourceTexts[index];
+      if (translated) el.textContent = translated;
+    });
+    const langSelect = document.getElementById("langSelect");
+    if (langSelect) langSelect.value = lang;
+  }
+
+  function detectPreferredLanguage() {
+    const saved = localStorage.getItem("artisanai_lang");
+    if (saved && SUPPORTED_LANGUAGES.includes(saved)) {
+      return saved;
+    }
+
+    const browserLanguages = [];
+    if (navigator.languages && navigator.languages.length) {
+      browserLanguages.push(...navigator.languages);
+    }
+    if (navigator.language) {
+      browserLanguages.push(navigator.language);
+    }
+
+    const localeMap = {
+      en: "en",
+      hi: "hi",
+      hin: "hi",
+      ta: "ta",
+      te: "te",
+      ml: "ml",
+      bn: "bn",
+      gu: "gu",
+      mr: "mr",
+      kn: "kn",
+      ur: "ur"
+    };
+
+    for (const candidate of browserLanguages) {
+      if (!candidate) continue;
+      const normalized = candidate.toLowerCase();
+      const base = normalized.split("-")[0];
+      if (SUPPORTED_LANGUAGES.includes(normalized)) return normalized;
+      if (SUPPORTED_LANGUAGES.includes(base)) return base;
+      if (localeMap[base]) return localeMap[base];
+    }
+
+    return "en";
+  }
+
+  const langSelect = document.getElementById("langSelect");
+  if (langSelect) {
+    langSelect.addEventListener("change", (event) => {
+      applyLanguage(event.target.value);
     });
   }
 
-  document.getElementById("languageSelect").addEventListener("change", (event) => {
-    applyLanguage(event.target.value);
-  });
+  const initialLang = detectPreferredLanguage();
+  applyLanguage(initialLang);
 
   /* ---------------------------------------------------------
      4. MOBILE MENU
@@ -379,20 +541,16 @@
       document.getElementById("phoneInput").focus();
       return;
     }
-
     const status = document.getElementById("otpStatus");
     status.textContent = "Sending OTP...";
     try {
       const response = await fetch(`${API_URL}/api/auth/send-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone })
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Could not send OTP");
-      status.textContent = data.demo
-        ? "Demo mode: your OTP is 1234."
-        : "OTP sent. Check your phone.";
+      status.textContent = data.demo ? "Demo mode: your OTP is 1234." : "OTP sent. Check your phone.";
       document.getElementById("otpHint").textContent = data.demo
         ? "Demo mode: enter OTP 1234."
         : "Enter the OTP sent to your phone.";
@@ -400,40 +558,41 @@
       status.textContent = error.message;
       return;
     }
-
     stepPhone.classList.add("hidden");
     stepOtp.classList.remove("hidden");
     document.getElementById("otpInput").focus();
   });
 
-  loginForm.addEventListener("submit", async (e) => {
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const otp = document.getElementById("otpInput").value.trim();
     const phone = document.getElementById("phoneInput").value.trim();
-    const otpHint = document.getElementById("otpHint");
-    otpHint.textContent = "Verifying...";
-    try {
-      const response = await fetch(`${API_URL}/api/auth/verify-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, otp })
-      });
+    const otp = document.getElementById("otpInput").value.trim();
+    fetch(`${API_URL}/api/auth/verify-otp`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, otp })
+    }).then(async (response) => {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Invalid OTP");
-    } catch (error) {
-      otpHint.textContent = error.message;
-      document.getElementById("otpInput").focus();
-      return;
-    }
-    showPage("dashboard");
-    // reset form state for next visit
-    stepPhone.classList.remove("hidden");
-    stepOtp.classList.add("hidden");
-    loginForm.reset();
+      state.authenticated = true;
+      showPage("dashboard");
+      await loadDashboard();
+      stepPhone.classList.remove("hidden");
+      stepOtp.classList.add("hidden");
+      loginForm.reset();
+    }).catch((error) => {
+      document.getElementById("otpHint").textContent = error.message;
+    });
   });
 
   document.getElementById("registerLink").addEventListener("click", () => {
     document.getElementById("phoneInput").focus();
+  });
+
+  document.querySelector(".side-link-logout").addEventListener("click", async (event) => {
+    event.preventDefault();
+    await fetch(`${API_URL}/api/auth/logout`, { method: "POST" });
+    state.authenticated = false;
+    showPage("landing");
   });
 
   /* ---------------------------------------------------------
@@ -442,12 +601,6 @@
   const uploadBox = document.getElementById("uploadBox");
   const productPhotoInput = document.getElementById("productPhoto");
   uploadBox.addEventListener("click", () => productPhotoInput.click());
-  uploadBox.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      productPhotoInput.click();
-    }
-  });
   productPhotoInput.addEventListener("change", () => {
     const file = productPhotoInput.files[0];
     if (!file) return;
@@ -455,60 +608,6 @@
     document.getElementById("uploadPreviewWrap").innerHTML =
       '<img src="' + url + '" alt="Product preview">';
   });
-
-  const describeByVoiceBtn = document.getElementById("describeByVoiceBtn");
-  const voiceProductStatus = document.getElementById("voiceProductStatus");
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRecognition) {
-    describeByVoiceBtn.disabled = true;
-    voiceProductStatus.textContent = "Voice input is not supported in this browser.";
-  } else {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = "hi-IN";
-
-    describeByVoiceBtn.addEventListener("click", () => {
-      recognition.lang = { en: "en-IN", hi: "hi-IN", bn: "bn-IN", ta: "ta-IN", te: "te-IN", mr: "mr-IN", kn: "kn-IN", gu: "gu-IN" }[state.lang] || "en-IN";
-      voiceProductStatus.textContent = state.lang === "hi" ? "बोलना शुरू करें..." : "Listening... describe your product.";
-      describeByVoiceBtn.classList.add("is-listening");
-      describeByVoiceBtn.disabled = true;
-      recognition.start();
-    });
-
-    recognition.addEventListener("result", async (event) => {
-      const transcript = event.results[0][0].transcript.trim();
-      document.getElementById("prodDesc").value = transcript;
-      voiceProductStatus.textContent = state.lang === "hi" ? "AI आपके विवरण को बेहतर बना रहा है..." : "AI is polishing your description...";
-      try {
-        const response = await fetch(`${API_URL}/api/ai/describe`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: document.getElementById("prodName").value.trim() || transcript,
-            material: document.getElementById("prodMaterials").value.trim() || "traditional materials"
-          })
-        });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error || "AI could not create a description");
-        document.getElementById("prodDesc").value = data.description;
-        voiceProductStatus.textContent = state.lang === "hi" ? "तैयार! AI विवरण जोड़ दिया गया है।" : "Done! AI description added.";
-      } catch (error) {
-        voiceProductStatus.textContent = error.message;
-      }
-    });
-
-    recognition.addEventListener("error", (event) => {
-      voiceProductStatus.textContent = event.error === "not-allowed"
-        ? "Microphone permission is required for voice input."
-        : "Could not hear that. Please try again.";
-    });
-    recognition.addEventListener("end", () => {
-      describeByVoiceBtn.classList.remove("is-listening");
-      describeByVoiceBtn.disabled = false;
-    });
-  }
-
   document.getElementById("addProductForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -523,17 +622,17 @@
   }
 
   try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("category", category);
-    formData.append("price", price);
-    formData.append("description", description);
-    const photo = productPhotoInput.files[0];
-    if (photo) formData.append("image", photo);
-
     const response = await fetch(`${API_URL}/api/products`, {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        category: category,
+        price: Number(price),
+        description: description
+      })
     });
 
 
@@ -552,9 +651,8 @@
       name: { en: savedProduct.name, hi: savedProduct.name },
       category: savedProduct.category,
       price: Number(savedProduct.price),
-      image_url: savedProduct.image_url || "",
       icon: "🛍️",
-      artisan: "Hello Lakshmi Priyaa",
+      artisan: "Kamla Devi",
       region: "India",
       desc: { en: savedProduct.description || "", hi: savedProduct.description || "" }
     });
@@ -577,131 +675,80 @@
      --------------------------------------------------------- */
   const studioUploadBtn = document.getElementById("studioUploadBtn");
   const studioUpload = document.getElementById("studioUpload");
-  let studioImageUrl = "";
   studioUploadBtn.addEventListener("click", () => studioUpload.click());
   studioUpload.addEventListener("change", () => {
     const file = studioUpload.files[0];
     if (!file) return;
-    studioImageUrl = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
     document.getElementById("rawPreview").innerHTML =
-      '<img src="' + studioImageUrl + '" alt="Raw upload">';
+      '<img src="' + url + '" alt="Raw upload">';
   });
 
-  document.getElementById("generateImageBtn").addEventListener("click", async function () {
+  document.getElementById("generateImageBtn").addEventListener("click", function () {
     const spinner = document.getElementById("resultSpinner");
     const content = document.getElementById("resultContent");
     const label = document.getElementById("resultLabel");
     const box = document.getElementById("resultPreview");
-    if (!studioImageUrl) {
-      label.textContent = state.lang === "hi" ? "पहले एक फ़ोटो अपलोड करें।" : "Upload a photo first.";
-      return;
-    }
     content.classList.add("hidden");
     spinner.classList.remove("hidden");
     label.textContent = state.lang === "hi" ? "AI आपकी फ़ोटो निखार रहा है..." : "AI is enhancing your photo...";
     box.classList.remove("is-done");
     this.disabled = true;
 
-    try {
-      const response = await fetch(`${API_URL}/api/image/enhance`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ image_url: studioImageUrl })
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Could not enhance image");
-      content.innerHTML = '<img src="' + data.enhanced_image_url + '" alt="Enhanced product">';
+    setTimeout(() => {
+      spinner.classList.add("hidden");
+      content.classList.remove("hidden");
+      content.textContent = "🏺✨";
+      box.classList.add("is-done");
       label.textContent = state.lang === "hi"
         ? "तैयार! साफ़ बैकग्राउंड और बेहतर रोशनी के साथ।"
         : "Done! Clean background and improved lighting applied.";
-      box.classList.add("is-done");
-    } catch (error) {
-      content.textContent = "⚠️";
-      label.textContent = error.message;
-    } finally {
-      spinner.classList.add("hidden");
-      content.classList.remove("hidden");
       this.disabled = false;
-    }
+    }, 1400);
   });
 
   /* ---------------------------------------------------------
      8. AI CATALOG GENERATOR (demo)
      --------------------------------------------------------- */
-  document.getElementById("generateCatalogBtn").addEventListener("click", () => {
+  document.getElementById("generateCatalogBtn").addEventListener("click", async () => {
     const craft = document.getElementById("genCraft").value || "Handmade product";
     const materials = document.getElementById("genMaterials").value || "traditional materials";
     const region = document.getElementById("genRegion").value || "India";
-    const selectedLanguages = Array.from(document.getElementById("genLang").selectedOptions).map((option) => option.value);
-    const languages = selectedLanguages.length ? selectedLanguages : ["en", "hi"];
+    const langChoice = document.getElementById("genLang").value;
     const out = document.getElementById("catalogOutput");
-    const craftText = craft.toLowerCase();
-    const escapeHTML = (value) => String(value).replace(/[&<>'"]/g, (character) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
-    }[character]));
-    const insights = craftText.includes("pottery") || craftText.includes("ceramic") || craftText.includes("clay")
-      ? { process: "Shaped by hand, dried slowly and finished with a careful glaze or natural surface.", use: "Bring warmth and handmade character to shelves, tables and everyday rituals.", care: "Wipe gently with a soft, dry cloth. Handle with care and keep away from sudden temperature changes." }
-      : craftText.includes("saree") || craftText.includes("textile") || craftText.includes("stole") || craftText.includes("scarf") || craftText.includes("cushion")
-        ? { process: "Prepared with patient handwork and finished with detail that gives every thread its own character.", use: "A thoughtful piece for daily style, gifting or adding texture to a welcoming home.", care: "Store folded in a dry place. Prefer gentle hand washing or professional cleaning according to the material." }
-        : craftText.includes("painting") || craftText.includes("art") || craftText.includes("canvas")
-          ? { process: "Built layer by layer with expressive hand-painted detail, allowing the maker's style to remain visible.", use: "Add a story-led focal point to a living room, workspace or thoughtful gift collection.", care: "Keep away from direct sunlight and moisture. Dust lightly with a soft, dry cloth." }
-          : { process: "Made slowly by hand with traditional techniques, careful finishing and the small variations that make it one of a kind.", use: "A meaningful addition to an everyday space or a thoughtful gift with a maker's story.", care: "Keep dry and clean gently with a soft cloth. Store safely when not in use." };
-    const historyEn = craftText.includes("pottery") || craftText.includes("ceramic") || craftText.includes("clay")
-      ? "Pottery has been part of everyday life across India for generations, from useful vessels and lamps to decorative forms. This piece carries that continuing tradition from " + region + ", where the maker transforms " + materials.toLowerCase() + " into an object shaped by hand and intended to be lived with."
-      : craftText.includes("saree") || craftText.includes("textile") || craftText.includes("stole") || craftText.includes("scarf") || craftText.includes("weav")
-        ? "India's textile traditions have been passed from one generation to the next through patient spinning, weaving, dyeing and handwork. This piece connects that living heritage in " + region + " with contemporary use, using " + materials.toLowerCase() + " and the maker's own careful interpretation."
-        : craftText.includes("painting") || craftText.includes("art") || craftText.includes("canvas")
-          ? "Folk and handmade art preserve the visual memory of communities through symbols, colour and stories. Inspired by the creative traditions of " + region + ", this work carries that history forward through the maker's hand, materials and personal expression."
-          : "Handcrafted objects carry knowledge through generations: materials are selected locally, techniques are learned through practice and each maker adds a personal touch. This piece connects the craft traditions of " + region + " with present-day life through " + materials.toLowerCase() + ".";
-    const historyHi = craftText.includes("pottery") || craftText.includes("ceramic") || craftText.includes("clay")
-      ? "भारत में मिट्टी के बर्तन पीढ़ियों से रोज़मर्रा की ज़िंदगी का हिस्सा रहे हैं। " + region + " की इस परंपरा में कारीगर " + materials + " को हाथ से आकार देकर उपयोगी और सुंदर वस्तु बनाते हैं।"
-      : craftText.includes("saree") || craftText.includes("textile") || craftText.includes("stole") || craftText.includes("scarf") || craftText.includes("weav")
-        ? "भारत की वस्त्र परंपराएं कताई, बुनाई, रंगाई और हाथ के धैर्यपूर्ण काम से पीढ़ी-दर-पीढ़ी आगे बढ़ी हैं। " + region + " का यह उत्पाद " + materials + " और कारीगर की अपनी शैली से उस जीवित विरासत को आज के उपयोग से जोड़ता है।"
-        : craftText.includes("painting") || craftText.includes("art") || craftText.includes("canvas")
-          ? "लोक और हस्तनिर्मित कला रंगों, प्रतीकों और कहानियों के माध्यम से समुदायों की स्मृति को सहेजती है। " + region + " से प्रेरित यह कृति कारीगर की कल्पना और हाथ के काम से उस परंपरा को आगे बढ़ाती है।"
-          : "हस्तनिर्मित वस्तुएं पीढ़ियों का ज्ञान अपने साथ रखती हैं। सामग्री का चुनाव, तकनीक का अभ्यास और कारीगर का व्यक्तिगत स्पर्श " + region + " की शिल्प परंपरा को आज की ज़िंदगी से जोड़ते हैं।";
 
     const en = {
       title: craft + " — Handcrafted in " + region,
-      desc: "Discover this beautifully handcrafted " + craft.toLowerCase() + ", made in " + region + " using " + materials.toLowerCase() + ". Its story begins with the maker's history: " + historyEn + " This tradition continues through careful handwork, connecting the product's origin with the person who made it and the home it will now enter. " + insights.process + " Every piece carries the unique mark of the hands that made it, so no two are exactly alike. " + insights.use + " " + insights.care,
-      history: historyEn,
-      process: insights.process,
-      use: insights.use,
-      care: insights.care,
+      desc: "A beautifully handcrafted " + craft.toLowerCase() + ", made using " + materials.toLowerCase() +
+        " by skilled artisans in " + region + ". Every piece carries the unique mark of the hands that made it — no two are exactly alike.",
       tags: ["handmade", "artisan-made", region.split(",")[0].trim().toLowerCase(), craft.split(" ")[0].toLowerCase(), "traditional craft"]
     };
     const hi = {
       title: craft + " — " + region + " में हस्तनिर्मित",
-      desc: "यह खूबसूरती से हाथ से बनाया गया " + craft + " है, जिसे " + region + " में " + materials + " का उपयोग करके तैयार किया गया है। इसकी कहानी कारीगर के इतिहास से शुरू होती है: " + historyHi + " यह परंपरा सावधानी से किए गए हाथ के काम में आगे बढ़ती है और उत्पाद की शुरुआत को उसे बनाने वाले व्यक्ति तथा उसके नए घर से जोड़ती है। पारंपरिक तकनीकों और धैर्यपूर्ण हाथ के काम से तैयार, हर बारीकी को ध्यान से पूरा किया गया है। हर उत्पाद उसे बनाने वाले हाथों की अनूठी छाप रखता है, इसलिए कोई भी दो उत्पाद बिल्कुल एक जैसे नहीं होते। इसे घर को सुंदर बनाने, रोज़मर्रा के उपयोग या किसी खास व्यक्ति को उपहार देने के लिए चुना जा सकता है। इसे सूखी और सुरक्षित जगह रखें और मुलायम कपड़े से धीरे साफ करें।",
-      history: historyHi,
-      process: "पारंपरिक तकनीकों और धैर्यपूर्ण हाथ के काम से तैयार, हर बारीकी को ध्यान से पूरा किया गया है।",
-      use: "घर को सुंदर बनाने, रोज़मर्रा के उपयोग या किसी खास व्यक्ति को उपहार देने के लिए।",
-      care: "इसे सूखी और सुरक्षित जगह रखें और मुलायम कपड़े से धीरे साफ करें।",
+      desc: "यह एक खूबसूरती से हाथ से बनाया गया " + craft + " है, जिसे " + region + " के कुशल कारीगरों ने " + materials + " का उपयोग करके तैयार किया है। हर उत्पाद उसे बनाने वाले हाथों की अनूठी छाप रखता है — कोई भी दो उत्पाद बिल्कुल एक जैसे नहीं होते।",
       tags: ["हस्तनिर्मित", "कारीगर-निर्मित", "पारंपरिक शिल्प"]
     };
 
-    let html = "";
-    if (languages.includes("en")) {
-      html += '<div class="lang-block"><span class="lang-flag">English</span>' +
-        "<h3>" + escapeHTML(en.title) + "</h3><p>" + escapeHTML(en.desc) + "</p>" +
-        '<div class="catalog-facts"><div><strong>History and origin</strong><span>' + escapeHTML(en.history) + '</span></div><div><strong>Materials</strong><span>' + escapeHTML(materials) + '</span></div><div><strong>How it is made</strong><span>' + escapeHTML(en.process) + '</span></div><div><strong>Perfect for</strong><span>' + escapeHTML(en.use) + '</span></div><div><strong>Care</strong><span>' + escapeHTML(en.care) + '</span></div></div>' +
-        '<div class="tag-row">' + en.tags.map((t) => '<span class="tag-chip">#' + t.replace(/\s+/g, "") + "</span>").join("") + "</div></div>";
-    }
-    if (languages.includes("hi")) {
-      html += '<div class="lang-block"><span class="lang-flag">हिंदी</span>' +
-        "<h3>" + escapeHTML(hi.title) + "</h3><p>" + escapeHTML(hi.desc) + "</p>" +
-        '<div class="catalog-facts"><div><strong>इतिहास और उत्पत्ति</strong><span>' + escapeHTML(hi.history) + '</span></div><div><strong>सामग्री</strong><span>' + escapeHTML(materials) + '</span></div><div><strong>कैसे बनाया गया</strong><span>' + escapeHTML(hi.process) + '</span></div><div><strong>किसके लिए</strong><span>' + escapeHTML(hi.use) + '</span></div><div><strong>देखभाल</strong><span>' + escapeHTML(hi.care) + '</span></div></div>' +
-        '<div class="tag-row">' + hi.tags.map((t) => '<span class="tag-chip">#' + t + "</span>").join("") + "</div></div>";
-    }
-    const additionalLanguages = {
-      bn: "বাংলা", ta: "தமிழ்", te: "తెలుగు", mr: "मराठी", kn: "ಕನ್ನಡ", gu: "ગુજરાતી"
+    const targetLanguage = langChoice === "both" ? state.lang : langChoice;
+    const translated = targetLanguage === "en" ? en : {
+      title: await translateText(en.title, targetLanguage),
+      desc: await translateText(en.desc, targetLanguage),
+      tags: await Promise.all(en.tags.map((tag) => translateText(tag, targetLanguage)))
     };
-    languages.filter((language) => additionalLanguages[language]).forEach((language) => {
-      html += '<div class="lang-block"><span class="lang-flag">' + additionalLanguages[language] + '</span>' +
-        '<h3>' + escapeHTML(en.title) + '</h3><p>' + escapeHTML(en.desc) + '</p>' +
-        '<div class="catalog-facts"><div><strong>Materials</strong><span>' + escapeHTML(materials) + '</span></div><div><strong>History and origin</strong><span>' + escapeHTML(en.history) + '</span></div><div><strong>How it is made</strong><span>' + escapeHTML(en.process) + '</span></div><div><strong>Perfect for</strong><span>' + escapeHTML(en.use) + '</span></div><div><strong>Care</strong><span>' + escapeHTML(en.care) + '</span></div></div>' +
+
+    let html = "";
+    if (langChoice !== "hi") {
+      html += '<div class="lang-block"><span class="lang-flag">English</span>' +
+        "<h3>" + en.title + "</h3><p>" + en.desc + "</p>" +
         '<div class="tag-row">' + en.tags.map((t) => '<span class="tag-chip">#' + t.replace(/\s+/g, "") + "</span>").join("") + "</div></div>";
-    });
+    }
+    if (langChoice !== "en") {
+      const languageLabel = langChoice === "both" ? targetLanguage.toUpperCase() : langChoice.toUpperCase();
+      const listing = langChoice === "hi" ? hi : translated;
+      html += '<div class="lang-block"><span class="lang-flag">' + languageLabel + "</span>" +
+        "<h3>" + listing.title + "</h3><p>" + listing.desc + "</p>" +
+        '<div class="tag-row">' + listing.tags.map((t) => '<span class="tag-chip">#' + t + "</span>").join("") + "</div></div>";
+    }
     out.innerHTML = html;
   });
 
@@ -742,25 +789,14 @@
 
     console.log("Products from Flask:", data.products);
 
-    const normalizeCategory = (category) => {
-      const value = String(category || "Handicrafts").toLowerCase();
-      if (value.includes("pottery") || value.includes("ceramic") || value.includes("clay")) return "Pottery";
-      if (value.includes("textile") || value.includes("weav") || value.includes("embroid") || value.includes("saree")) return "Textiles & Weaving";
-      if (value.includes("paint") || value.includes("art")) return "Painting";
-      if (value.includes("jewel") || value.includes("chain") || value.includes("silver")) return "Jewelry";
-      if (value.includes("wood") || value.includes("carv")) return "Woodwork";
-      if (value.includes("metal") || value.includes("brass")) return "Metalwork";
-      return "Handicrafts";
-    };
     return (data.products || []).map(p => ({
       id: p.id,
       name: {
         en: p.name,
         hi: p.name
       },
-      category: normalizeCategory(p.category),
+      category: p.category,
       price: Number(p.price),
-      image_url: p.image_url || "",
       icon: p.icon || "🛍️",
       artisan: p.artisan || "Artisan",
       region: p.region || "India",
@@ -778,17 +814,16 @@
   
 function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
-    const imageUrl = getProductImage(p);
     return (
       '<div class="product-card" data-product-id="' + p.id + '">' +
-        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span><img src="' + imageUrl + '" alt="' + name + '"></div>' +
+        '<div class="product-thumb"><span class="cat-chip" data-en="' + p.category + '">' + p.category + '</span>' + p.icon + "</div>" +
         '<div class="product-body">' +
-          "<h3>" + name + "</h3>" +
+          '<h3 data-en="' + p.name.en + '">' + name + "</h3>" +
           '<div class="product-artisan">' + p.artisan + " · " + p.region + "</div>" +
           '<div class="product-price-row">' +
             '<span class="product-price">₹' + p.price.toLocaleString("en-IN") + "</span>" +
             '<button type="button" class="mini-btn" data-view-product="' + p.id + '">' +
-              (state.lang === "hi" ? "देखें" : "View") +
+              '<span data-en="View">View</span>' +
             "</button>" +
           "</div>" +
         "</div>" +
@@ -799,11 +834,11 @@ function productCardHTML(p) {
   function renderMyCatalogGrid() {
     const grid = document.getElementById("myCatalogGrid");
     const q = (document.getElementById("myCatalogSearch").value || "").toLowerCase();
-    const mine = PRODUCTS.filter((p) => (p.name.en + p.name.hi).toLowerCase().includes(q));
+    // simulate "my products" as the first 5 sample products (this artisan's own listings)
+    const mine = PRODUCTS.slice(0, 5).filter((p) => (p.name.en + p.name.hi).toLowerCase().includes(q));
     grid.innerHTML = mine.length
       ? mine.map(productCardHTML).join("")
-      : '<div class="empty-state">' + (state.lang === "hi" ? "कोई उत्पाद नहीं मिला।" : "No products found.") + "</div>";
-    document.getElementById("productCount").textContent = PRODUCTS.length;
+      : '<div class="empty-state" data-en="No products found.">No products found.</div>';
   }
 
   function renderMarketGrid() {
@@ -823,19 +858,13 @@ function productCardHTML(p) {
 
     grid.innerHTML = products.length
       ? products.map(productCardHTML).join("")
-      : '<div class="empty-state">' + (state.lang === "hi" ? "कोई उत्पाद नहीं मिला।" : "No products found.") + "</div>";
-    updateCategoryResultLabel();
-  }
-
-  function updateCategoryResultLabel() {
-    const label = document.getElementById("categoryResultLabel");
-    const category = document.getElementById("marketCategory").value;
-    label.textContent = category === "all" ? "Showing all artisan products" : "Showing all " + category + " products";
+      : '<div class="empty-state" data-en="No products found.">No products found.</div>';
   }
 
   function renderDashboardRecent() {
     const wrap = document.getElementById("dashRecentProducts");
-    wrap.innerHTML = PRODUCTS.slice(0, 4).map((p) => (
+    const products = state.dashboardProducts.slice(0, 4);
+    wrap.innerHTML = products.map((p) => (
       '<div class="mini-item" data-view-product="' + p.id + '">' +
         '<span class="mini-thumb">' + p.icon + "</span>" +
         '<span class="mini-info"><strong>' + (p.name[state.lang] || p.name.en) + "</strong>" +
@@ -844,47 +873,29 @@ function productCardHTML(p) {
     )).join("");
   }
 
+  async function loadDashboard() {
+    const response = await fetch(`${API_URL}/api/artisan/dashboard`);
+    if (!response.ok) {
+      state.authenticated = false;
+      showPage("login");
+      return;
+    }
+    const data = await response.json();
+    state.dashboardProducts = data.products || [];
+    document.getElementById("dashboardProductCount").textContent = state.dashboardProducts.length;
+    document.getElementById("dashboardOrderCount").textContent = (data.orders || []).length;
+    document.getElementById("dashboardViews").textContent = data.analytics?.views || 0;
+    document.getElementById("dashboardEarnings").textContent = "₹" + Number(data.earnings?.total || 0).toLocaleString("en-IN");
+    document.getElementById("dashboardOrders").innerHTML = (data.orders || []).map((order) =>
+      "<tr><td>" + order.product + "</td><td>" + order.buyer + "</td><td>₹" + Number(order.amount).toLocaleString("en-IN") + "</td><td>" + order.status + "</td></tr>"
+    ).join("");
+    renderDashboardRecent();
+  }
+
   ["marketSearch", "marketCategory", "marketSort"].forEach((id) => {
     document.getElementById(id).addEventListener("input", renderMarketGrid);
   });
   document.getElementById("myCatalogSearch").addEventListener("input", renderMyCatalogGrid);
-  document.getElementById("homeSearchBtn").addEventListener("click", () => {
-    const query = document.getElementById("homeSearch").value.trim();
-    document.getElementById("marketSearch").value = query;
-    showPage("marketplace");
-    renderMarketGrid();
-  });
-  document.getElementById("homeSearch").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") document.getElementById("homeSearchBtn").click();
-  });
-  const homeVoiceSearchBtn = document.getElementById("homeVoiceSearchBtn");
-  const homeVoiceSearchStatus = document.getElementById("homeVoiceSearchStatus");
-  const HomeSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (HomeSpeechRecognition) {
-    const homeRecognition = new HomeSpeechRecognition();
-    homeRecognition.continuous = false;
-    homeRecognition.interimResults = false;
-    homeVoiceSearchBtn.addEventListener("click", () => {
-      homeRecognition.lang = { en: "en-IN", hi: "hi-IN", bn: "bn-IN", ta: "ta-IN", te: "te-IN", mr: "mr-IN", kn: "kn-IN", gu: "gu-IN" }[state.lang] || "en-IN";
-      homeVoiceSearchBtn.classList.add("is-listening");
-      homeVoiceSearchStatus.textContent = "Listening...";
-      homeRecognition.start();
-    });
-    homeRecognition.addEventListener("result", (event) => {
-      document.getElementById("homeSearch").value = event.results[0][0].transcript;
-      document.getElementById("homeSearchBtn").click();
-    });
-    homeRecognition.addEventListener("error", (event) => {
-      homeVoiceSearchStatus.textContent = event.error === "not-allowed" ? "Microphone permission is required." : "Voice search could not be completed.";
-    });
-    homeRecognition.addEventListener("end", () => {
-      homeVoiceSearchBtn.classList.remove("is-listening");
-      homeVoiceSearchStatus.textContent = "";
-    });
-  } else {
-    homeVoiceSearchBtn.disabled = true;
-    homeVoiceSearchBtn.title = "Voice search is not supported in this browser";
-  }
 
   /* ---------------------------------------------------------
      11. PRODUCT DETAILS
@@ -899,22 +910,23 @@ function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
     const desc = p.desc[state.lang] || p.desc.en;
     wrap.innerHTML =
-      '<button type="button" class="link-btn back-link" data-target="marketplace">' +
-        (state.lang === "hi" ? "← बाज़ार पर वापस जाएं" : "← Back to marketplace") +
+      '<button type="button" class="link-btn back-link" data-target="marketplace" data-en="← Back to marketplace">' +
+      "← Back to marketplace" +
       "</button>" +
       '<div class="detail-grid">' +
         "<div>" +
-          '<div class="detail-gallery-main"><img src="' + getProductImage(p) + '" alt="' + name + '"></div>' +
+          '<div class="detail-gallery-main">' + p.icon + "</div>" +
           '<div class="detail-thumbs"><span>' + p.icon + "</span><span>🧵</span><span>📦</span></div>" +
         "</div>" +
         "<div class=\"detail-info\">" +
-          '<span class="cat-chip-solo">' + p.category + "</span>" +
-          "<h1>" + name + "</h1>" +
+          '<span class="cat-chip-solo" data-en="' + p.category + '">' + p.category + "</span>" +
+          '<h1 data-en="' + p.name.en + '">' + name + "</h1>" +
           '<div class="detail-price-row"><span class="detail-price">₹' + p.price.toLocaleString("en-IN") + "</span></div>" +
-          "<p>" + desc + "</p>" +
+          '<p data-en="' + p.desc.en + '">' + desc + "</p>" +
           '<div class="detail-actions">' +
-            '<button type="button" class="btn btn-primary btn-lg" id="addToCartBtn">🧺 ' + (state.lang === "hi" ? "कार्ट में डालें" : "Add to Cart") + "</button>" +
-            '<button type="button" class="btn btn-outline btn-lg" id="buyNowBtn">' + (state.lang === "hi" ? "अभी खरीदें" : "Buy Now") + "</button>" +
+            '<button type="button" class="btn btn-primary btn-lg" id="addToCartBtn" data-en="🧺 Add to Cart">🧺 Add to Cart</button>' +
+            '<button type="button" class="btn btn-outline btn-lg" id="buyNowBtn" data-en="Buy Now">Buy Now</button>' +
+            '<a class="btn btn-soft btn-lg" id="whatsappBtn" target="_blank" rel="noopener noreferrer" data-en="💬 WhatsApp Seller">💬 WhatsApp Seller</a>' +
           "</div>" +
           '<div class="artisan-box">' +
             '<span class="artisan-avatar">🧑‍🎨</span>' +
@@ -923,100 +935,25 @@ function productCardHTML(p) {
         "</div>" +
       "</div>";
 
-
-    document.getElementById("addToCartBtn").addEventListener("click", (event) => {
-      event.stopPropagation();
-      addToCart(p);
-    });
-    document.getElementById("buyNowBtn").addEventListener("click", (event) => {
-      event.stopPropagation();
-      state.cart = [{
-        id: p.id,
-        name: p.name.en,
-        price: p.price,
-        icon: p.icon,
-        image_url: getProductImage(p),
-        quantity: 1
-      }];
-      saveCart();
-      showPage("cart");
-      document.getElementById("buyerName").focus();
+    document.getElementById("addToCartBtn").addEventListener("click", bumpCart);
+    document.getElementById("buyNowBtn").addEventListener("click", bumpCart);
+    document.getElementById("whatsappBtn").addEventListener("click", async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/products/${id}/whatsapp`);
+        const data = await response.json();
+        if (response.ok && data.url) {
+          window.open(data.url, "_blank", "noopener,noreferrer");
+        }
+      } catch (error) {
+        console.warn("WhatsApp link unavailable", error);
+      }
     });
   }
 
-  function saveCart() {
-    localStorage.setItem("artisanai_cart", JSON.stringify(state.cart));
-    document.getElementById("cartCount").textContent = state.cart.reduce((total, item) => total + item.quantity, 0);
+  function bumpCart() {
+    state.cartCount += 1;
+    document.getElementById("cartCount").textContent = state.cartCount;
   }
-
-  function addToCart(product, showMessage) {
-    const existing = state.cart.find((item) => item.id === product.id);
-    if (existing) existing.quantity += 1;
-    else state.cart.push({ id: product.id, name: product.name.en, price: product.price, icon: product.icon, image_url: getProductImage(product), quantity: 1 });
-    saveCart();
-    if (showMessage !== false) {
-      const button = document.getElementById("addToCartBtn");
-      button.textContent = state.lang === "hi" ? "कार्ट में जोड़ा गया" : "Added to cart";
-      setTimeout(() => renderProductDetail(product.id), 900);
-    }
-  }
-
-  function renderCart() {
-    const items = document.getElementById("cartItems");
-    const total = state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    document.getElementById("cartTotal").textContent = "₹" + total.toLocaleString("en-IN");
-    items.innerHTML = state.cart.length ? '<h2>' + (state.lang === "hi" ? "आपके उत्पाद" : "Your products") + "</h2>" + state.cart.map((item) =>
-      '<div class="cart-item"><span class="cart-item-icon">' + (item.image_url ? '<img src="' + item.image_url + '" alt="' + item.name + '">' : item.icon) + '</span><div><strong>' + item.name + '</strong><span>₹' + item.price.toLocaleString("en-IN") + ' × ' + item.quantity + '</span></div><button class="mini-btn" type="button" data-remove-cart="' + item.id + '">×</button></div>'
-    ).join("") : '<div class="empty-state">' + (state.lang === "hi" ? "आपका कार्ट खाली है।" : "Your cart is empty.") + '</div>';
-    document.querySelector("#checkoutForm button[type=submit]").disabled = !state.cart.length;
-  }
-
-  document.getElementById("checkoutForm").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const status = document.getElementById("checkoutStatus");
-    status.textContent = "Placing order...";
-    try {
-      const response = await fetch(`${API_URL}/api/orders`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
-        name: document.getElementById("buyerName").value.trim(), phone: document.getElementById("buyerPhone").value.trim(), address: document.getElementById("buyerAddress").value.trim(), items: state.cart
-      }) });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Could not place order");
-      state.orders.unshift({
-        id: data.order.id,
-        status: data.order.status || "New",
-        createdAt: new Date().toISOString(),
-        total: data.order.amount,
-        items: state.cart.map((item) => ({ ...item }))
-      });
-      localStorage.setItem("artisanai_orders", JSON.stringify(state.orders));
-      state.cart = [];
-      saveCart();
-      event.target.reset();
-      status.textContent = `Order ${data.order.id} placed successfully.`;
-      renderCart();
-    } catch (error) { status.textContent = error.message; }
-  });
-
-  function renderOrders() {
-    const history = document.getElementById("orderHistory");
-    if (!state.orders.length) {
-      history.innerHTML = '<div class="empty-state"><p>' + (state.lang === "hi" ? "अभी तक कोई ऑर्डर नहीं है।" : "You have not placed any orders yet.") + '</p><button class="btn btn-primary" data-target="marketplace">' + (state.lang === "hi" ? "खरीदारी शुरू करें" : "Start shopping") + "</button></div>";
-      return;
-    }
-    history.innerHTML = state.orders.map((order) =>
-      '<article class="order-card"><div class="order-card-head"><div><strong>' + order.id + '</strong><span>' + new Date(order.createdAt).toLocaleDateString("en-IN") + '</span></div><b>' + (order.status || "New") + '</b></div><div class="order-products">' +
-      order.items.map((item) => '<div class="order-product"><span class="order-product-image">' + (item.image_url ? '<img src="' + item.image_url + '" alt="' + item.name + '">' : item.icon) + '</span><div><strong>' + item.name + '</strong><span>₹' + Number(item.price).toLocaleString("en-IN") + ' × ' + item.quantity + '</span></div></div>').join("") +
-      '</div><div class="order-total"><span>' + (state.lang === "hi" ? "कुल" : "Total") + '</span><strong>₹' + Number(order.total).toLocaleString("en-IN") + '</strong></div></article>'
-    ).join("");
-  }
-
-  document.body.addEventListener("click", (event) => {
-    const removeButton = event.target.closest("[data-remove-cart]");
-    if (!removeButton) return;
-    state.cart = state.cart.filter((item) => item.id !== Number(removeButton.dataset.removeCart));
-    saveCart();
-    renderCart();
-  });
 
   document.body.addEventListener("click", (e) => {
     const viewBtn = e.target.closest("[data-view-product]");
@@ -1026,7 +963,8 @@ function productCardHTML(p) {
              : null;
     if (id) {
       state.currentProductId = id;
-      showPage("product-details-" + id);
+      renderProductDetail(id);
+      showPage("product-details");
     }
   });
 
@@ -1034,23 +972,25 @@ function productCardHTML(p) {
      12. INIT
      --------------------------------------------------------- */
   async function init() {
+    const authResponse = await fetch(`${API_URL}/api/auth/me`);
+    state.authenticated = authResponse.ok && (await authResponse.json()).authenticated;
     applyLanguage(state.lang);
-    saveCart();
 
     const startId = location.hash.replace("#", "") || "landing";
     showPage(startId, { skipHash: true });
 
+    if (state.authenticated) await loadDashboard();
+
     const backendProducts = await loadProductsFromBackend();
 
     if (backendProducts.length > 0) {
-      const backendIds = new Set(backendProducts.map((product) => product.id));
-      PRODUCTS = backendProducts.concat(PRODUCTS.filter((product) => !backendIds.has(product.id)));
+      PRODUCTS = backendProducts;
     }
 
     renderMarketGrid();
     renderMyCatalogGrid();
     renderDashboardRecent();
-    if (state.currentProductId) renderProductDetail(state.currentProductId);
+    await applyLanguage(state.lang);
 }
 
   document.addEventListener("DOMContentLoaded", init);

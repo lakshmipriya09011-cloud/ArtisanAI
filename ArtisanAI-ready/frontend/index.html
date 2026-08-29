@@ -38,11 +38,12 @@
     </nav>
 
     <div class="header-tools">
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language">
-        <span class="lang-opt" data-lang-label-en>EN</span>
-        <span class="lang-sep">/</span>
-        <span class="lang-opt" data-lang-label-hi>हिं</span>
-      </button>
+      <label class="language-picker" aria-label="Select language">
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="bn">বাংলা</option>
+        </select>
+      </label>
       <button class="cart-btn" data-target="marketplace" aria-label="Cart">
         🧺 <span class="cart-count" id="cartCount">0</span>
       </button>
@@ -123,7 +124,7 @@
       <div class="feature-card">
         <div class="feature-icon">📝</div>
         <h3 data-en="AI Catalog Generator" data-hi="AI कैटलॉग जनरेटर">AI Catalog Generator</h3>
-        <p data-en="Get a ready title, description and tags in English and Hindi — automatically." data-hi="अंग्रेज़ी और हिंदी में तैयार शीर्षक, विवरण और टैग — अपने आप।">Get a ready title, description and tags in English and Hindi — automatically.</p>
+        <p data-en="Get a ready title, description and tags in English and Bengali — automatically.">Get a ready title, description and tags in English and Bengali — automatically.</p>
         <button class="link-btn" data-target="catalog-generator" data-en="Try it →" data-hi="आज़माएँ →">Try it →</button>
       </div>
       <div class="feature-card">
@@ -432,9 +433,9 @@
           <input type="text" class="text-input" id="genRegion" value="Jaipur, Rajasthan">
           <label class="form-label" data-en="Output language" data-hi="आउटपुट भाषा">Output language</label>
           <select class="text-input" id="genLang">
-            <option value="both" data-en="English + Hindi" data-hi="अंग्रेज़ी + हिंदी">English + Hindi</option>
-            <option value="en" data-en="English only" data-hi="केवल अंग्रेज़ी">English only</option>
-            <option value="hi" data-en="Hindi only" data-hi="केवल हिंदी">Hindi only</option>
+            <option value="both" data-en="English + Bengali">English + Bengali</option>
+            <option value="en" data-en="English only">English only</option>
+            <option value="bn" data-en="Bengali only">Bengali only</option>
           </select>
           <button class="btn btn-primary btn-block btn-lg" id="generateCatalogBtn" data-en="✨ Generate Listing" data-hi="✨ लिस्टिंग बनाएं">✨ Generate Listing</button>
         </div>
@@ -575,6 +576,10 @@
       </select>
     </div>
     <div class="product-grid" id="marketGrid"></div>
+    <section class="cart-panel" id="cartPanel" hidden>
+      <h2 data-en="Your cart">Your cart</h2>
+      <div id="cartItems"></div>
+    </section>
   </div>
 </section>
 

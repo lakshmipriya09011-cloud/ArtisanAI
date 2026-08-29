@@ -40,6 +40,7 @@
   const state = {
     lang: localStorage.getItem("artisanai_lang") || "en",
     cartCount: 0,
+    cartItems: [],
     currentProductId: null
   };
   const API_URL = window.location.protocol === "file:"
@@ -92,24 +93,79 @@
   });
 
   /* ---------------------------------------------------------
-     3. LANGUAGE TOGGLE (English / Hindi)
+     3. LANGUAGE SUPPORT (English / Bengali)
      --------------------------------------------------------- */
-  function applyLanguage(lang) {
-    state.lang = lang;
-    localStorage.setItem("artisanai_lang", lang);
-    document.documentElement.setAttribute("lang", lang === "hi" ? "hi" : "en");
-    document.documentElement.setAttribute("data-lang", lang);
+  const SUPPORTED_LANGUAGES = ["en", "bn"];
+  const translationCache = new Map();
+  let languageRequestId = 0;
 
-    document.querySelectorAll("[data-en]").forEach((el) => {
-      // skip elements only used as containers for translation data (none currently)
-      const text = el.dataset[lang] || el.dataset.en;
-      if (text !== undefined) el.textContent = text;
-    });
+  async function translateText(text, lang) {
+    if (!text || lang === "en") return text;
+    const key = `${lang}:${text}`;
+    if (translationCache.has(key)) return translationCache.get(key);
+    try {
+      const response = await fetch(`${API_URL}/api/translate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, target_language: lang })
+      });
+      const data = await response.json();
+      const translated = data.translated_text || text;
+      translationCache.set(key, translated);
+      return translated;
+    } catch (error) {
+      console.warn("Translation fallback used:", error);
+      return text;
+    }
   }
 
-  document.getElementById("langToggle").addEventListener("click", () => {
-    applyLanguage(state.lang === "en" ? "hi" : "en");
+  async function showMessage(text) {
+    alert(await translateText(text, state.lang));
+  }
+
+  async function applyLanguage(lang) {
+    if (!SUPPORTED_LANGUAGES.includes(lang)) lang = "en";
+    const requestId = ++languageRequestId;
+    state.lang = lang;
+    localStorage.setItem("artisanai_lang", lang);
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("data-lang", lang);
+
+    if (document.getElementById("marketGrid")) {
+      renderMarketGrid();
+      renderMyCatalogGrid();
+      renderDashboardRecent();
+      if (state.currentProductId) renderProductDetail(state.currentProductId);
+    }
+
+    const nodes = Array.from(document.querySelectorAll("[data-en]"));
+    const attributeNodes = [];
+    document.querySelectorAll("[placeholder], [aria-label]").forEach((el) => {
+      ["placeholder", "aria-label"].forEach((attribute) => {
+        const value = el.getAttribute(attribute);
+        if (value && value !== "98xxxxxxxx" && value !== "0000") {
+          attributeNodes.push({ el, attribute, value });
+        }
+      });
+    });
+    const translations = await Promise.all(nodes.map((el) => translateText(el.dataset.en, lang)));
+    const attributeTranslations = await Promise.all(
+      attributeNodes.map(({ value }) => translateText(value, lang))
+    );
+    if (requestId !== languageRequestId) return;
+    nodes.forEach((el, index) => { el.textContent = translations[index]; });
+    attributeNodes.forEach(({ el, attribute }, index) => {
+      el.setAttribute(attribute, attributeTranslations[index]);
+    });
+    const select = document.getElementById("languageSelect");
+    if (select) select.value = lang;
+  }
+
+  document.getElementById("languageSelect").addEventListener("change", (event) => {
+    applyLanguage(event.target.value);
   });
+
+  applyLanguage(SUPPORTED_LANGUAGES.includes(state.lang) ? state.lang : "en");
 
   /* ---------------------------------------------------------
      4. MOBILE MENU
@@ -212,7 +268,7 @@
   const description = document.getElementById("prodDesc").value.trim();
 
   if (!name || !category || !price || Number(price) <= 0) {
-    alert("Please enter a name, category, and valid price.");
+    await showMessage("Please enter a name, category, and valid price.");
     return;
   }
 
@@ -234,11 +290,11 @@
     const data = await response.json();
 
     if (!response.ok) {
-      alert(data.error || "Could not add product");
+      await showMessage(data.error || "Could not add product");
       return;
     }
 
-    alert("✅ Product added successfully!");
+    await showMessage("✅ Product added successfully!");
 
     const savedProduct = data.product;
     PRODUCTS.unshift({
@@ -262,7 +318,7 @@
 
   } catch (error) {
     console.error("Error:", error);
-    alert("❌ Could not connect to the backend");
+    await showMessage("❌ Could not connect to the backend");
   }
 });
   /* ---------------------------------------------------------
@@ -286,12 +342,12 @@
     const label = document.getElementById("resultLabel");
     const box = document.getElementById("resultPreview");
     if (!studioImageUrl) {
-      label.textContent = state.lang === "hi" ? "पहले एक फ़ोटो अपलोड करें।" : "Upload a photo first.";
+      label.textContent = await translateText("Upload a photo first.", state.lang);
       return;
     }
     content.classList.add("hidden");
     spinner.classList.remove("hidden");
-    label.textContent = state.lang === "hi" ? "AI आपकी फ़ोटो निखार रहा है..." : "AI is enhancing your photo...";
+    label.textContent = await translateText("AI is enhancing your photo...", state.lang);
     box.classList.remove("is-done");
     this.disabled = true;
 
@@ -304,9 +360,7 @@
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Could not enhance image");
       content.innerHTML = '<img src="' + data.enhanced_image_url + '" alt="Enhanced product">';
-      label.textContent = state.lang === "hi"
-        ? "तैयार! साफ़ बैकग्राउंड और बेहतर रोशनी के साथ।"
-        : "Done! Clean background and improved lighting applied.";
+      label.textContent = await translateText("Done! Clean background and improved lighting applied.", state.lang);
       box.classList.add("is-done");
     } catch (error) {
       content.textContent = "⚠️";
@@ -321,7 +375,7 @@
   /* ---------------------------------------------------------
      8. AI CATALOG GENERATOR (demo)
      --------------------------------------------------------- */
-  document.getElementById("generateCatalogBtn").addEventListener("click", () => {
+  document.getElementById("generateCatalogBtn").addEventListener("click", async () => {
     const craft = document.getElementById("genCraft").value || "Handmade product";
     const materials = document.getElementById("genMaterials").value || "traditional materials";
     const region = document.getElementById("genRegion").value || "India";
@@ -334,22 +388,22 @@
         " by skilled artisans in " + region + ". Every piece carries the unique mark of the hands that made it — no two are exactly alike.",
       tags: ["handmade", "artisan-made", region.split(",")[0].trim().toLowerCase(), craft.split(" ")[0].toLowerCase(), "traditional craft"]
     };
-    const hi = {
-      title: craft + " — " + region + " में हस्तनिर्मित",
-      desc: "यह एक खूबसूरती से हाथ से बनाया गया " + craft + " है, जिसे " + region + " के कुशल कारीगरों ने " + materials + " का उपयोग करके तैयार किया है। हर उत्पाद उसे बनाने वाले हाथों की अनूठी छाप रखता है — कोई भी दो उत्पाद बिल्कुल एक जैसे नहीं होते।",
-      tags: ["हस्तनिर्मित", "कारीगर-निर्मित", "पारंपरिक शिल्प"]
+    const bn = {
+      title: craft + " — " + region + "-এ হস্তনির্মিত",
+      desc: "এটি " + region + "-এর দক্ষ কারিগরদের তৈরি একটি সুন্দর " + craft + ", যেখানে " + materials + " ব্যবহার করা হয়েছে। প্রতিটি পণ্যে কারিগরের হাতের অনন্য ছাপ রয়েছে।",
+      tags: ["হস্তনির্মিত", "কারিগর-তৈরি", "ঐতিহ্যবাহী কারুশিল্প"]
     };
 
     let html = "";
-    if (langChoice !== "hi") {
+    if (langChoice !== "bn") {
       html += '<div class="lang-block"><span class="lang-flag">English</span>' +
         "<h3>" + en.title + "</h3><p>" + en.desc + "</p>" +
         '<div class="tag-row">' + en.tags.map((t) => '<span class="tag-chip">#' + t.replace(/\s+/g, "") + "</span>").join("") + "</div></div>";
     }
     if (langChoice !== "en") {
-      html += '<div class="lang-block"><span class="lang-flag">हिंदी</span>' +
-        "<h3>" + hi.title + "</h3><p>" + hi.desc + "</p>" +
-        '<div class="tag-row">' + hi.tags.map((t) => '<span class="tag-chip">#' + t + "</span>").join("") + "</div></div>";
+      html += '<div class="lang-block"><span class="lang-flag">বাংলা</span>' +
+        "<h3>" + bn.title + "</h3><p>" + bn.desc + "</p>" +
+        '<div class="tag-row">' + bn.tags.map((t) => '<span class="tag-chip">#' + t + "</span>").join("") + "</div></div>";
     }
     out.innerHTML = html;
   });
@@ -418,14 +472,14 @@ function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
     return (
       '<div class="product-card" data-product-id="' + p.id + '">' +
-        '<div class="product-thumb"><span class="cat-chip">' + p.category + '</span>' + p.icon + "</div>" +
+        '<div class="product-thumb"><span class="cat-chip" data-en="' + p.category + '">' + p.category + '</span>' + p.icon + "</div>" +
         '<div class="product-body">' +
-          "<h3>" + name + "</h3>" +
+          '<h3 data-en="' + p.name.en + '">' + name + "</h3>" +
           '<div class="product-artisan">' + p.artisan + " · " + p.region + "</div>" +
           '<div class="product-price-row">' +
             '<span class="product-price">₹' + p.price.toLocaleString("en-IN") + "</span>" +
             '<button type="button" class="mini-btn" data-view-product="' + p.id + '">' +
-              (state.lang === "hi" ? "देखें" : "View") +
+              '<span data-en="View">View</span>' +
             "</button>" +
           "</div>" +
         "</div>" +
@@ -439,7 +493,7 @@ function productCardHTML(p) {
     const mine = PRODUCTS.filter((p) => (p.name.en + p.name.hi).toLowerCase().includes(q));
     grid.innerHTML = mine.length
       ? mine.map(productCardHTML).join("")
-      : '<div class="empty-state">' + (state.lang === "hi" ? "कोई उत्पाद नहीं मिला।" : "No products found.") + "</div>";
+      : '<div class="empty-state" data-en="No products found.">No products found.</div>';
     document.getElementById("productCount").textContent = PRODUCTS.length;
   }
 
@@ -460,7 +514,23 @@ function productCardHTML(p) {
 
     grid.innerHTML = products.length
       ? products.map(productCardHTML).join("")
-      : '<div class="empty-state">' + (state.lang === "hi" ? "कोई उत्पाद नहीं मिला।" : "No products found.") + "</div>";
+      : '<div class="empty-state" data-en="No products found.">No products found.</div>';
+    renderCartPanel();
+  }
+
+  function renderCartPanel() {
+    const panel = document.getElementById("cartPanel");
+    const items = document.getElementById("cartItems");
+    if (!panel || !items) return;
+    panel.hidden = state.cartItems.length === 0;
+    items.innerHTML = state.cartItems.map((id) => {
+      const product = PRODUCTS.find((item) => item.id === id);
+      if (!product) return "";
+      return '<article class="cart-item"><strong>' + product.name.en + '</strong>' +
+        '<span>₹' + product.price.toLocaleString("en-IN") + '</span>' +
+        '<button type="button" class="btn btn-soft" data-ai-details="' + product.id + '" data-en="✨ Get AI product details">✨ Get AI product details</button>' +
+        '<div class="ai-cart-details" id="ai-cart-details-' + product.id + '"></div></article>';
+    }).join("");
   }
 
   function renderDashboardRecent() {
@@ -468,7 +538,7 @@ function productCardHTML(p) {
     wrap.innerHTML = PRODUCTS.slice(0, 4).map((p) => (
       '<div class="mini-item" data-view-product="' + p.id + '">' +
         '<span class="mini-thumb">' + p.icon + "</span>" +
-        '<span class="mini-info"><strong>' + (p.name[state.lang] || p.name.en) + "</strong>" +
+        '<span class="mini-info"><strong data-en="' + p.name.en + '">' + (p.name[state.lang] || p.name.en) + "</strong>" +
         "<span>₹" + p.price.toLocaleString("en-IN") + "</span></span>" +
       "</div>"
     )).join("");
@@ -492,22 +562,20 @@ function productCardHTML(p) {
     const name = p.name[state.lang] || p.name.en;
     const desc = p.desc[state.lang] || p.desc.en;
     wrap.innerHTML =
-      '<button type="button" class="link-btn back-link" data-target="marketplace">' +
-        (state.lang === "hi" ? "← बाज़ार पर वापस जाएं" : "← Back to marketplace") +
-      "</button>" +
+      '<button type="button" class="link-btn back-link" data-target="marketplace" data-en="← Back to marketplace">← Back to marketplace</button>' +
       '<div class="detail-grid">' +
         "<div>" +
           '<div class="detail-gallery-main">' + p.icon + "</div>" +
           '<div class="detail-thumbs"><span>' + p.icon + "</span><span>🧵</span><span>📦</span></div>" +
         "</div>" +
         "<div class=\"detail-info\">" +
-          '<span class="cat-chip-solo">' + p.category + "</span>" +
-          "<h1>" + name + "</h1>" +
+          '<span class="cat-chip-solo" data-en="' + p.category + '">' + p.category + "</span>" +
+          '<h1 data-en="' + p.name.en + '">' + name + "</h1>" +
           '<div class="detail-price-row"><span class="detail-price">₹' + p.price.toLocaleString("en-IN") + "</span></div>" +
-          "<p>" + desc + "</p>" +
+          '<p data-en="' + p.desc.en + '">' + desc + "</p>" +
           '<div class="detail-actions">' +
-            '<button type="button" class="btn btn-primary btn-lg" id="addToCartBtn">🧺 ' + (state.lang === "hi" ? "कार्ट में डालें" : "Add to Cart") + "</button>" +
-            '<button type="button" class="btn btn-outline btn-lg" id="buyNowBtn">' + (state.lang === "hi" ? "अभी खरीदें" : "Buy Now") + "</button>" +
+            '<button type="button" class="btn btn-primary btn-lg" id="addToCartBtn" data-en="🧺 Add to Cart">🧺 Add to Cart</button>' +
+            '<button type="button" class="btn btn-outline btn-lg" id="buyNowBtn" data-en="Buy Now">Buy Now</button>' +
           "</div>" +
           '<div class="artisan-box">' +
             '<span class="artisan-avatar">🧑‍🎨</span>' +
@@ -517,13 +585,31 @@ function productCardHTML(p) {
       "</div>";
 
 
-    document.getElementById("addToCartBtn").addEventListener("click", bumpCart);
-    document.getElementById("buyNowBtn").addEventListener("click", bumpCart);
+    document.getElementById("addToCartBtn").addEventListener("click", () => bumpCart(p.id));
+    document.getElementById("buyNowBtn").addEventListener("click", () => bumpCart(p.id));
   }
 
-  function bumpCart() {
+  async function loadAiProductDetails(id) {
+    const target = document.getElementById("ai-cart-details-" + id);
+    if (!target) return;
+    target.textContent = "Loading AI details...";
+    try {
+      const response = await fetch(`${API_URL}/api/products/${id}/ai-details`, { method: "POST" });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Could not load AI details");
+      target.innerHTML = "<p><strong>Story:</strong> " + data.story + "</p>" +
+        "<p><strong>Care:</strong> " + data.care + "</p>" +
+        "<p><strong>Best for:</strong> " + data.best_for + "</p>";
+    } catch (error) {
+      target.textContent = error.message;
+    }
+  }
+
+  function bumpCart(productId) {
+    if (productId && !state.cartItems.includes(productId)) state.cartItems.push(productId);
     state.cartCount += 1;
     document.getElementById("cartCount").textContent = state.cartCount;
+    renderCartPanel();
   }
 
   document.body.addEventListener("click", (e) => {
@@ -537,16 +623,21 @@ function productCardHTML(p) {
       renderProductDetail(id);
       showPage("product-details");
     }
+    const detailsButton = e.target.closest("[data-ai-details]");
+    if (detailsButton) loadAiProductDetails(parseInt(detailsButton.dataset.aiDetails, 10));
   });
 
   /* ---------------------------------------------------------
      12. INIT
      --------------------------------------------------------- */
+  let initialized = false;
   async function init() {
-    applyLanguage(state.lang);
-
+    if (initialized) return;
+    initialized = true;
     const startId = location.hash.replace("#", "") || "landing";
     showPage(startId, { skipHash: true });
+
+    await applyLanguage(state.lang);
 
     const backendProducts = await loadProductsFromBackend();
 
@@ -559,6 +650,6 @@ function productCardHTML(p) {
     renderDashboardRecent();
 }
 
-  document.addEventListener("DOMContentLoaded", init);
+  init();
 
 })();  

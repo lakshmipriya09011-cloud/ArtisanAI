@@ -37,8 +37,37 @@ import sqlite3                              # sqlite3 = built into Python, no in
 import os
 import secrets
 import time
+import json
+from urllib import request as urllib_request
 from datetime import datetime
 from twilio.rest import Client
+
+
+def translate_with_openai(text, target_language):
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return None
+    language_name = {"en": "English", "bn": "Bengali"}[target_language]
+    payload = {
+        "model": "gpt-4o-mini",
+        "messages": [{"role": "user", "content": (
+            f"Translate this text to {language_name}. Return only the translation. "
+            f"Preserve names, numbers, punctuation, and emojis: {text}"
+        )}],
+        "temperature": 0,
+    }
+    request = urllib_request.Request(
+        "https://api.openai.com/v1/chat/completions",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib_request.urlopen(request, timeout=15) as response:
+            result = json.loads(response.read().decode("utf-8"))
+        return result["choices"][0]["message"]["content"].strip()
+    except Exception:
+        return None
 
 # ---------------------------------------------------------------
 # STEP 2: Create the Flask app
@@ -228,6 +257,54 @@ def get_product(product_id):
     return jsonify({"product": dict(row)}), 200
 
 
+@app.route("/api/products/<int:product_id>/ai-details", methods=["POST"])
+def get_ai_product_details(product_id):
+    conn = get_db_connection()
+    row = conn.execute("SELECT * FROM products WHERE id = ?", (product_id,)).fetchone()
+    conn.close()
+    if row is None:
+        return jsonify({"error": "Product not found"}), 404
+
+    product = dict(row)
+    prompt = (
+        "Give helpful buyer information for this handmade product. Return only valid JSON "
+        "with exactly these string fields: story, care, best_for. Keep each under 45 words. "
+        f"Product: {json.dumps(product, ensure_ascii=False)}"
+    )
+    ai_details = None
+    api_key = os.getenv("OPENAI_API_KEY")
+    if api_key:
+        payload = {
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.4,
+            "response_format": {"type": "json_object"},
+        }
+        ai_request = urllib_request.Request(
+            "https://api.openai.com/v1/chat/completions",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib_request.urlopen(ai_request, timeout=20) as response:
+                result = json.loads(response.read().decode("utf-8"))
+            ai_details = json.loads(result["choices"][0]["message"]["content"])
+        except Exception:
+            ai_details = None
+
+    return jsonify({
+        "product_id": product_id,
+        "story": (ai_details or {}).get("story") or
+                 f"A handmade {product.get('category') or 'craft'} made by an independent artisan.",
+        "care": (ai_details or {}).get("care") or
+                "Keep away from moisture and direct sunlight. Clean gently with a soft, dry cloth.",
+        "best_for": (ai_details or {}).get("best_for") or
+                    "A thoughtful gift or a distinctive piece for your home.",
+        "ai_enabled": bool(api_key),
+    }), 200
+
+
 # =================================================================
 # ROUTE 4: POST /api/catalog/generate -> Auto-generate a catalog listing
 # =================================================================
@@ -362,17 +439,23 @@ def translate_text():
     """
     data = request.get_json(silent=True) or {}
     text = data.get("text")
-    target_language = data.get("target_language", "en")
+    target_language = str(data.get("target_language", "en")).lower()
 
     if not text:
         return jsonify({"error": "Field 'text' is required"}), 400
 
+    if target_language not in {"en", "bn"}:
+        return jsonify({"error": "Only English and Bengali are supported"}), 400
+
+    translated_text = text if target_language == "en" else translate_with_openai(text, target_language)
+    if translated_text is None:
+        translated_text = text
+
     return jsonify({
         "original_text": text,
         "target_language": target_language,
-        "translated_text": text,  # placeholder: no real translation happening
-        "note": "This is a placeholder. Plug in a real translation API here "
-                "to get an actual translated result."
+        "translated_text": translated_text,
+        "ai_enabled": bool(os.getenv("OPENAI_API_KEY")),
     }), 200
 
 

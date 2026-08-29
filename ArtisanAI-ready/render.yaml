@@ -11,3 +11,5 @@ services:
         sync: false
       - key: TWILIO_PHONE_NUMBER
         sync: false
+      - key: OPENAI_API_KEY
+        sync: false
