@@ -29,6 +29,11 @@
       </span>
     </a>
 
+    <div class="header-search" role="search">
+      <input type="search" aria-label="Search handcrafted products" placeholder="Search pottery, sarees, paintings...">
+      <button type="button" aria-label="Submit search">Search</button>
+    </div>
+
     <nav class="main-nav" id="mainNav" aria-label="Primary">
       <button class="nav-link" data-target="landing"><span data-en="Home" data-hi="होम">Home</span></button>
       <button class="nav-link" data-target="marketplace"><span data-en="Marketplace" data-hi="बाज़ार">Marketplace</span></button>
@@ -61,6 +66,34 @@
     </div>
   </div>
 </header>
+
+<div class="header-menu-strip" aria-label="Main menu categories">
+  <div class="header-menu-inner">
+    <div class="menu-dropdown-wrap">
+      <button type="button" class="menu-trigger" aria-label="Browse categories">
+        <span aria-hidden="true">☰</span>
+        All
+      </button>
+      <div class="menu-dropdown" aria-label="Browse categories menu">
+        <button type="button" data-target="marketplace">Pottery</button>
+        <button type="button" data-target="marketplace">Textiles</button>
+        <button type="button" data-target="marketplace">Paintings</button>
+        <button type="button" data-target="marketplace">Jewelry</button>
+        <button type="button" data-target="marketplace">Woodwork</button>
+      </div>
+    </div>
+    <nav class="header-categories" aria-label="Store categories">
+      <button type="button" data-target="marketplace">Best Sellers</button>
+      <button type="button" data-target="marketplace">Today's Deals</button>
+      <button type="button" data-target="marketplace">Pottery</button>
+      <button type="button" data-target="marketplace">Textiles</button>
+      <button type="button" data-target="marketplace">Paintings</button>
+      <button type="button" data-target="marketplace">Jewelry</button>
+      <button type="button" data-target="about">About</button>
+      <button type="button" data-target="dashboard">Dashboard</button>
+    </nav>
+  </div>
+</div>
 
 <main id="app">
 
