@@ -256,6 +256,23 @@ html[data-lang="hi"] [data-lang-label-hi]{ opacity:1; color:var(--madder); }
   color:#fff; padding:5rem 1.5rem 4rem;
 }
 .hero-inner{ max-width:900px; margin:0 auto; text-align:center; position:relative; z-index:2; }
+.hero-search-wrap{
+  max-width:740px; margin:1.5rem auto 1.8rem; display:flex; align-items:center;
+  background:#fff; border:1px solid rgba(255,255,255,.2); border-radius:999px; overflow:hidden;
+  box-shadow:var(--shadow-pop);
+}
+.hero-search-wrap input{
+  flex:1; min-width:0; border:0; background:transparent; padding:1rem 1.1rem; font:inherit; color:var(--ink);
+}
+.hero-search-wrap input::placeholder{ color:#72695d; }
+.hero-search-wrap input:focus{ outline:none; }
+.hero-search-btn{
+  border:0; background:var(--turmeric); color:var(--indigo-deep); font-weight:700; padding:1rem 1.3rem; cursor:pointer;
+}
+.home-voice-btn{
+  width:58px; height:100%; border:0; border-left:1px solid var(--line); background:var(--paper-alt); color:var(--indigo); font-size:1.1rem; cursor:pointer;
+}
+.home-voice-btn.listening{ background:var(--madder); color:#fff; }
 .eyebrow{
   display:inline-block; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.08em;
   text-transform:uppercase; color:var(--turmeric); background:rgba(226,160,48,.12);
@@ -500,8 +517,13 @@ textarea.text-input{ resize:vertical; }
    ========================================================= */
 .toolbar{ margin-bottom:1.4rem; max-width:420px; }
 .market-toolbar{ display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:2rem; }
-.market-toolbar input{ flex:1; min-width:220px; }
+.market-search-wrap{ flex:1; min-width:220px; display:flex; align-items:center; border:1px solid var(--line); border-radius:var(--radius-sm); background:#fff; overflow:hidden; }
+.market-search-wrap input{ flex:1; min-width:0; border:none; background:transparent; padding:0.9rem 1rem; }
+.market-search-wrap input:focus{ outline:none; }
 .market-toolbar select{ max-width:220px; }
+.voice-search-btn{ width:52px; height:100%; border:0; border-left:1px solid var(--line); background:var(--paper-alt); color:var(--indigo); font-size:1.1rem; cursor:pointer; transition:all .15s ease; }
+.voice-search-btn:hover{ background:#eadaae; }
+.voice-search-btn.listening{ background:var(--madder); color:#fff; }
 
 .marketplace-hero{
   background:var(--paper-alt); text-align:center; padding:3.5rem 1.5rem 3rem;

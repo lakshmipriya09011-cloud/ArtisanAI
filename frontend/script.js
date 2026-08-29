@@ -892,10 +892,81 @@ function productCardHTML(p) {
     renderDashboardRecent();
   }
 
+  function bindVoiceSearch(searchInput, voiceButton) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      voiceButton.disabled = true;
+      voiceButton.title = "Voice search is not supported in this browser";
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = state.lang === "hi" ? "hi-IN" : "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    voiceButton.addEventListener("click", () => {
+      if (voiceButton.classList.contains("listening")) {
+        recognition.stop();
+        return;
+      }
+      recognition.start();
+    });
+
+    recognition.onstart = () => {
+      voiceButton.classList.add("listening");
+      voiceButton.setAttribute("aria-pressed", "true");
+    };
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.trim();
+      if (transcript) {
+        searchInput.value = transcript;
+        searchInput.dispatchEvent(new Event("input"));
+      }
+    };
+
+    recognition.onend = () => {
+      voiceButton.classList.remove("listening");
+      voiceButton.setAttribute("aria-pressed", "false");
+    };
+
+    recognition.onerror = () => {
+      voiceButton.classList.remove("listening");
+      voiceButton.setAttribute("aria-pressed", "false");
+    };
+  }
+
+  const homeSearchInput = document.getElementById("homeSearch");
+  const homeSearchBtn = document.getElementById("homeSearchBtn");
+  if (homeSearchInput && homeSearchBtn) {
+    homeSearchBtn.addEventListener("click", () => {
+      const value = (homeSearchInput.value || "").trim();
+      const marketSearch = document.getElementById("marketSearch");
+      if (marketSearch) {
+        marketSearch.value = value;
+      }
+      showPage("marketplace");
+      setTimeout(() => {
+        if (marketSearch) {
+          marketSearch.focus();
+          marketSearch.dispatchEvent(new Event("input"));
+        }
+      }, 50);
+    });
+    homeSearchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        homeSearchBtn.click();
+      }
+    });
+  }
+
   ["marketSearch", "marketCategory", "marketSort"].forEach((id) => {
     document.getElementById(id).addEventListener("input", renderMarketGrid);
   });
   document.getElementById("myCatalogSearch").addEventListener("input", renderMyCatalogGrid);
+  bindVoiceSearch(document.getElementById("marketSearch"), document.getElementById("marketVoiceBtn"));
+  bindVoiceSearch(homeSearchInput, document.getElementById("homeVoiceBtn"));
 
   /* ---------------------------------------------------------
      11. PRODUCT DETAILS

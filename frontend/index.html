@@ -67,6 +67,18 @@
 <!-- ============ 1. LANDING PAGE ============ -->
 <section class="page" id="page-landing" data-page="landing">
 
+  <nav class="storefront-subnav" aria-label="Home menu">
+    <button type="button" data-target="landing">Home</button>
+    <button type="button" data-target="marketplace">Marketplace</button>
+    <button type="button" data-target="about">About</button>
+    <button type="button" data-target="dashboard">Dashboard</button>
+    <button type="button" data-target="login">Artisan Login</button>
+    <button type="button" data-target="marketplace">Pottery</button>
+    <button type="button" data-target="marketplace">Textiles</button>
+    <button type="button" data-target="marketplace">Paintings</button>
+    <button type="button" data-target="marketplace">Jewelry</button>
+  </nav>
+
   <div class="hero">
     <div class="hero-thread" aria-hidden="true"></div>
     <div class="hero-inner">
@@ -75,9 +87,16 @@
         <span data-en="Your hands make it." data-hi="आपके हाथ इसे बनाते हैं।">Your hands make it.</span><br>
         <span class="accent" data-en="AI helps the world find it." data-hi="AI इसे दुनिया तक पहुँचाता है।">AI helps the world find it.</span>
       </h1>
-      <p class="hero-sub" data-en="ArtisanAI helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps." data-hi="ArtisanAI वंचित कारीगरों को उनके हस्तशिल्प की फ़ोटो लेने, विवरण लिखने, सही दाम तय करने और ऑनलाइन बेचने में मदद करता है — अपनी भाषा में, बस कुछ टैप में।">
-        ArtisanAI helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps.
+      <p class="hero-sub" data-en="Kalasetu helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps." data-hi="कलासेटु वंचित कारीगरों को उनके हस्तशिल्प की फ़ोटो लेने, विवरण लिखने, सही दाम तय करने और ऑनलाइन बेचने में मदद करता है — अपनी भाषा में, बस कुछ टैप में।">
+        Kalasetu helps marginalized craftspeople photograph, describe, price and sell their handicrafts online — in their own language, with a few taps.
       </p>
+
+      <div class="hero-search-wrap" aria-label="Search products">
+        <input type="search" id="homeSearch" placeholder="Search pottery, sarees, paintings..." aria-label="Search handcrafted products">
+        <button type="button" class="voice-search-btn home-voice-btn" id="homeVoiceBtn" aria-label="Search by voice" title="Search by voice">🎤</button>
+        <button type="button" class="hero-search-btn" id="homeSearchBtn">Search</button>
+      </div>
+
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg" data-target="login">
           🧑‍🎨 <span data-en="I am an Artisan" data-hi="मैं एक कारीगर हूँ">I am an Artisan</span>
@@ -597,7 +616,10 @@
 
   <div class="section">
     <div class="market-toolbar">
-      <input type="search" class="text-input" id="marketSearch" placeholder="Search for pottery, sarees, paintings...">
+      <div class="market-search-wrap">
+        <input type="search" class="text-input" id="marketSearch" placeholder="Search for pottery, sarees, paintings..." aria-label="Search products">
+        <button type="button" class="voice-search-btn" id="marketVoiceBtn" aria-label="Search by voice" title="Search by voice">🎤</button>
+      </div>
       <select class="text-input" id="marketCategory">
         <option value="all" data-en="All Categories" data-hi="सभी श्रेणियाँ">All Categories</option>
         <option value="Pottery" data-en="Pottery" data-hi="मिट्टी के बर्तन">Pottery</option>
@@ -625,7 +647,7 @@
 <!-- ============ 11. ABOUT THE SOLUTION ============ -->
 <section class="page" id="page-about" data-page="about">
   <div class="about-hero">
-    <h1 data-en="About ArtisanAI" data-hi="ArtisanAI के बारे में">About ArtisanAI</h1>
+    <h1 data-en="About Kalasetu" data-hi="कलासेटु के बारे में">About Kalasetu</h1>
     <p data-en="A Smart India Hackathon solution for artisan empowerment through AI." data-hi="AI के माध्यम से कारीगर सशक्तिकरण के लिए एक स्मार्ट इंडिया हैकाथॉन समाधान।">A Smart India Hackathon solution for artisan empowerment through AI.</p>
   </div>
 
@@ -637,7 +659,7 @@
       </div>
       <div class="about-card">
         <h2>💡 <span data-en="Our Solution" data-hi="हमारा समाधान">Our Solution</span></h2>
-        <p data-en="ArtisanAI is a low-literacy-friendly platform where artisans photograph a product and AI handles the rest: image enhancement, bilingual catalog writing, fair price suggestions and a direct-to-buyer marketplace." data-hi="ArtisanAI एक कम-साक्षरता-अनुकूल मंच है जहाँ कारीगर उत्पाद की फ़ोटो खींचते हैं और बाकी काम AI करता है: छवि सुधार, द्विभाषी कैटलॉग लेखन, उचित मूल्य सुझाव और सीधे-ग्राहक बाज़ार।">ArtisanAI is a low-literacy-friendly platform where artisans photograph a product and AI handles the rest: image enhancement, bilingual catalog writing, fair price suggestions and a direct-to-buyer marketplace.</p>
+        <p data-en="Kalasetu is a low-literacy-friendly platform where artisans photograph a product and AI handles the rest: image enhancement, bilingual catalog writing, fair price suggestions and a direct-to-buyer marketplace." data-hi="कलासेटु एक कम-साक्षरता-अनुकूल मंच है जहाँ कारीगर उत्पाद की फ़ोटो खींचते हैं और बाकी काम AI करता है: छवि सुधार, द्विभाषी कैटलॉग लेखन, उचित मूल्य सुझाव और सीधे-ग्राहक बाज़ार।">Kalasetu is a low-literacy-friendly platform where artisans photograph a product and AI handles the rest: image enhancement, bilingual catalog writing, fair price suggestions and a direct-to-buyer marketplace.</p>
       </div>
     </div>
 
@@ -688,7 +710,7 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <div class="brand-name" style="font-family: 'Fraunces', serif; font-size:1.3rem;">ArtisanAI</div>
+      <div class="brand-name" style="font-family: 'Fraunces', serif; font-size:1.3rem;">Kalasetu</div>
       <p data-en="Digitizing craft, dignifying artisans." data-hi="शिल्प को डिजिटल बनाना, कारीगरों को सम्मान देना।">Digitizing craft, dignifying artisans.</p>
     </div>
     <div class="footer-links">
@@ -697,7 +719,7 @@
       <button class="nav-link" data-target="about" data-en="About" data-hi="जानकारी">About</button>
       <button class="nav-link" data-target="login" data-en="Artisan Login" data-hi="कारीगर लॉगिन">Artisan Login</button>
     </div>
-    <p class="footer-note" data-en="Built for Smart India Hackathon · Team ArtisanAI" data-hi="स्मार्ट इंडिया हैकाथॉन के लिए बनाया गया · टीम ArtisanAI">Built for Smart India Hackathon · Team ArtisanAI</p>
+    <p class="footer-note" data-en="Built for Smart India Hackathon · Team Kalasetu" data-hi="स्मार्ट इंडिया हैकाथॉन के लिए बनाया गया · टीम कलासेटु">Built for Smart India Hackathon · Team Kalasetu</p>
   </div>
 </footer>
 </body>
